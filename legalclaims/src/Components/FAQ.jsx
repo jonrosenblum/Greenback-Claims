@@ -5,44 +5,40 @@ export default function FAQ() {
 
   const faqs = [
     {
-      question: 'What is this lawsuit about?',
-      answer: 'Answer to question 1...',
+      question: 'What is the nature of this lawsuit?',
+      answer: 'This lawsuit primarily revolves around the interchange fees associated with merchants accepting Visa or Mastercard credit or debit cards between January 1, 2004, and January 25, 2019, as well as the rules imposed by Visa and Mastercard on these merchants.',
     },
     {
-      question: 'Do all businesses qualify for the settlement?',
-      answer: 'No, not all business will qualify. Our lawyers will work with the settlement administrator to see if your business qualifies.',
+      question: 'Could you explain what an interchange fee is?',
+      answer: 'An interchange fee is the charge associated with transactions made by a cardholder using a credit or debit card, typically ranging from around 1% to 2% of the purchase amount. These fees constitute a significant portion of what merchants pay for accepting Visa and Mastercard cards. Visa and Mastercard establish interchange fee rates for various transaction types, often updating and publishing them on their websites approximately twice a year.',
     },
     {
-      question: 'What is an interchange fee?',
-      answer: 'When a cardholder makes a purchase with a credit or debit card, there is an interchange fee attributable to those transactions, which is usually around 1% to 2% of the purchase price. Interchange fees typically account for the greatest part of the fees paid by merchants for accepting Visa and Mastercard cards. Visa and Mastercard set interchange fee rates for different kinds of transactions and publish them on their websites, usually twice a year.',
+      question: 'Are all businesses eligible for the settlement?',
+      answer: 'Not every business will qualify. Our legal team will collaborate with the settlement administrator to determine if your business meets the criteria.',
     },
     {
-      question: 'How much money will I get?',
-      answer: 'The amount paid from the settlement fund will be based on your actual or estimated interchange fees attributable to Visa and Mastercard card transactions (between you and your customers) from January 1, 2004, through January 25, 2019. The amount of money each Authorized Claimant will receive from the settlement fund depends on the money available to pay all claims, the total dollar value of all valid claims filed, the cost of class administration and notice, applicable taxes on the settlement fund and any other related tax expenses, attorneys’ fees and expenses, and money awards to the Rule 23(b)(3) Class Plaintiffs for their representation of merchants in MDL 1720, which culminated in the Class Settlement Agreement, all as approved by the Court.',
+      question: 'What amount of money can I expect to receive?',
+      answer: "The payout from the settlement fund will be determined by your documented or estimated interchange fees related to Visa and Mastercard card transactions (between you and your customers) spanning from January 1, 2004, to January 25, 2019. The specific sum each Authorized Claimant will receive is contingent upon several factors, including the total funds available for all claims, the aggregate value of valid claims submitted, expenses for class administration and notifications, taxes applicable to the settlement fund and associated tax-related costs, legal fees and expenses, and compensations to the Rule 23(b)(3) Class Plaintiffs for their advocacy on behalf of merchants in MDL 1720, culminating in the Class Settlement Agreement—all subject to the Court's approval.",
     },
     {
-      question: 'When will the claim forms be available?',
-      answer: 'Claim forms are not yet available. They should be available on or after December 1, 2023. Our lawyers are getting a head start and collecting claim information now and will be submitting shortly on your behalf.',
+      question: 'At what time will the claim forms be accessible?',
+      answer: 'The claim forms are not currently accessible. They are anticipated to be available on or after December 1, 2023. Our legal team is proactively gathering claim information now and will soon submit it on your behalf.',
     },
     {
-      question: 'What if I no longer have my business?',
-      answer: 'Your business does not have to be active now for you to qualify. The business just had to be in existence any time between from January 1, 2004, through January 25, 2019, and accepted Visa and Mastercard. Don’t worry if you closed your business or if it was dissolved by your respective state’s division of corporations. Once you hire our law firm, we will work with the settlement administrator to confirm whether your business qualified.',
+      question: 'What if my business is no longer operational?',
+      answer: "Your current business status doesn't affect your eligibility. Your business simply needed to have been active at any point between January 1, 2004, and January 25, 2019, and have accepted Visa and Mastercard. If your business has closed or was dissolved by your state's division of corporations, there's no need to worry. Upon engaging our law firm, we'll collaborate with the settlement administrator to ascertain your business's eligibility.",
     },
     {
-        question: "How will I know if I don't qualify",
-        answer: 'Our lawyers will will work with the settlement administrator to determine whether you qualify. If you do not qualify, our team will let you know.',
+      question: "Will I owe any fees to the lawyers if I'm ineligible?",
+      answer: 'No, you only incur fees if we successfully recover funds for your business. In the event that we secure a monetary return for your business, our lawyers receive 33.3% of the recovered amount.',
     },
     {
-      question: "Do I have to pay the lawyers anything if I don't qualify?",
-      answer: 'No. You, only pay us a fee if we can recover something for your business. If we get your business money back, our lawyers are paid 40% out of the money paid back.',
+      question: 'Is it necessary to hire an attorney for assistance?',
+      answer: "While hiring a lawyer isn't mandatory for your business concerning this settlement, engaging our experienced legal team ensures that you receive the full entitlements under this settlement. With over a decade of handling class actions and securing over $1 billion for our clients from settlements, our expertise is invaluable. Successful participation in this settlement necessitates the timely and accurate submission of a valid claim, and not all businesses will qualify for payment. We'll collaborate closely with the claims administrator to ensure your business receives its due if deemed eligible. Historically, nearly 95% of entitled beneficiaries in class action settlements miss out on their benefits due to various reasons—lack of awareness about the settlement, difficulties in completing required claim forms, failure to submit necessary documents promptly, or inadequate information provision during follow-ups by settlement administrators. Our team ensures the proper and timely submission of your claim without complications. Additionally, we'll ensure you receive the correct entitled amount. If discrepancies arise, our lawyers will dispute any incorrect amounts on your behalf.",
     },
     {
-      question: 'Do I have to hire an attorney to help me?',
-      answer: 'Although your business does not have to hire a lawyer in connection with this settlement, it makes sense for you to hire our experienced lawyers to make sure you get all the money you are entitled to under this settlement. Our legal team has handled class actions for well over a decade and have gotten our clients over $1 billion dollars from settlements. This settlement requires the submission of a timely and valid claim, and not all businesses will qualify for a payment. We will work closely with the claims administrator to get your business paid properly if you are qualified. Historically, nearly 95% of all those entitled to benefits in class action settlements never receive those benefits. Why is that? It’s because class members are not aware of the settlement, they do not know how to complete the required claim forms, they fail to complete the necessary documents, they fail to submit the claim forms on time, or they do not provide the necessary information when follow-up information has been requested by the settlement administrators. Our team will make sure your claim is properly and timely submitted and that there are no hiccups. We will also make sure you get the amount you are entitled to receive. If the amounts don’t match up, our lawyers will dispute the amount if we believe it is incorrect.',
-    },
-    {
-      question: 'By signing the retainer, what are the main items I am authorizing counsel to do for me? ',
-      answer: 'The Settlement Administrator and Class Counsel are available at no cost to your business to assist during the claims-filing period. Notwithstanding, by retaining our legal team, you are giving our attorneys complete authority to communicate with the Settlement Administrator on you and your business’ behalf and to make any and all decisions related to your business’ status as a class member and in connection with your business’ claim. Our attorneys shall serve as the sole representative for you and your business in connection with the settlement and in dealing with the Settlement Administrator for the entirety of the claim process, to receive from the Settlement Administrator your business’ claim form, to prepare, complete, and submit the claim to the Settlement Administrator; to communicate as necessary with the Settlement Administrator or Class Counsel about your business or its claim and the claim process, to respond to any follow-up requests from the Settlement Administrator for additional information or documentation necessary to prove a valid claim, and to ensure you and your business is properly and timely paid.',
+      question: 'What actions am I authorizing counsel to undertake by signing the retainer?',
+      answer: "By retaining our legal team, you grant our attorneys full authority to represent and act on behalf of you and your business throughout the claims-filing period. This authorization includes communicating with the Settlement Administrator, making decisions concerning your business's status as a class member, and managing your business's claim. Our attorneys will exclusively represent you and your business in all matters concerning the settlement, including receiving and handling your business's claim form, preparing, completing, and submitting the claim to the Settlement Administrator, communicating as necessary with the Settlement Administrator or Class Counsel regarding your business and its claim, responding to any requests for additional information or documentation from the Settlement Administrator to validate the claim, and ensuring that you and your business receive the appropriate and timely payment.",
     },
     {
       question: 'Where can I find additional information about the settlement?',
@@ -55,8 +51,8 @@ export default function FAQ() {
   };
 
   return (
-    <div className='p-16'>
-      <h1 className='text-center text-4xl font-bold m-2 mb-5'>Frequently Asked Questions</h1>
+    <div className='p-32'>
+      <h1 className='text-center text-2xl font-bold mb-5'>Frequently Asked Questions</h1>
       {faqs.map((faq, index) => (
         <div key={index} className="mb-4">
           <div

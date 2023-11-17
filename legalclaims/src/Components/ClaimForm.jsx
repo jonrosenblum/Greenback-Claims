@@ -20,32 +20,42 @@ export default function ClaimForm() {
     switch (page) {
       case 1:
         return (
-          <div>
-            <div className='m-2'>
-                <p className='m-2'>Did you have a business at any time between January 1, 2004 - January 25, 2019 that accepted Visa or Mastercard?</p>
-                <input
-                className='m-2'
-                type="radio"
-                value="Yes"
-                />
-                Yes
-                <input 
-                className='m-2'
-                type="radio"
-                value="No"
-                />
-                No
-            </div>
-            <div className='m-2 flex justify-between mb-4'>
+          <div className='relative'>
+
+            <div className='flex justify-between items-start m-2'>
                 <div>
-                    <p className='m-2'>What is your first name?</p>
+                    <p className='max-w-xs m-2'>Did you have a business at any time between January 1, 2004 - January 25, 2019 that accepted Visa or Mastercard?</p>
                     <input
+                    className='m-2'
+                    type="radio"
+                    name="businessAcceptance"
+                    value="Yes"
+                    required
+                    />
+                    Yes
+                    <input 
+                    className='m-2'
+                    type="radio"
+                    name="businessAcceptance"
+                    value="No"
+                    required
+                    />
+                    No
+                </div>
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>What is / was the legal name of the business?</p>
+                    <input
+                    placeholder='Enter name'
                     className='m-2 p-2 border border-2 border-blue-500 rounded-md'
                     type='text'
+                    required
                     />
                 </div>
-                <div>
-                    <p className='m-2'>Select your company type:</p>
+            </div>
+
+            <div className='flex justify-between m-2'>
+                <div className='flex flex-col mt-5'>
+                    <p className='m-2 w-45'>Select your company type:</p>
                     <select className='m-2 p-2 border border-2 border-blue-500 rounded-md'>
                         <option value=''>Please Select</option>
                         <option value='inc'>Incorporated (Inc.)</option>
@@ -57,52 +67,59 @@ export default function ClaimForm() {
                         <option value='sole'>Sole Proprietorship</option>
                      </select>
                 </div>
-            </div>
-            <div className='m-2 flex justify-between'>
-                <div>
-                    <p className='m-2'>What is your relationship with the business? (Title)</p>
-                    <select
-                   className='m-2 p-2 border border-2 border-blue-500 rounded-md'
-                    >
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>What is / was your relationship with the business? (Title)</p>
+                    <select className='m-2 p-2 border border-2 border-blue-500 rounded-md'>
                         <option value=''>Please Select</option>
-                        <option value=''>Director</option>
+                        <option value='director'>Director</option>
                         <option value='owner'>Officer</option>
                         <option value='employee'>Owner</option>
                         <option value='other'>Shareholder</option>
                         <option value='other'>Manager</option>
                     </select>
                 </div>
-                <div className='w-1/2'>
-                    <p className='m-2'>Business Tax Identification Number (EIN) for incorporated businesses or Social Security Number (SSN) for Sole Proprietorships - MUST BE 9 DIGITS</p>
+            </div>
+
+
+
+            <div className='flex justify-between items-start m-2'>
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>Business Tax Identification Number (EIN) for incorporated businesses or Social Security Number (SSN) for Sole Proprietorships - MUST BE 9 DIGITS</p>
                     <input
+                    required
+                    placeholder='EIN or SSN'
                     className='m-2 p-2 border border-2 border-blue-500 rounded-md'
                     type='text'/>
                 </div>
-            </div>
-            <div className='m-2 flex justify-between'>
-                <div>
-                    <p className='m-2'>Was/is your business subject to a franchise agreement?*</p>
-                    <input
-                    type='radio'
-                    className='m-2 p-2'
-                    />
-                    Yes
-                    <input
-                    type='radio'
-                    className='m-2 p-2'
-                    />
-                    No
-    
+                <div className='flex flex-col gap-4'>
+                    <div className='flex flex-col'>
+                        <p className='m-2 w-56'>Estimated annual credit card sales</p>
+                        <input
+                        className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                        placeholder='$'
+                        required
+                        type='text'/>
+                    </div>
+                    <div className=''>
+                        <p className='m-2 w-56'>Is / was  your business subject to a franchise agreement?*</p>
+                        <input
+                        type='radio'
+                        name='franchiseagreement'
+                        required
+                        className='m-2'
+                        />
+                        Yes
+                        <input
+                        type='radio'
+                        name='franchiseagreement'
+                        required
+                        className='m-2'
+                        />
+                        No
+                    </div>
                 </div>
-                <div className='w-1/2'>
-                    <p className='m-2'>Estimated annual credit card sales</p>
-                    <input
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
-                    type='text'/>
-                </div>
             </div>
-            
-            <button onClick={nextPage}>Next</button>
+            <button className='absolute bottom-0 right-0 bg-blue-500 p-2 rounded-md' onClick={nextPage}>Next</button>
           </div>
         );
       case 2:
@@ -134,12 +151,11 @@ export default function ClaimForm() {
 
   return (
     <div className="bg-white text-black">
-      <div className="p-4">
-        <div className="text-sm">
+      <div className="p-10">
+        <div className="text-sm m-2 p-4 border border-2 border-blue-500 rounded-md">
           <h1>Please answer the following questions to help us determine if you are eligible to make a claim for compensation:</h1>
         </div>
-        <div>
-          {/* Render current form page */}
+        <div className='text-sm mt-4'>
           {renderFormPage(currentPage)}
         </div>
       </div>
