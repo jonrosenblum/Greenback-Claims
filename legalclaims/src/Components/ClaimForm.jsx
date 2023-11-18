@@ -2,7 +2,25 @@ import { useState } from 'react';
 
 export default function ClaimForm() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 3; // Total number of form pages
+  const totalPages = 4; // Total number of form pages
+
+  const [formData, setFormData] = useState({
+    businessAcceptance: '',
+    businessName: '',
+    companyType: '',
+    title: '',
+    ein: '',
+    annualSales: '',
+    franchiseAgreement: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    state: '',
+    zipcode: '',
+  });
 
   const nextPage = () => {
     if (currentPage < totalPages) {
@@ -21,6 +39,11 @@ export default function ClaimForm() {
       case 1:
         return (
           <div className='relative'>
+            <div className="text-sm m-2 p-4">
+                <h1>Please answer the following questions to help us determine if you are eligible to make a claim for compensation:</h1>
+                
+            </div>
+            <hr className="border-t border-gray-300 mt-5" />
 
             <div className='flex justify-between items-start m-2'>
                 <div>
@@ -125,25 +148,134 @@ export default function ClaimForm() {
       case 2:
         return (
           <div>
-            {/* Page 2 content */}
-            <h1>Page 2</h1>
-            <button onClick={prevPage}>Previous</button>
-            <button onClick={nextPage}>Next</button>
+            <div className="text-sm m-2 p-4">
+                <h1 className='text-2xl'>Client Information</h1>
+            </div>
+            <hr className="border-t border-gray-300" />
+            <div className='flex justify-between items-start mt-5'>
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>First Name</p>
+                    <input
+                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    placeholder='First'
+                    type='text'
+                    required
+                    />
+                </div>
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>Last Name</p>
+                    <input
+                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    placeholder='Last'
+                    type='text'
+                    required
+                    />
+                </div>
+            </div>
+            <div className='flex justify-between items-start'>
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>Email Address</p>
+                    <input
+                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    placeholder='Email'
+                    type='email'
+                    required
+                    />
+                </div>
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>Phone Number</p>
+                    <input
+                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    placeholder='Phone'
+                    type='tel'
+                    required
+                    />
+                </div>
+            </div>
+            <div className='flex justify-between items-start'>
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>Address Line 1</p>
+                    <input
+                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    placeholder='Address'
+                    type='text'
+                    required
+                    />
+                </div>
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>City</p>
+                    <input
+                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    placeholder='City'
+                    type='text'
+                    required
+                    />
+                </div>
+            </div>
+            <div className='flex justify-between items-start mb-5'>
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>State</p>
+                    <input
+                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    placeholder='State'
+                    type='text'
+                    required
+                    />
+                </div>
+                <div className='flex flex-col'>
+                    <p className='m-2 w-56'>Zipcode</p>
+                    <input
+                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    placeholder='Zipcode'
+                    type='text'
+                    required
+                    />
+                </div>
+            </div>
+            <div className='flex justify-between'>
+              <button className='bg-blue-500 p-2 rounded-md' onClick={prevPage}>Previous</button>
+              <button className='bg-blue-500 p-2 rounded-md' onClick={nextPage}>Next</button>
+            </div>
           </div>
         );
       case 3:
         return (
           <div>
-            {/* Page 3 content */}
-            <h1>Page 3</h1>
-            <button onClick={prevPage}>Previous</button>
-            <button onClick={submitForm}>Submit</button>
+            <div className="text-sm m-2 p-4">
+              <h1 className='text-2xl text-center'>Please sign the contract below</h1>
+            </div>
+            <hr className="border-t border-gray-300" />
+            <div className='mt-5 mb-5'>
+              Form will go here
+            </div>
+            <div className='flex justify-between'>
+              <button className='bg-blue-500 rounded-md p-2' onClick={prevPage}>Previous</button>
+              <button className='bg-blue-500 rounded-md p-2' onClick={nextPage}>Next</button>
+            </div>
+          </div>
+        );
+        case 4:
+        return (
+          <div>
+            <div className="text-sm m-2 p-4">
+              <h1 className='text-2xl text-center'>Please sign the contract below</h1>
+            </div>
+            <hr className="border-t border-gray-300" />
+            <div className='mt-5 mb-5'>
+              Form will go here
+            </div>
+            <div className='flex justify-between'>
+              <button className='bg-blue-500 rounded-md p-2' onClick={prevPage}>Previous</button>
+              <button className='bg-blue-500 rounded-md p-2' onClick={submitForm}>Submit</button>
+            </div>
           </div>
         );
       default:
         return null;
     }
   };
+
+  
 
   const submitForm = () => {
     // Handle form submission
@@ -152,9 +284,7 @@ export default function ClaimForm() {
   return (
     <div className="bg-white text-black">
       <div className="p-10">
-        <div className="text-sm m-2 p-4 border border-2 border-blue-500 rounded-md">
-          <h1>Please answer the following questions to help us determine if you are eligible to make a claim for compensation:</h1>
-        </div>
+       
         <div className='text-sm mt-4'>
           {renderFormPage(currentPage)}
         </div>
