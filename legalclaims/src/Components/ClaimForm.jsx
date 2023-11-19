@@ -27,6 +27,7 @@ export default function ClaimForm() {
       setCurrentPage(currentPage + 1);
     }
   };
+ 
 
   const prevPage = () => {
     if (currentPage > 1) {
@@ -46,7 +47,7 @@ export default function ClaimForm() {
             <hr className="border-t border-gray-300 mt-5" />
 
             <div className='flex justify-between items-start m-2'>
-                <div>
+                <div className='w-45%'>
                     <p className='max-w-xs m-2'>Did you have a business at any time between January 1, 2004 - January 25, 2019 that accepted Visa or Mastercard?</p>
                     <input
                     className='m-2'
@@ -65,11 +66,11 @@ export default function ClaimForm() {
                     />
                     No
                 </div>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>What is / was the legal name of the business?</p>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2   '>What is / was the legal name of the business?</p>
                     <input
                     placeholder='Enter name'
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    className='m-2 p-2  border-2 border-blue-500 rounded-md'
                     type='text'
                     required
                     />
@@ -77,9 +78,9 @@ export default function ClaimForm() {
             </div>
 
             <div className='flex justify-between m-2'>
-                <div className='flex flex-col mt-5'>
-                    <p className='m-2 w-45'>Select your company type:</p>
-                    <select className='m-2 p-2 border border-2 border-blue-500 rounded-md'>
+                <div className='flex flex-col mt-5 w-[45%]'>
+                    <p className='m-2'>Select your company type:</p>
+                    <select className='m-2 p-2  border-2 border-blue-500 rounded-md'>
                         <option value=''>Please Select</option>
                         <option value='inc'>Incorporated (Inc.)</option>
                         <option value='co'>Company (Co.)</option>
@@ -90,9 +91,9 @@ export default function ClaimForm() {
                         <option value='sole'>Sole Proprietorship</option>
                      </select>
                 </div>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>What is / was your relationship with the business? (Title)</p>
-                    <select className='m-2 p-2 border border-2 border-blue-500 rounded-md'>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2  '>What is / was your relationship with the business? (Title)</p>
+                    <select className='m-2 p-2 border-2 border-blue-500 rounded-md'>
                         <option value=''>Please Select</option>
                         <option value='director'>Director</option>
                         <option value='owner'>Officer</option>
@@ -106,25 +107,25 @@ export default function ClaimForm() {
 
 
             <div className='flex justify-between items-start m-2'>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>Business Tax Identification Number (EIN) for incorporated businesses or Social Security Number (SSN) for Sole Proprietorships - MUST BE 9 DIGITS</p>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2   '>Business Tax Identification Number (EIN) for incorporated businesses or Social Security Number (SSN) for Sole Proprietorships - MUST BE 9 DIGITS</p>
                     <input
                     required
                     placeholder='EIN or SSN'
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    className='m-2 p-2 border-2 border-blue-500 rounded-md'
                     type='text'/>
                 </div>
-                <div className='flex flex-col gap-4'>
+                <div className='flex flex-col gap-4 w-[45%]'>
                     <div className='flex flex-col'>
-                        <p className='m-2 w-56'>Estimated annual credit card sales</p>
+                        <p className='m-2 '>Estimated annual credit card sales</p>
                         <input
-                        className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                        className='m-2 p-2 border-2 border-blue-500 rounded-md'
                         placeholder='$'
                         required
                         type='text'/>
                     </div>
                     <div className=''>
-                        <p className='m-2 w-56'>Is / was  your business subject to a franchise agreement?*</p>
+                        <p className='m-2  '>Is / was  your business subject to a franchise agreement?*</p>
                         <input
                         type='radio'
                         name='franchiseagreement'
@@ -147,25 +148,25 @@ export default function ClaimForm() {
         );
       case 2:
         return (
-          <div>
+          <div className='pl-3 pr-3 pb-3'>
             <div className="text-sm m-2 p-4">
                 <h1 className='text-2xl'>Client Information</h1>
             </div>
             <hr className="border-t border-gray-300" />
             <div className='flex justify-between items-start mt-5'>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>First Name</p>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2'>First Name</p>
                     <input
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    className='m-2 p-2  border-2 border-blue-500 rounded-md'
                     placeholder='First'
                     type='text'
                     required
                     />
                 </div>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>Last Name</p>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2 '>Last Name</p>
                     <input
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    className='m-2 p-2  border-2 border-blue-500 rounded-md'
                     placeholder='Last'
                     type='text'
                     required
@@ -173,19 +174,19 @@ export default function ClaimForm() {
                 </div>
             </div>
             <div className='flex justify-between items-start'>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>Email Address</p>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2'>Email Address</p>
                     <input
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    className='m-2 p-2 border-2 border-blue-500 rounded-md'
                     placeholder='Email'
                     type='email'
                     required
                     />
                 </div>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>Phone Number</p>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2'>Phone Number</p>
                     <input
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    className='m-2 p-2  border-2 border-blue-500 rounded-md'
                     placeholder='Phone'
                     type='tel'
                     required
@@ -193,19 +194,19 @@ export default function ClaimForm() {
                 </div>
             </div>
             <div className='flex justify-between items-start'>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>Address Line 1</p>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2'>Address Line 1</p>
                     <input
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    className='m-2 p-2 border-2 border-blue-500 rounded-md'
                     placeholder='Address'
                     type='text'
                     required
                     />
                 </div>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>City</p>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2'>City</p>
                     <input
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    className='m-2 p-2 border-2 border-blue-500 rounded-md'
                     placeholder='City'
                     type='text'
                     required
@@ -213,19 +214,19 @@ export default function ClaimForm() {
                 </div>
             </div>
             <div className='flex justify-between items-start mb-5'>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>State</p>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2'>State</p>
                     <input
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    className='m-2 p-2 border-2 border-blue-500 rounded-md'
                     placeholder='State'
                     type='text'
                     required
                     />
                 </div>
-                <div className='flex flex-col'>
-                    <p className='m-2 w-56'>Zipcode</p>
+                <div className='flex flex-col w-[45%]'>
+                    <p className='m-2'>Zipcode</p>
                     <input
-                    className='m-2 p-2 border border-2 border-blue-500 rounded-md'
+                    className='m-2 p-2  border-2 border-blue-500 rounded-md'
                     placeholder='Zipcode'
                     type='text'
                     required
@@ -282,8 +283,8 @@ export default function ClaimForm() {
   };
 
   return (
-    <div className="bg-white text-black">
-      <div className="p-10">
+    <div className="bg-white text-black pl-3 pr-3 pb-3">
+      <div className="p-0 xl:p-10">
        
         <div className='text-sm mt-4'>
           {renderFormPage(currentPage)}
