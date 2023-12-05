@@ -8,7 +8,7 @@ export default function Body() {
         <div>
             <section>
             <div className="bg-gray-900 text-md">
-                <div className="py-20 px-4 sm:px-6 lg:px-8 bg-cover bg-center" style={{ backgroundImage: 'url("https://www.ncmic.com/webres/Image/0581-NCMIC-Website-Graphics_Finance_Credit-Card-Processing_Hero_1500x580.jpg")' }}>
+                <div className="py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center" style={{ backgroundImage: 'url("https://www.ncmic.com/webres/Image/0581-NCMIC-Website-Graphics_Finance_Credit-Card-Processing_Hero_1500x580.jpg")' }}>
                     <div className="max-w-xl">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">Did You Own A Business Between 2004 and 2019?</h1>
                     <p className="text-md md:text-lg mb-8 max-w-sm font-medium">You Could be Eligible to Reclaim Funds as Part of a $5.5 Billion Dollar Settlement. </p>
@@ -21,7 +21,7 @@ export default function Body() {
             </section>
             <section id="about" className="bg-white dark:bg-gray-900 text-white">
                 <div className="block lg:flex bg-bgg">
-                <div className="lg:w-1/2 p-2 text-white">
+                <div className="lg:w-1/2 p-2 text-white flex items-center">
                     <div className="p-8 flex flex-col">
                         <h2 className="text-xl font-bold mb-6">If your business accepted Visa or Mastercard for payments at any point between 2004 and 2019, it&apos;s possible that you were charged excessive fees for credit card transactions.</h2>
                         <p className="mb-6 text-sm">MasterCard and Visa faced legal action for excessively charging fees on credit card transactions during that period. A $5.5 billion settlement has been established, permitting eligible businesses to seek restitution for these fees. Our law firm specializes in class action cases and is dedicated to ensuring that your company receives its rightful compensation. </p>
