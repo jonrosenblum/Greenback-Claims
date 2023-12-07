@@ -2,10 +2,9 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const aws = require('aws-sdk');
-const dotenv = require('dotenv');
 const sesTransport = require('nodemailer-ses-transport');
 
-dotenv.config();
+require('dotenv').config()
 
 const app = express();
 cors = require('cors');
@@ -21,9 +20,9 @@ app.use(bodyParser.json());
 
 // Configure AWS SDK
 aws.config.update({
-  accessKeyId: process.env.AWS_ACCESSKEYID,
-  secretAccessKey: process.env.AWS_SECRETKEYID,
-  region: process.env.AWS_REGION
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
 });
 
 // Create an AWS SES transporter
