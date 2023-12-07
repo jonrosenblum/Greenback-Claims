@@ -11,8 +11,8 @@ app.use(bodyParser.json());
 
 // Configure AWS SDK
 aws.config.update({
-  accessKeyId: 'AKIA4YIRF2DYMAP7Q7U7', // Update with your AWS access key ID
-  secretAccessKey: 'qUBWXv4bN2id5y20sWYel1WqiFKil9OY9G0O4u/3', // Update with your AWS secret access key
+  accessKeyId: 'AKIA4YIRF2DYBHNT6C57', // Update with your AWS access key ID
+  secretAccessKey: 'b7ISTB5p9Ycuqrv+NdsIOH6q5KK9INCfqJIzDP4D', // Update with your AWS secret access key
   region: 'us-east-1', // Update with your AWS region
 });
 
@@ -28,7 +28,7 @@ app.post('/send-email', (req, res) => {
   // Email content
   const mailOptions = {
     from: 'claims@greenbackclaims.com', // Sender (from) email address
-    to: 'claims@greenbackclaims.com', // Recipient (to) email address
+    to: 'jon.m.rosenblum@gmail.com', // Recipient (to) email address
     subject: 'New Form Submission',
     html: `<p>Form Data: ${JSON.stringify(formData)}</p>`,
   };
