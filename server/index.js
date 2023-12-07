@@ -13,6 +13,9 @@ app.use(cors({
   origin: '*'
 }));
 
+app.use(express.static(path.join(__dirname, 'client/dist')));
+
+
 
 
 // Middleware to parse JSON bodies
@@ -52,6 +55,10 @@ app.post('/send-email', (req, res) => {
       res.status(200).send('Email sent successfully');
     }
   });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/dist/index.html'));
 });
 
 // Start the server
