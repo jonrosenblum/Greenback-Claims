@@ -6,6 +6,15 @@ const sesTransport = require('nodemailer-ses-transport');
 
 const app = express();
 
+cors = require('cors');
+
+
+app.use(cors({
+  origin: '*'
+}));
+
+
+
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
@@ -28,7 +37,7 @@ app.post('/send-email', (req, res) => {
   // Email content
   const mailOptions = {
     from: 'claims@greenbackclaims.com', // Sender (from) email address
-    to: 'jon.m.rosenblum@gmail.com', // Recipient (to) email address
+    to: 'claims@greenbackclaims.com', // Recipient (to) email address
     subject: 'New Form Submission',
     html: `<p>Form Data: ${JSON.stringify(formData)}</p>`,
   };
@@ -39,7 +48,7 @@ app.post('/send-email', (req, res) => {
       console.error('Error:', error);
       res.status(500).send('Error sending email');
     } else {
-      console.log('Email sent:', info.response);
+      console.log('Email sent:', info.messageId);
       res.status(200).send('Email sent successfully');
     }
   });

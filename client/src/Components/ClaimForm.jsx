@@ -334,7 +334,7 @@ export default function ClaimForm() {
   
 
   const submitForm = () => {
-    fetch('/send-email', {
+    fetch('http://localhost:3000/send-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
