@@ -22,6 +22,14 @@ export default function ClaimForm() {
     zipcode: '',
   });
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   const nextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -54,6 +62,7 @@ export default function ClaimForm() {
                     type="radio"
                     name="businessAcceptance"
                     value="Yes"
+                    onChange={handleInputChange}
                     required
                     />
                     Yes
@@ -62,16 +71,20 @@ export default function ClaimForm() {
                     type="radio"
                     name="businessAcceptance"
                     value="No"
+                    onChange={handleInputChange}
                     required
                     />
                     No
                 </div>
+
                 <div className='flex flex-col w-[45%]'>
-                    <p className='m-2   '>What is / was the legal name of the business?</p>
+                    <p className='m-2'>What is / was the legal name of the business?</p>
                     <input
-                    placeholder='Enter name'
                     className='m-2 p-2  border-2 border-blue-500 rounded-md'
+                    placeholder='Enter name'
                     type='text'
+                    name='businessName'
+                    onChange={handleInputChange}
                     required
                     />
                 </div>
@@ -80,7 +93,12 @@ export default function ClaimForm() {
             <div className='flex justify-between m-2'>
                 <div className='flex flex-col mt-5 w-[45%]'>
                     <p className='m-2'>Select your company type:</p>
-                    <select className='m-2 p-2  border-2 border-blue-500 rounded-md'>
+                    <select 
+                      className='m-2 p-2  border-2 border-blue-500 rounded-md'
+                      name='companyType'
+                      onChange={handleInputChange}
+                      required
+                      >
                         <option value=''>Please Select</option>
                         <option value='inc'>Incorporated (Inc.)</option>
                         <option value='co'>Company (Co.)</option>
@@ -91,9 +109,14 @@ export default function ClaimForm() {
                         <option value='sole'>Sole Proprietorship</option>
                      </select>
                 </div>
+
                 <div className='flex flex-col w-[45%]'>
                     <p className='m-2  '>What is / was your relationship with the business? (Title)</p>
-                    <select className='m-2 p-2 border-2 border-blue-500 rounded-md'>
+                    <select 
+                      className='m-2 p-2 border-2 border-blue-500 rounded-md'
+                      name='title'
+                      onChange={handleInputChange}
+                      required>
                         <option value=''>Please Select</option>
                         <option value='director'>Director</option>
                         <option value='owner'>Officer</option>
@@ -108,13 +131,16 @@ export default function ClaimForm() {
 
             <div className='flex justify-between items-start m-2'>
                 <div className='flex flex-col w-[45%]'>
-                    <p className='m-2   '>Business Tax Identification Number (EIN) for incorporated businesses or Social Security Number (SSN) for Sole Proprietorships - MUST BE 9 DIGITS</p>
+                    <p className='m-2'>Business Tax Identification Number (EIN) for incorporated businesses or Social Security Number (SSN) for Sole Proprietorships - MUST BE 9 DIGITS</p>
                     <input
                     required
+                    name='ein'
+                    onChange={handleInputChange}
                     placeholder='EIN or SSN'
                     className='m-2 p-2 border-2 border-blue-500 rounded-md'
                     type='text'/>
                 </div>
+
                 <div className='flex flex-col gap-4 w-[45%]'>
                     <div className='flex flex-col'>
                         <p className='m-2 '>Estimated annual credit card sales</p>
@@ -122,20 +148,26 @@ export default function ClaimForm() {
                         className='m-2 p-2 border-2 border-blue-500 rounded-md'
                         placeholder='$'
                         required
-                        type='text'/>
+                        type='text'
+                        name='annualSales'
+                        onChange={handleInputChange}
+                        />
                     </div>
-                    <div className=''>
+
+                    <div>
                         <p className='m-2  '>Is / was  your business subject to a franchise agreement?*</p>
                         <input
                         type='radio'
-                        name='franchiseagreement'
+                        name='franchiseAgreement'
+                        onChange={handleInputChange}
                         required
                         className='m-2'
                         />
                         Yes
                         <input
                         type='radio'
-                        name='franchiseagreement'
+                        name='franchiseAgreement'
+                        onChange={handleInputChange}
                         required
                         className='m-2'
                         />
@@ -146,46 +178,61 @@ export default function ClaimForm() {
             <button className='absolute bottom-0 right-0 bg-blue-500 p-2 rounded-md' onClick={nextPage}>Next</button>
           </div>
         );
+
+
       case 2:
         return (
           <div className='pl-3 pr-3 pb-3'>
             <div className="text-sm m-2 p-4">
-                <h1 className='text-2xl'>Client Information</h1>
+                <h1 className='text-2xl'>Business Information</h1>
             </div>
+
             <hr className="border-t border-gray-300" />
+
             <div className='flex justify-between items-start mt-5'>
                 <div className='flex flex-col w-[45%]'>
-                    <p className='m-2'>First Name</p>
+                    <p className='m-2'>First name</p>
                     <input
+                    name='firstName'
                     className='m-2 p-2  border-2 border-blue-500 rounded-md'
                     placeholder='First'
                     type='text'
+                    onChange={handleInputChange}
                     required
                     />
                 </div>
+
                 <div className='flex flex-col w-[45%]'>
-                    <p className='m-2 '>Last Name</p>
+                    <p className='m-2 '>Last name</p>
                     <input
+                    name='lastName'
                     className='m-2 p-2  border-2 border-blue-500 rounded-md'
                     placeholder='Last'
+                    onChange={handleInputChange}
                     type='text'
                     required
                     />
                 </div>
             </div>
+
             <div className='flex justify-between items-start'>
                 <div className='flex flex-col w-[45%]'>
-                    <p className='m-2'>Email Address</p>
+                    <p className='m-2'>Email</p>
                     <input
+                    name='email'
+                    onChange={handleInputChange}
                     className='m-2 p-2 border-2 border-blue-500 rounded-md'
                     placeholder='Email'
                     type='email'
                     required
                     />
                 </div>
+
                 <div className='flex flex-col w-[45%]'>
-                    <p className='m-2'>Phone Number</p>
+                    <p className='m-2'>Phone</p>
                     <input
+                    name='phone'
+                    onChange={handleInputChange}
                     className='m-2 p-2  border-2 border-blue-500 rounded-md'
                     placeholder='Phone'
                     type='tel'
@@ -197,6 +244,8 @@ export default function ClaimForm() {
                 <div className='flex flex-col w-[45%]'>
                     <p className='m-2'>Address Line 1</p>
                     <input
+                    name='address'
+                    onChange={handleInputChange}
                     className='m-2 p-2 border-2 border-blue-500 rounded-md'
                     placeholder='Address'
                     type='text'
@@ -206,6 +255,8 @@ export default function ClaimForm() {
                 <div className='flex flex-col w-[45%]'>
                     <p className='m-2'>City</p>
                     <input
+                    name='city'
+                    onChange={handleInputChange}
                     className='m-2 p-2 border-2 border-blue-500 rounded-md'
                     placeholder='City'
                     type='text'
@@ -217,6 +268,8 @@ export default function ClaimForm() {
                 <div className='flex flex-col w-[45%]'>
                     <p className='m-2'>State</p>
                     <input
+                    name='state'
+                    onChange={handleInputChange}
                     className='m-2 p-2 border-2 border-blue-500 rounded-md'
                     placeholder='State'
                     type='text'
@@ -226,6 +279,8 @@ export default function ClaimForm() {
                 <div className='flex flex-col w-[45%]'>
                     <p className='m-2'>Zipcode</p>
                     <input
+                    name='zipcode'
+                    onChange={handleInputChange}
                     className='m-2 p-2  border-2 border-blue-500 rounded-md'
                     placeholder='Zipcode'
                     type='text'
@@ -279,7 +334,22 @@ export default function ClaimForm() {
   
 
   const submitForm = () => {
-    // Handle form submission
+    fetch('/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle response
+        console.log(data);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error('Error:', error);
+      });
   };
 
   return (
