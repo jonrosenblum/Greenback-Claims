@@ -10,7 +10,7 @@ export default function Body() {
             <BodySlider/>
             <section id="about" className="bg-white dark:bg-gray-900 text-white">
                 <div className="block lg:flex bg-bgg">
-                <div className="lg:w-1/2 p-2 text-white flex items-center">
+                <div className="lg:w-1/2 p-2 text-white flex ">
                     <div className="p-8 flex flex-col">
                         <h2 className="text-xl font-bold mb-6">If your business accepted Visa or Mastercard for payments at any point between 2004 and 2019, it&apos;s possible that you were charged excessive fees for credit card transactions.</h2>
                         <p className="mb-6 text-sm">MasterCard and Visa faced legal action for excessively charging fees on credit card transactions during that period. A $5.5 billion settlement has been established, permitting eligible businesses to seek restitution for these fees. Our law firm specializes in class action cases and is dedicated to ensuring that your company receives its rightful compensation. </p>
