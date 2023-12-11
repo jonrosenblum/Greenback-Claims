@@ -12,6 +12,8 @@ export default function BodySlider() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
   };
 
   return (
@@ -42,13 +44,13 @@ export default function BodySlider() {
         </div>
       </div>
 
-       {/* Second Slide */}
-       <div className="bg-gray-900 text-md">
+      {/* Second Slide */}
+      <div className="bg-gray-900 text-md">
         <div
           className="py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center"
           style={{
             backgroundImage:
-            'url("https://via.placeholder.com/1500x580")',
+              'url("https://via.placeholder.com/1500x580")',
           }}
         >
           <div className="max-w-xl">
@@ -56,10 +58,10 @@ export default function BodySlider() {
               What Is Employee Retention Credit?
             </h1>
             <p className="text-md md:text-lg mb-8 max-w-sm font-medium">
-            The Employee Retention Credit (ERC) is a tax credit provided by the U.S. government to support 
-            businesses during challenging times, 
-            such as the COVID-19 pandemic. It was introduced as part of the CARES Act in 2020 and has since 
-            been expanded and extended to help businesses retain their employees.{' '}
+              The Employee Retention Credit (ERC) is a tax credit provided by the U.S. government to support
+              businesses during challenging times,
+              such as the COVID-19 pandemic. It was introduced as part of the CARES Act in 2020 and has since
+              been expanded and extended to help businesses retain their employees.{' '}
             </p>
             <a
               href="#form"
