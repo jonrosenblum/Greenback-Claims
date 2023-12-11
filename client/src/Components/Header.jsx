@@ -52,20 +52,20 @@ export default function Header() {
                   href="#"
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                 >
-                  Dropdown Item 1
+                  Visa and MasterCard
                 </a>
                 <a
                   href="#"
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                 >
-                  Dropdown Item 2
+                  Employee Retention Credit (ERC)
                 </a>
-                <a
+                {/* <a
                   href="#"
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                 >
                   Dropdown Item 3
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

@@ -6,8 +6,8 @@ const multer = require('multer');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-// const aws = require('aws-sdk');
-// const sesTransport = require('nodemailer-ses-transport');
+const aws = require('aws-sdk');
+const sesTransport = require('nodemailer-ses-transport');
 
 require('dotenv').config()
 
@@ -20,7 +20,6 @@ app.use(cors({
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
-// app.use(express.static(path.join(__dirname, 'client/dist')));
 
 
 
@@ -49,7 +48,7 @@ app.post('/send-email', upload.single('pdf'), async (req, res) => {
   // Email content
   const mailOptions = {
     from: 'claims@greenbackclaims.com', // Sender (from) email address
-    to: 'okashatanoli12345@gmail.com', // Recipient (to) email address
+    to: 'claims@greenbackclaims.com', // Recipient (to) email address
     subject: 'New Form Submission',
     html: `<p>Form Data: ${JSON.stringify(formData)}</p>`,
     attachments: [
@@ -73,9 +72,6 @@ app.post('/send-email', upload.single('pdf'), async (req, res) => {
   // res.json({message:'hello'})
 });
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client/dist/index.html'));
-// });
 
 // Start the server
 const PORT = process.env.PORT || 3000;

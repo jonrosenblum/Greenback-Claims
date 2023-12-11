@@ -72,7 +72,7 @@ export default function ClaimForm() {
             Re:	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
           </div>
           <div className='mt-3'>
-            <p className=''>Dear, {formData.firstName},</p>
+            <p className=''>Dear {formData.firstName},</p>
             <p className='indent-14 mt-3'>
               This Retainer Agreement will memorialize the retention of Criden & Love, P.A.
               and Stabile Law Firm, LLC (the “Firms”) to represent :______________________________
