@@ -23,7 +23,7 @@ export default function Body() {
                     </div>
                 </div>
                 <div className="w-[100%] lg:w-[50%] md:p-5 mt-5 p-2">
-                    <div id="form" className="p-3 border-2 border-white-500">
+                    <div id="form" className="p-3 border-2 border-white-500 ">
                         <ClaimForm/>
                     </div>
                 </div>
