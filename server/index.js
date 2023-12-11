@@ -29,27 +29,16 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 // app.use(bodyParser.json());
 
 // Configure AWS SDK
-// aws.config.update({
-//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-//   region: process.env.AWS_REGION,
-// });
+aws.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
 
-// // Create an AWS SES transporter
-// const transporter = nodemailer.createTransport(sesTransport({
-//   ses: new aws.SES({ apiVersion: '2010-12-01' }),
-// }));
-
-let config = {
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASS
-  }
-}
-
-let transporter = nodemailer.createTransport(config);
-
+// Create an AWS SES transporter
+const transporter = nodemailer.createTransport(sesTransport({
+  ses: new aws.SES({ apiVersion: '2010-12-01' }),
+}));
 
 // POST endpoint for handling form submissions
 app.post('/send-email', upload.single('pdf'), async (req, res) => {
