@@ -15,13 +15,14 @@ export default function BodySlider() {
     autoplay: true,
     autoplaySpeed: 2000,
   };
+  
 
   return (
     <Slider {...settings}>
       {/* First Slide */}
-      <div className="bg-gray-900 text-md">
+      <div className="bg-gray-900 text-md h-fit">
         <div
-          className="py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center"
+          className="py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center h-[600px]"
           style={{
             backgroundImage:
               'url("https://www.ncmic.com/webres/Image/0581-NCMIC-Website-Graphics_Finance_Credit-Card-Processing_Hero_1500x580.jpg")',
@@ -45,9 +46,9 @@ export default function BodySlider() {
       </div>
 
       {/* Second Slide */}
-      <div className="bg-gray-900 text-md">
+      <div className="bg-gray-900 text-md h-fit">
         <div
-          className="py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center"
+          className="py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center h-[600px]"
           style={{
             backgroundImage:
               'url("https://via.placeholder.com/1500x580")',
