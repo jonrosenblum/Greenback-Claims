@@ -1212,7 +1212,7 @@ export default function ClaimForm() {
   };
 
   return (
-    <div className="bg-white text-black pl-3 pr-3 pb-3 h-[90vh] overflow-y-auto">
+    <div className="bg-white text-black pl-3 pr-3 pb-3 h-[70vh] overflow-y-auto">
       <Toaster />
       <div className="p-0 xl:p-10">
         <div className='text-sm mt-4'>
