@@ -64,7 +64,7 @@ export default function ClaimForm() {
             <img src="/public/pdf2.png" className='w-[110px] object-contain' alt="" />
           </div>
           <div className='mt-5'>
-            <p><span className='font-semibold'>Name</span> : {formData.firstName}</p>
+            <p><span className='font-semibold'>Name</span> : {formData.firstName} {formData.lastName}</p>
             <p><span className='font-semibold'>Email</span> : {formData.email}</p>
             <p><span className='font-semibold'>EIN</span> : {formData.ein}</p>
           </div>
@@ -240,7 +240,16 @@ export default function ClaimForm() {
           })
           .catch((error) => {
             // Handle error
-            console.error('Error:', error);
+            // console.error('Error:', error);
+            toast.error(error.message, {
+              position: window.matchMedia("(min-width: 600px)").matches ? "bottom-right" : "bottom-center",
+              style: {
+                backgroundColor: '#d9d9d9',
+                padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
+                fontSize: '14px',
+                fontWeight: 'bold'
+              },
+            });
           })
           .finally(() => {
             setLoading(false)
@@ -1021,7 +1030,7 @@ export default function ClaimForm() {
                 <img src="/public/pdf2.png" className='w-[110px] md:w-[130px] object-contain' alt="" />
               </div>
               <div className='mt-5'>
-                <p><span className='font-semibold'>Name</span> : {formData.firstName}</p>
+                <p><span className='font-semibold'>Name</span> : {formData.firstName} {formData.lastName}</p>
                 <p><span className='font-semibold'>Email</span> : {formData.email}</p>
                 <p><span className='font-semibold'>EIN</span> : {formData.ein}</p>
               </div>
@@ -1133,14 +1142,14 @@ export default function ClaimForm() {
               </div>
             </>
             <div className='block [@media(min-width:500px)]:flex justify-between items-end mt-10'>
-              <div className='flex items-end gap-5'>
+              <div className='block [@media(min-width:500px)]:flex items-end gap-5'>
                 <p className='font-bold'>By: </p>
                 <div className='flex flex-col items-start'>
                   <p>please save the sign before moving forward</p>
                   <div className='border border-zinc-400 mt-2 box-border'>
                     <SignatureCanvas penColor='black'
 
-                      canvasProps={{ width: 200, height: 130, className: 'signature' }}
+                      canvasProps={{ width: 250, height: 130, className: 'signature' }}
                       ref={signatureRef}
                     />
                   </div>
@@ -1203,7 +1212,7 @@ export default function ClaimForm() {
   };
 
   return (
-    <div className="bg-white text-black pl-3 pr-3 pb-3 max-h-[90vh] overflow-y-auto">
+    <div className="bg-white text-black pl-3 pr-3 pb-3 h-[70vh] overflow-y-auto">
       <Toaster />
       <div className="p-0 xl:p-10">
         <div className='text-sm mt-4'>
