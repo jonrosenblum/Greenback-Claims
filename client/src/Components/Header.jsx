@@ -1,4 +1,8 @@
 import { useState } from 'react';
+// import { Link } from 'react-router-dom';
+import { Link } from 'react-scroll';
+
+
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -11,16 +15,23 @@ export default function Header() {
     <div>
       <nav className="bg-gray-900 py-4">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-white text-2xl font-bold">
-            Greenback Claims
-          </div>
+        {/* <Link to="/"> */}
+         <a href="/">     <div className="text-white text-2xl font-bold">
+                Greenback Claims
+              </div>
+              </a>
+          {/* </Link> */}
           <div className="flex space-x-4">
-            <a href="#" className="text-white hover:text-gray-300">
-              About
-            </a>
-            <a href="#" className="text-white hover:text-gray-300">
+            
+        <Link to="about" className="text-white hover:text-gray-300" smooth={true} duration={500}>
+          About
+        </Link>
+            {/* <a href="#" className="text-white hover:text-gray-300">
               FAQs
-            </a>
+            </a> */}
+        <Link to="fqs" className="text-white hover:text-gray-300" smooth={true} duration={500}>
+            FAQs
+        </Link>
             <div className="relative inline-block text-left">
               <div>
                 <button
@@ -32,7 +43,8 @@ export default function Header() {
                 </button>
               </div>
               <div
-                className={`absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg ${
+              // style={{zIndex: '1000'}}
+                className={`z-10 absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg ${
                   isDropdownOpen ? '' : 'hidden'
                 }`}
               >
@@ -40,20 +52,20 @@ export default function Header() {
                   href="#"
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                 >
-                  Dropdown Item 1
+                  Visa and MasterCard
                 </a>
                 <a
                   href="#"
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                 >
-                  Dropdown Item 2
+                  Employee Retention Credit (ERC)
                 </a>
-                <a
+                {/* <a
                   href="#"
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                 >
                   Dropdown Item 3
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
