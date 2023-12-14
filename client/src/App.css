@@ -1,15 +1,1 @@
 
-.signature{
-    width: 230px !important;
-    height: 120px !important;
-}
-@media (max-width:500px ){
-    .signature{
-        width: 100% !important;
-        height: 200px !important;
-        aspect-ratio: 6/3;
-    }
-}
-.slick-next{
-    display: none !important;
-}
