@@ -444,7 +444,7 @@ export default function ClaimForm() {
 
       <hr className="border-t border-gray-300" />
 
-      <div className="flex flex-col md:flex-row justify-between items-start mt-10">
+      <div className="flex flex-col md:flex-row justify-between items-start mt-8">
         <div className="flex flex-col w-full md:w-3/5">
           <p className="m-2">First name</p>
           <input
