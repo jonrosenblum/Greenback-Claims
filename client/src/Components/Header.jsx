@@ -57,14 +57,14 @@ export default function Header() {
                 <a
                   href="#"
                   onClick={setVisaTrue}
-                  className={`block px-4 py-2 text-gray-800 hover:bg-gray-200 ${visa && 'bg-gray-200'}`}
+                  className={`block px-4 py-2 rounded-t-lg text-gray-800 hover:bg-gray-200 ${visa && 'bg-gray-200'}`}
                 >
                  Master card
                 </a>
                 <a
                   href="#"
                   onClick={setVisaFalse}
-                  className={`block px-4 py-2 text-gray-800 hover:bg-gray-200 ${!visa && 'bg-gray-200'}`}
+                  className={`block px-4 py-2 rounded-b-lg text-gray-800 hover:bg-gray-200 ${!visa && 'bg-gray-200'}`}
                 >
                  ERC
                 </a>
