@@ -10,3 +10,6 @@
         aspect-ratio: 6/3;
     }
 }
+.slick-next{
+    display: none !important;
+}

@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import { Link } from 'react-scroll';
+import useStore from '../zustand/store';
 
 
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { visa, setVisaTrue, setVisaFalse, toggleVisa } = useStore();
+  
+  useEffect(() => {
+    console.log('isLogged value changed:', visa);
+  }, [visa]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -50,22 +56,19 @@ export default function Header() {
               >
                 <a
                   href="#"
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                  onClick={setVisaTrue}
+                  className={`block px-4 py-2 text-gray-800 hover:bg-gray-200 ${visa && 'bg-gray-200'}`}
                 >
-                  Dropdown Item 1
+                 Master card
                 </a>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                  onClick={setVisaFalse}
+                  className={`block px-4 py-2 text-gray-800 hover:bg-gray-200 ${!visa && 'bg-gray-200'}`}
                 >
-                  Dropdown Item 2
+                 ERC
                 </a>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                >
-                  Dropdown Item 3
-                </a>
+
               </div>
             </div>
           </div>
