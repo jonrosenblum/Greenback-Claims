@@ -17,9 +17,11 @@ export default function Body() {
             {/* visa */}
 
             {visa && <section id="about" className="bg-white dark:bg-gray-900 text-white">
-                 <div className="b bg-bgg grid grid-cols-2 p-[25px] text-[1.3rem] ">
+                <div className="bg-bgg p-[35px]">
+                 <div className="b bg-bgg grid grid-cols-2 text-[1.3rem] border border-gray-400">
                     <button className={`p-2 font-bold ${visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaTrue}>Visa</button>
                     <button className={`p-2 font-bold ${!visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaFalse}>ERC</button>
+                </div>
                 </div>
                 <div className="block lg:flex bg-bgg">
                 <div className="lg:w-1/2 p-2 text-white flex ">
@@ -45,9 +47,11 @@ export default function Body() {
             {/* ERC */}
 
             {!visa && <section id="about" className="bg-white dark:bg-gray-900 text-white">
-                <div className="b bg-bgg grid grid-cols-2 p-[25px] text-[1.3rem] ">
+            <div className="bg-bgg p-[35px]">
+                 <div className="b bg-bgg grid grid-cols-2 text-[1.3rem] border border-gray-400">
                     <button className={`p-2 font-bold ${visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaTrue}>Visa</button>
                     <button className={`p-2 font-bold ${!visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaFalse}>ERC</button>
+                </div>
                 </div>
                 <div className="block lg:flex bg-bgg">
                 <div className="lg:w-1/2 p-2 text-white flex ">
