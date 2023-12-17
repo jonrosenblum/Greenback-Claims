@@ -56,19 +56,16 @@ export default function BodySlider() {
         >
           <div className="max-w-xl">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-              What Is Employee Retention Credit?
+              What Is The Employee Retention Tax Credit?
             </h1>
             <p className="text-md md:text-lg mb-8 max-w-sm font-medium">
-              The Employee Retention Credit (ERC) is a tax credit provided by the U.S. government to support
-              businesses during challenging times,
-              such as the COVID-19 pandemic. It was introduced as part of the CARES Act in 2020 and has since
-              been expanded and extended to help businesses retain their employees.{' '}
+              Your Business Could Qualify for up to $26,000 Per Employee.{' '}
             </p>
             <a
               href="#form"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-2xl px-6 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              Submit Claim
+              Learn More
             </a>
           </div>
         </div>

@@ -5,44 +5,32 @@ export default function FAQ1() {
 
   const faqs = [
     {
-      question: 'What is the nature of this lawsuit?',
-      answer: 'This lawsuit primarily revolves around the interchange fees associated with merchants accepting Visa or Mastercard credit or debit cards between January 1, 2004, and January 25, 2019, as well as the rules imposed by Visa and Mastercard on these merchants.',
+      question: 'Do I have to repay the ERC Credit?',
+      answer: "No. This is not a loan. It's a refundable tax credit. When we file your ERC claim we request a refund check for you.",
     },
     {
-      question: 'Could you explain what an interchange fee is?',
-      answer: 'An interchange fee is the charge associated with transactions made by a cardholder using a credit or debit card, typically ranging from around 1% to 2% of the purchase amount. These fees constitute a significant portion of what merchants pay for accepting Visa and Mastercard cards. Visa and Mastercard establish interchange fee rates for various transaction types, often updating and publishing them on their websites approximately twice a year.',
+      question: 'How much do you charge?',
+      answer: 'Our service charge is based on a percentage of the credit recovered. We calculate and provide our fee with our free analysis. Just like a good CPA, using the right team for this process pays for itself.',
     },
     {
-      question: 'Are all businesses eligible for the settlement?',
-      answer: 'Not every business will qualify. Our legal team will collaborate with the settlement administrator to determine if your business meets the criteria.',
+      question: 'Can I get ERC Funds if I already took the PPP?',
+      answer: "Yes. The Taxpayer Certainty and Disaster Tax Relief Act of 2020, enacted December 27, 2020, modified the ERC credit rules. One of the modifications included allowing a company to have a PPP loan and still take advantage of the ERC credit. However, you can't use the same dollar for dollar funds. We take this into account when processing your ERC credit.",
     },
     {
-      question: 'What amount of money can I expect to receive?',
-      answer: "The payout from the settlement fund will be determined by your documented or estimated interchange fees related to Visa and Mastercard card transactions (between you and your customers) spanning from January 1, 2004, to January 25, 2019. The specific sum each Authorized Claimant will receive is contingent upon several factors, including the total funds available for all claims, the aggregate value of valid claims submitted, expenses for class administration and notifications, taxes applicable to the settlement fund and associated tax-related costs, legal fees and expenses, and compensations to the Rule 23(b)(3) Class Plaintiffs for their advocacy on behalf of merchants in MDL 1720, culminating in the Class Settlement Agreement—all subject to the Court's approval.",
+      question: 'Will the ERC funds run out?',
+      answer: "This is not a lending program - tax refunds are issued by the US Treasury. Therefore, all eligible employers will receive the funds.",
     },
     {
-      question: 'At what time will the claim forms be accessible?',
-      answer: 'The claim forms are not currently accessible. They are anticipated to be available on or after December 1, 2023. Our legal team is proactively gathering claim information now and will soon submit it on your behalf.',
+      question: 'How long does it take to get my ERC Credit?',
+      answer: 'This is how the process works: you send us the required documents and we process an analysis at no charge. The process from start to finish usually happens in 2-3 weeks. If you wish to move forward, you sign your amended return and we file your claim. Once filed, refunds are released based on IRS backlog. Currently, the IRS has stipulated a 6-9 month turnaround on the ERC refunds.',
     },
     {
-      question: 'What if my business is no longer operational?',
-      answer: "Your current business status doesn't affect your eligibility. Your business simply needed to have been active at any point between January 1, 2004, and January 25, 2019, and have accepted Visa and Mastercard. If your business has closed or was dissolved by your state's division of corporations, there's no need to worry. Upon engaging our law firm, we'll collaborate with the settlement administrator to ascertain your business's eligibility.",
+      question: 'Is the ERC Credit taxable?',
+      answer: "The ERC credit is not considered income for federal income tax purposes, but you must reduce any deductible wage expenses by the amount of the credit. Please provide the credit information to your CPA for tax purposes.",
     },
     {
-      question: "Will I owe any fees to the lawyers if I'm ineligible?",
-      answer: 'No, you only incur fees if we successfully recover funds for your business. In the event that we secure a monetary return for your business, our lawyers receive 33.3% of the recovered amount.',
-    },
-    {
-      question: 'Is it necessary to hire an attorney for assistance?',
-      answer: "While hiring a lawyer isn't mandatory for your business concerning this settlement, engaging our experienced legal team ensures that you receive the full entitlements under this settlement. With over a decade of handling class actions and securing over $1 billion for our clients from settlements, our expertise is invaluable. Successful participation in this settlement necessitates the timely and accurate submission of a valid claim, and not all businesses will qualify for payment. We'll collaborate closely with the claims administrator to ensure your business receives its due if deemed eligible. Historically, nearly 95% of entitled beneficiaries in class action settlements miss out on their benefits due to various reasons—lack of awareness about the settlement, difficulties in completing required claim forms, failure to submit necessary documents promptly, or inadequate information provision during follow-ups by settlement administrators. Our team ensures the proper and timely submission of your claim without complications. Additionally, we'll ensure you receive the correct entitled amount. If discrepancies arise, our lawyers will dispute any incorrect amounts on your behalf.",
-    },
-    {
-      question: 'What actions am I authorizing counsel to undertake by signing the retainer?',
-      answer: "By retaining our legal team, you grant our attorneys full authority to represent and act on behalf of you and your business throughout the claims-filing period. This authorization includes communicating with the Settlement Administrator, making decisions concerning your business's status as a class member, and managing your business's claim. Our attorneys will exclusively represent you and your business in all matters concerning the settlement, including receiving and handling your business's claim form, preparing, completing, and submitting the claim to the Settlement Administrator, communicating as necessary with the Settlement Administrator or Class Counsel regarding your business and its claim, responding to any requests for additional information or documentation from the Settlement Administrator to validate the claim, and ensuring that you and your business receive the appropriate and timely payment.",
-    },
-    {
-      question: 'Where can I find additional information about the settlement?',
-      answer: 'For more information about the Settlement, here is a link to the Payment Card Interchange Fee Settlement:https://www.paymentcardsettlement.com/en',
+      question: "Can I be eligible for the ERC if I'm self employed?",
+      answer: 'No, if you are majority owner (over 50%) of your company then your wages are not eligible.',
     },
   ];
 
@@ -52,7 +40,7 @@ export default function FAQ1() {
 
   return (
     <div id='fqs' className=' md:p-10  lg;p-32 lg:w-[60%] md:w-[75%]  w-[90%] m-auto'>
-      <h1 className='text-center text-2xl font-bold mb-5'>Frequently Asked Questions (ERC)</h1>
+      <h1 className='text-center text-2xl font-bold mb-5'>Frequently Asked Questions</h1>
       {faqs.map((faq, index) => (
         <div key={index} className="mb-4">
           <div
