@@ -51,8 +51,8 @@ export default function Body() {
                 <section className="bg-white dark:bg-gray-900 text-white">
                     <div className="bg-bgg p-[35px]">
                         <div className="b bg-bgg grid grid-cols-2 text-[1.3rem] border border-gray-400">
-                            <button className={`p-2 font-bold ${visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaTrue}>Visa</button>
-                            <button className={`p-2 font-bold ${!visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaFalse}>ERC</button>
+                            <button className={`p-2 font-bold ${visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaTrue}>Visa & Mastercard Anti-Trust Lawsuit</button>
+                            <button className={`p-2 font-bold ${!visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaFalse}>Employee Retention Credit (ERC)</button>
                         </div>
                     </div>
                     <div className="block lg:flex bg-bgg">
