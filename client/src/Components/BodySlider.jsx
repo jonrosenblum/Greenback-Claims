@@ -15,7 +15,7 @@ export default function BodySlider() {
     autoplay: true,
     autoplaySpeed: 4000,
   };
-  const { visa, setVisaTrue, setVisaFalse, toggleVisa } = useStore();
+  const { setVisaTrue, setVisaFalse,  } = useStore();
 
   return (
     <Slider {...settings}>

@@ -7,7 +7,7 @@ import useStore from '../zustand/store';
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { visa, setVisaTrue, setVisaFalse, toggleVisa } = useStore();
+  const { visa, setVisaTrue, setVisaFalse } = useStore();
   
   useEffect(() => {
     console.log('isLogged value changed:', visa);
