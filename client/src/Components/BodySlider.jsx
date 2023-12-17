@@ -1,6 +1,6 @@
 
 import Slider from 'react-slick';
-
+import useStore from '../zustand/store';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -15,7 +15,7 @@ export default function BodySlider() {
     autoplay: true,
     autoplaySpeed: 4000,
   };
-  
+  const { visa, setVisaTrue, setVisaFalse, toggleVisa } = useStore();
 
   return (
     <Slider {...settings}>
@@ -36,7 +36,8 @@ export default function BodySlider() {
               You Could be Eligible to Reclaim Funds as Part of a $5.5 Billion Dollar Settlement.{' '}
             </p>
             <a
-              href="#form"
+              onClick={setVisaTrue}
+              href="#about"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-2xl px-6 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Submit Claim
@@ -62,7 +63,8 @@ export default function BodySlider() {
               Your Business Could Qualify for up to $26,000 Per Employee.{' '}
             </p>
             <a
-              href="#form"
+              onClick={setVisaFalse}
+              href="#about"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-2xl px-6 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Learn More
