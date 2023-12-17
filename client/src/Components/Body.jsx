@@ -1,9 +1,9 @@
 import BodySlider from "./BodySlider";
 import ClaimForm from "./ClaimForm";
-import ClaimForm1 from "./ClainForm1"; // Corrected import name
+import ClaimForm1 from "./ClaimForm"; // Corrected import name
 import FAQ from "./FAQ";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useStore } from "../zustand/store";
+import useStore from '../zustand/store';
 import FAQ1 from "./FAQ1";
 
 export default function Body() {
