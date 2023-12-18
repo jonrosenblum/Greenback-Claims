@@ -1,6 +1,6 @@
 import BodySlider from "./BodySlider";
 import ClaimForm from "./ClaimForm";
-import ClaimForm1 from "./ClaimForm"; // Corrected import name
+import SendEmail from "./SendEmail"; // Corrected import name
 import FAQ from "./FAQ";
 import { FaArrowRightLong } from "react-icons/fa6";
 import useStore from '../zustand/store';
@@ -60,17 +60,17 @@ export default function Body() {
                             <div className="lg:w-1/2 p-2 text-white flex items-center">
                                 <div className="p-8 flex flex-col">
                                 <h2 className="text-[29px] font-bold mb-6">The Employee Retention Credit or ERC is a generous stimulus program designed to bolster businesses that were able to retain their employees during the Covid-19 Pandemic by giving them a refundable tax credit check.</h2>
-                                    <p className="mb-6 text-base">This credit, spanning 2020 and the initial three quarters of 2021, allows eligible employers to claim up to $26,000 per employee. Qualification hinges on various factors, including experiencing significant declines in gross receipts or facing government-issued operational suspensions due to COVID-19. Eligible entities range from small businesses to larger corporations, encompassing a spectrum of industries. This credit presents a lifeline for those navigating economic disruptions, empowering businesses to sustain their workforce and operations, thereby fostering resilience during unprecedented times.</p>
-                                    <p className="mb-6 text-base">Greenback Claims collaborates with legal experts to facilitate ERC claims for eligible businesses. Qualification for the ERC revolves around meeting specific criteria tied to revenue declines or operational restrictions due to COVID-19. Our partnership streamlines the process, ensuring accurate and timely submission of claims on behalf of businesses seeking reimbursement of up to $26,000 per employee. Our dedication lies in managing the intricate aspects of the claim process, offering guidance and expertise while eliminating upfront costs. For inquiries or assistance with your ERC claim, reach out to claims@greenbackclaims.com. We’re committed to securing the compensation your business deserves, navigating the complexities of the ERC to maximize your reimbursement.</p>
+                                    <p className="mb-6 text-base">From 2020 through most of 2021, eligible employers could claim up to $26,000 per employee through a COVID-related credit. Qualification depends on factors like revenue drops or government-issued operational pauses. This lifeline aids businesses of all sizes and industries during economic disruptions, helping them sustain their workforce and operations in challenging times.</p>
+                                    <p className="mb-6 text-base">Greenback Claims partners with legal experts to simplify ERC claims for qualifying businesses. We streamline the process for reimbursement of up to $26,000 per employee by managing intricate claim details without upfront costs. Contact us at claims@greenbackclaims.com for ERC claim support, ensuring your business receives the compensation it deserves by navigating ERC complexities.</p>
                                     <div className="flex items-center justify-between">
-                                        <h3 className="text-2xl font-bold">Submit claim today:</h3>
+                                        <h3 className="text-2xl font-bold">Send us an email today:</h3>
                                         <FaArrowRightLong className="text-4xl" />
                                     </div>
                                 </div>
                             </div>
                             <div className="w-full lg:w-1/2 md:p-5 mt-5 p-2">
                                 <div id="form" className="p-3 border-2 border-white-500">
-                                    <ClaimForm1 /> {/* Changed to ClaimForm1 */}
+                                    <SendEmail/>
                                 </div>
                             </div>
                         </div>
