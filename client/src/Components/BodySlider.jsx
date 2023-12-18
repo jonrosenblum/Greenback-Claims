@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import useStore from '../zustand/store';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
+import erc from '../../public/erc.png';
 export default function BodySlider() {
   const settings = {
     dots: false,
@@ -51,8 +51,7 @@ export default function BodySlider() {
         <div
           className="py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center h-[600px]"
           style={{
-            backgroundImage:
-              'url("https://via.placeholder.com/1500x580")',
+            backgroundImage: `url(${erc})`,
           }}
         >
           <div className="max-w-xl">

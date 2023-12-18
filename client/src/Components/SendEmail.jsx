@@ -1,8 +1,7 @@
-
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 const ContactForm = () => (
-  <div className="bg-white p-6 max-w-2xl mx-auto rounded">
+  <div className="bg-white p-6 mx-auto rounded">
     <h2 className="text-xl font-semibold mb-4 text-black">Contact Us</h2>
     <Formik
       initialValues={{
@@ -11,8 +10,8 @@ const ContactForm = () => (
         businessName: '',
         email: '',
         phone: '',
-        subject: '',
-        message: '',
+        subject: 'ERC CLAIM',
+        message: 'Hi, I am reaching out on behalf of my business to learn more about our ERC claim process.',
       }}
       validate={values => {
         const errors = {};
@@ -21,7 +20,9 @@ const ContactForm = () => (
       }}
       onSubmit={(values, { setSubmitting }) => {
         // Handle form submission logic here
-        console.log(values);
+        const { businessName, ...otherValues } = values;
+        const subject = `ERC Claim for ${businessName}`;
+        console.log({ ...otherValues, subject });
         setSubmitting(false);
       }}
     >
@@ -33,54 +34,54 @@ const ContactForm = () => (
               <label className="font-medium text-black" htmlFor="firstName">
                 First Name:
               </label>
-              <Field className="border p-2 rounded w-full text-black" id="firstName" name="firstName" placeholder="Your first name" type="text" />
+              <Field className="border p-2 rounded w-full text-black" id="firstName" name="firstName" placeholder="First Name" type="text" />
               <ErrorMessage name="firstName" component="div" className="text-red-500" />
             </div>
             <div className="flex flex-col">
               <label className="font-medium text-black" htmlFor="lastName">
                 Last Name:
               </label>
-              <Field className="border p-2 rounded w-full text-black" id="lastName" name="lastName" placeholder="Your last name" type="text" />
+              <Field className="border p-2 rounded w-full text-black" id="lastName" name="lastName" placeholder="Last Name" type="text" />
               <ErrorMessage name="lastName" component="div" className="text-red-500" />
             </div>
             <div className="flex flex-col col-span-2">
               <label className="font-medium text-black" htmlFor="businessName">
                 Business Name:
               </label>
-              <Field className="border p-2 rounded w-full text-black" id="businessName" name="businessName" placeholder="Your business name" type="text" />
+              <Field className="border p-2 rounded w-full text-black" id="businessName" name="businessName" placeholder="Business Name" type="text" />
               <ErrorMessage name="businessName" component="div" className="text-red-500" />
             </div>
             <div className="flex flex-col col-span-2">
               <label className="font-medium text-black" htmlFor="email">
                 Email:
               </label>
-              <Field className="border p-2 rounded w-full text-black" id="email" name="email" placeholder="Your email" type="email" />
+              <Field className="border p-2 rounded w-full text-black" id="email" name="email" placeholder="Email" type="email" />
               <ErrorMessage name="email" component="div" className="text-red-500" />
             </div>
             <div className="flex flex-col col-span-2">
               <label className="font-medium text-black" htmlFor="phone">
                 Phone:
               </label>
-              <Field className="border p-2 rounded w-full text-black" id="phone" name="phone" placeholder="Your phone number" type="tel" />
+              <Field className="border p-2 rounded w-full text-black" id="phone" name="phone" placeholder="Phone Number" type="tel" />
               <ErrorMessage name="phone" component="div" className="text-red-500" />
             </div>
-            <div className="flex flex-col col-span-2">
+            <div className="hidden">
               <label className="font-medium text-black" htmlFor="subject">
                 Subject:
               </label>
-              <Field className="border p-2 rounded w-full text-black" id="subject" name="subject" placeholder="Subject of the email" type="text" />
+              <Field className="border p-2 rounded w-full text-black" id="subject" name="subject" type="text" />
               <ErrorMessage name="subject" component="div" className="text-red-500" />
             </div>
-            <div className="flex flex-col col-span-2">
+            <div className="hidden">
               <label className="font-medium text-black" htmlFor="message">
                 Message:
               </label>
-              <Field className="border p-2 rounded h-32 w-full" as="textarea" id="message" name="message" placeholder="Your message" />
+              <Field className="border p-2 rounded h-32 w-full text-black" as="textarea" id="message" name="message" />
               <ErrorMessage name="message" component="div" className="text-red-500" />
             </div>
           </div>
           <button className="w-full bg-blue-600 text-white p-2 rounded" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending Email...' : 'Send Email'}
+            {isSubmitting ? 'Submitting...' : 'Submit'}
           </button>
         </Form>
       )}
