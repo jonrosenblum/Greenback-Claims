@@ -30,19 +30,15 @@ export default function FAQ() {
     },
     {
       question: "Will I owe any fees to the lawyers if I'm ineligible?",
-      answer: 'No, you only incur fees if we successfully recover funds for your business. In the event that we secure a monetary return for your business, our lawyers receive 33.3% of the recovered amount.',
+      answer: 'No, you only incur fees if we successfully recover funds for your business. In the event that we secure a monetary return for your business, our lawyers receive 30% of the recovered amount.',
     },
     {
       question: 'Is it necessary to hire an attorney for assistance?',
-      answer: "While hiring a lawyer isn't mandatory for your business concerning this settlement, engaging our experienced legal team ensures that you receive the full entitlements under this settlement. With over a decade of handling class actions and securing over $1 billion for our clients from settlements, our expertise is invaluable. Successful participation in this settlement necessitates the timely and accurate submission of a valid claim, and not all businesses will qualify for payment. We'll collaborate closely with the claims administrator to ensure your business receives its due if deemed eligible. Historically, nearly 95% of entitled beneficiaries in class action settlements miss out on their benefits due to various reasons—lack of awareness about the settlement, difficulties in completing required claim forms, failure to submit necessary documents promptly, or inadequate information provision during follow-ups by settlement administrators. Our team ensures the proper and timely submission of your claim without complications. Additionally, we'll ensure you receive the correct entitled amount. If discrepancies arise, our lawyers will dispute any incorrect amounts on your behalf.",
+      answer: "While hiring a lawyer isn't mandatory for your business concerning this settlement, engaging our experienced legal team ensures that you receive the full entitlements under this settlement. With over 30 years of experience, our firm is familiar with properly filing these claims and getting our clients compensated. Successful participation in this settlement necessitates the timely and accurate submission of a valid claim, and not all businesses will qualify for payment. We'll collaborate closely with the claims administrator to ensure your business receives its due if deemed eligible. Historically, nearly 95% of entitled beneficiaries in class action settlements miss out on their benefits due to various reasons—lack of awareness about the settlement, difficulties in completing required claim forms, failure to submit necessary documents promptly, or inadequate information provision during follow-ups by settlement administrators. Our team ensures the proper and timely submission of your claim without complications. Additionally, we'll ensure you receive the correct entitled amount. If discrepancies arise, our lawyers will dispute any incorrect amounts on your behalf.",
     },
     {
       question: 'What actions am I authorizing counsel to undertake by signing the retainer?',
       answer: "By retaining our legal team, you grant our attorneys full authority to represent and act on behalf of you and your business throughout the claims-filing period. This authorization includes communicating with the Settlement Administrator, making decisions concerning your business's status as a class member, and managing your business's claim. Our attorneys will exclusively represent you and your business in all matters concerning the settlement, including receiving and handling your business's claim form, preparing, completing, and submitting the claim to the Settlement Administrator, communicating as necessary with the Settlement Administrator or Class Counsel regarding your business and its claim, responding to any requests for additional information or documentation from the Settlement Administrator to validate the claim, and ensuring that you and your business receive the appropriate and timely payment.",
-    },
-    {
-      question: 'Where can I find additional information about the settlement?',
-      answer: 'For more information about the Settlement, here is a link to the Payment Card Interchange Fee Settlement:https://www.paymentcardsettlement.com/en',
     },
   ];
 

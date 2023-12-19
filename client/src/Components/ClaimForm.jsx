@@ -72,11 +72,11 @@ export default function ClaimForm() {
             Re:	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
           </div>
           <div className='mt-3'>
-            <p className=''>Dear {formData.firstName},</p>
+            <p className=''>Dear <span className='underline'>{formData.firstName}</span>,</p>
             <p className='indent-14 mt-3'>
               This Retainer Agreement will memorialize the retention of Criden & Love, P.A.
-              and Stabile Law Firm, LLC (the “Firms”) to represent :______________________________
-              (“Client”) in connection with any claim Client may have as a member of the Rule 23(b)(3)
+              and Stabile Law Firm, LLC (the “Firms”) to represent: <span className='underline'>{formData.businessName}</span> (“Client”) 
+              in connection with any claim Client may have as a member of the Rule 23(b)(3)
               Settlement Class pursuant to any settlement or court award in the above-referenced action,
               which is currently pending in the United States District Court for the Eastern District
               of New York.
@@ -93,7 +93,7 @@ export default function ClaimForm() {
               Agreement, which is available <a href="https://www.paymentcardsettlement.com/Content/Documents/New%20Docs/Dkt%20No.%207257-2_Settlement%20Agreement.pdf" target='_blank' rel="noreferrer" className='text-blue-500 underline'>here</a>.
               Client consents to the verification of its claim by the Firms. In the event that Client
               does not have a claim, the retention of the Firms is null and void. Client agrees to
-              keep the terms of this engagement confidential.________________________________________
+              keep the terms of this engagement confidential.
             </p>
             <p className='mt-3 font-bold text-center underline'>Scope of Retention</p>
             <p className='indent-14 mt-1 mb-32'>
@@ -113,7 +113,7 @@ export default function ClaimForm() {
             <p className='mt-3 font-bold text-center underline'>Fees for Services Rendered</p>
             <p className='indent-14 mt-1'>
               In consideration of the services rendered, and to be rendered, pursuant to this Agreement,
-              Client has agreed to pay as fees to the Firms twenty-five percent (25%) of any recovery
+              Client has agreed to pay as fees to the Firms thirty percent (30%) of any recovery
               Client obtains from the Settlement Fund. All reasonable costs and out-of-pocket expenses
               necessary to prepare and submit Client’s claim, and to provide other services to be rendered
               pursuant to this Agreement as outlined above, will be advanced by the Firms, 100% of
@@ -585,11 +585,10 @@ export default function ClaimForm() {
                 Re:	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
               </div>
               <div className='mt-3'>
-                <p className=''>Dear, {formData.firstName},</p>
+                <p className=''>Dear {formData.firstName},</p>
                 <p className='indent-14 mt-3'>
                   This Retainer Agreement will memorialize the retention of Criden & Love, P.A.
-                  and Stabile Law Firm, LLC (the “Firms”) to represent :______________________________
-                  (“Client”) in connection with any claim Client may have as a member of the Rule 23(b)(3)
+                  and Stabile Law Firm, LLC (the “Firms”) to represent : <span className='underline'>{formData.businessName}</span>  (“Client”) in connection with any claim Client may have as a member of the Rule 23(b)(3)
                   Settlement Class pursuant to any settlement or court award in the above-referenced action,
                   which is currently pending in the United States District Court for the Eastern District
                   of New York.
@@ -606,7 +605,7 @@ export default function ClaimForm() {
                   Agreement, which is available <a href="https://www.paymentcardsettlement.com/Content/Documents/New%20Docs/Dkt%20No.%207257-2_Settlement%20Agreement.pdf" target='_blank' rel="noreferrer" className='text-blue-500 underline'>here</a>.
                   Client consents to the verification of its claim by the Firms. In the event that Client
                   does not have a claim, the retention of the Firms is null and void. Client agrees to
-                  keep the terms of this engagement confidential.________________________________________
+                  keep the terms of this engagement confidential.
                 </p>
                 <p className='mt-3 font-bold text-center underline'>Scope of Retention</p>
                 <p className='indent-14 mt-1'>
@@ -626,7 +625,7 @@ export default function ClaimForm() {
                 <p className='mt-3 font-bold text-center underline'>Fees for Services Rendered</p>
                 <p className='indent-14 mt-1'>
                   In consideration of the services rendered, and to be rendered, pursuant to this Agreement,
-                  Client has agreed to pay as fees to the Firms twenty-five percent (25%) of any recovery
+                  Client has agreed to pay as fees to the Firms thirty percent (30%) of any recovery
                   Client obtains from the Settlement Fund. All reasonable costs and out-of-pocket expenses
                   necessary to prepare and submit Client’s claim, and to provide other services to be rendered
                   pursuant to this Agreement as outlined above, will be advanced by the Firms, 100% of
@@ -692,7 +691,7 @@ export default function ClaimForm() {
               <div className='block [@media(min-width:500px)]:flex items-end gap-5'>
                 <p className='font-bold'>By: </p>
                 <div className='flex flex-col items-start'>
-                  <p>please save the sign before moving forward</p>
+                  <p>Please save the PDF before moving forward</p>
                   <div className='border border-zinc-400 mt-2 box-border'>
                     <SignatureCanvas penColor='black'
 
