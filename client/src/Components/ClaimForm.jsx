@@ -96,7 +96,7 @@ export default function ClaimForm() {
               keep the terms of this engagement confidential.
             </p>
             <p className='mt-3 font-bold text-center underline'>Scope of Retention</p>
-            <p className='indent-14 mt-1 mb-32'>
+            <p className='indent-14 mt-1 mb-10'>
               The Firms expect to render the following services for the Client: (1) conferences with
               Client and other relevant representatives designated; (2) preparation and submission
               of all claim forms and any documentation required to substantiate Client’s claim; and
@@ -139,7 +139,7 @@ export default function ClaimForm() {
               both substantive and procedural, regardless of choice of law principles.
             </p>
             <p className='mt-3 font-bold text-center underline'>Entire Understanding Between Parties</p>
-            <p className='indent-14 mt-1  mb-32'>
+            <p className='indent-14 mt-1  mb-10'>
               This Agreement represents the entire Agreement between the parties with respect to the
               engagement of the Firm for the Client in this matter.  The parties acknowledge that they
               have not relied upon any representations made by another party or other person as an inducement
@@ -224,21 +224,34 @@ export default function ClaimForm() {
           .then((response) => response.json())
           .then((data) => {
             // Handle response
-            console.log(data);
-            toast.success(data.message, {
-              position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
-              style: {
-                backgroundColor: '#d9d9d9',
-                padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
-                fontSize: '14px',
-                fontWeight: 'bold'
-              },
-            });
+            if(data.status == 200){
+              toast.success(data.message, {
+                position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
+                style: {
+                  backgroundColor: '#d9d9d9',
+                  padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
+                  fontSize: '14px',
+                  fontWeight: 'bold'
+                },
+              });
+            } 
+            if (data.status == 500){
+              toast.error(data.message, {
+                position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
+                style: {
+                  backgroundColor: '#d9d9d9',
+                  padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
+                  fontSize: '14px',
+                  fontWeight: 'bold'
+                },
+              });
+            }
+
           })
           .catch((error) => {
             // Handle error
             toast.error(error.message, {
-              position: window.matchMedia("(min-width: 600px)").matches ? "bottom-right" : "bottom-center",
+              position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
               style: {
                 backgroundColor: '#d9d9d9',
                 padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",

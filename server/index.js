@@ -63,10 +63,10 @@ app.post('/send-email', upload.single('pdf'), async (req, res) => {
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error('Error:', error);
-      res.status(500).send({ message: 'Error sending email' });
+      res.status(500).send({ message: 'Error sending email', status: 500 });
     } else {
       console.log('Email sent:', info.messageId);
-      res.status(200).send({ message: 'Email sent successfully' });
+      res.status(200).send({ message: 'Email sent successfully', status: 200 });
     }
   });
   // res.json({message:'hello'})
