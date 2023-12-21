@@ -5,9 +5,11 @@ import FAQ from "./FAQ";
 import { FaArrowRightLong } from "react-icons/fa6";
 import useStore from '../zustand/store';
 import FAQ1 from "./FAQ1";
+import { useState } from "react";
 
 export default function Body() {
     const { visa, setVisaTrue, setVisaFalse } = useStore(); // Removed unused toggleVisa
+    const [emailSent, setEmailSent] = useState('');
 
     return (
         <div>
@@ -38,7 +40,14 @@ export default function Body() {
                             </div>
                             <div className="w-full lg:w-1/2 md:p-5 mt-5 p-2">
                                 <div id="form" className="p-3 border-2 border-white-500">
-                                    <ClaimForm />
+                                    {emailSent == 'claimForm' ? <div className="bg-green-300/30 p-6 mx-auto rounded">
+                                        <h2 className="text-xl font-semibold mb-4 text-green-500">Thank you for your submission!
+                                        </h2>
+                                        <p className="mb-4 text-justify">
+                                            You must receive a confirming email from Greenback Claims stating your retainer has been accepted along with the file number assigned. If you do not receive an email within 24 hours the documents were not received or accepted.
+                                        </p>
+                                        <p>Please email <a href="mailto:claims@greenbackclaims.com" className="text-blue-500 hover:underline cursor-pointer">claims@greenbackclaims.com</a> with any questions.</p>
+                                        </div> : <ClaimForm onEmailSent={() => setEmailSent('claimForm')} />}
                                 </div>
                             </div>
                         </div>
@@ -59,7 +68,7 @@ export default function Body() {
                         <div className="block lg:flex bg-bgg">
                             <div className="lg:w-1/2 p-2 text-white flex items-center">
                                 <div className="p-8 flex flex-col">
-                                <h2 className="text-[29px] font-bold mb-6">The Employee Retention Credit or ERC is a generous stimulus program designed to bolster businesses that were able to retain their employees during the Covid-19 Pandemic by giving them a refundable tax credit check.</h2>
+                                    <h2 className="text-[29px] font-bold mb-6">The Employee Retention Credit or ERC is a generous stimulus program designed to bolster businesses that were able to retain their employees during the Covid-19 Pandemic by giving them a refundable tax credit check.</h2>
                                     <p className="mb-6 text-base">From 2020 through most of 2021, eligible employers could claim up to $26,000 per employee through a COVID-related credit. Qualification depends on factors like revenue drops or government-issued operational pauses. This lifeline aids businesses of all sizes and industries during economic disruptions, helping them sustain their workforce and operations in challenging times.</p>
                                     <p className="mb-6 text-base">Greenback Claims partners with legal experts to simplify ERC claims for qualifying businesses. We streamline the process for reimbursement of up to $26,000 per employee by managing intricate claim details without upfront costs. Contact us at claims@greenbackclaims.com for ERC claim support, ensuring your business receives the compensation it deserves by navigating ERC complexities.</p>
                                     <div className="flex items-center justify-between">
@@ -70,7 +79,14 @@ export default function Body() {
                             </div>
                             <div className="w-full lg:w-1/2 md:p-5 mt-5 p-2">
                                 <div id="form" className="p-3 border-2 border-white-500">
-                                    <SendEmail/>
+                                    {emailSent == 'contactForm' ? <div className="bg-green-300/30 p-6 mx-auto rounded">
+                                        <h2 className="text-xl font-semibold mb-4 text-green-500">Thank you for your submission!
+                                        </h2>
+                                        <p className="mb-4 text-justify">
+                                            You must receive a confirming email from Greenback Claims stating your retainer has been accepted along with the file number assigned. If you do not receive an email within 24 hours the documents were not received or accepted.
+                                        </p>
+                                        <p>Please email <a href="mailto:claims@greenbackclaims.com" className="text-blue-500 hover:underline cursor-pointer">claims@greenbackclaims.com</a> with any questions.</p>
+                                        </div> : <SendEmail onEmailSent={() => setEmailSent('contactForm')} />}
                                 </div>
                             </div>
                         </div>
