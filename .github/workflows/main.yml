@@ -1,26 +1,27 @@
-name: Build Project
+name: Build and Deploy
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '16' # Specify the Node.js version you want to use
 
-    - name: Install dependencies
-      run: npm install
+    - name: Change directory and Install dependencies
+      run: |
+        cd client
+        npm install
 
-    - name: Run build
-      run: npm run build
+    - name: Build the project
+      run: |
+        cd client
+        npm run build
+
+    # Add additional steps if you want to deploy or further process the build artifacts
