@@ -30,7 +30,7 @@ export default function BodySlider() {
         >
           <div className="max-w-xl">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-              Did You Own A Business Between 2004 and 2019?
+              Did You Own A Business Between 2005 and 2019?
             </h1>
             <p className="text-md md:text-lg mb-8 max-w-sm font-medium">
               You Could be Eligible to Reclaim Funds as Part of a $5.5 Billion Dollar Settlement.{' '}
