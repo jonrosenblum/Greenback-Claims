@@ -75,8 +75,8 @@ jobs:
       with:
         host: 3.95.189.168
         username: ubuntu
-        key: ~/.ssh/id_rsa
+        key: /home/runner/.ssh/id_rsa
         port: 22
         script: |
           # Commands to copy build files to the EC2 server
-          scp -i ~/.ssh/id_rsa -r $GITHUB_WORKSPACE/dist/* ubuntu@3.95.189.168:/var/www/Greenback-Claims-main/client/dist
+          scp -i /home/runner/.ssh/id_rsa -r $GITHUB_WORKSPACE/dist/* ubuntu@3.95.189.168:/var/www/Greenback-Claims-main/client/dist
