@@ -1,79 +1,26 @@
 name: Build and Deploy
 
-on:
-  push:
-    branches:
-      - dev
+on: [push]
 
 jobs:
-  build_and_deploy:
+  build:
     runs-on: ubuntu-latest
 
-    env:
-      EC2_SSH_PRIVATE_KEY: |
-        -----BEGIN RSA PRIVATE KEY-----
-          MIIEpAIBAAKCAQEAjw1NvilzncD+cefoLRtLTVLPr2iHgHTfMULXXkI2JggPBCo/
-          QLADrNsLoJYW35kfr1KoVKsIyTdhc86PruikyThZF2tg73W6Kwe2+l0XK6tDoeaF
-          c5ksxzw8pPQImbz6rOzOD/1lw0lQro4C1VUV6DTnunfXFawvMksam8u15kgboeZ8
-          XPIIfZqrEixyiqMVt6+SgVJeMxCGb5jRF+s1rMQhXFXx1MV8nqMZQvmCXNlqksRN
-          J7qf4iZsQQXQS6vUp3QV7RoKC4wnNu2+DDWLPGNR6VORgP4tWrvWEERw4enE2OCd
-          dQpTrOW8pHN3OWqZBMozRiRNoCduMmbdOSIQ/wIDAQABAoIBAHKVB2aAMVl00tpO
-          FUy8Bg8De9NWeOLNulDs5zFa+6Bu6AhABrY7xlXYhnG0htHHBvgZzzcyYDE8KNTn
-          6XMCaau7dLErk1N7CwmYfln/4qVZ4yx1RwOW96UGfNTrm0/5bRjB/TQVlkNcIEIR
-          Aff61TdP2SUlBKUZbBxux/tuql6uwvjmnVvpGNgxCJ+97qXKZzNgRQhKiPxBJ6WR
-          qZIa+IQjY+qsf4Js5IHtHXjh0iJITfMntp/5J/JPji/gWFNRCLLHyHoj8tXzzgjK
-          qzU6BOqeIWxzJFDaVGnIxiEKcFKUBeepjU4KxORCNalNmrreQmCtkJp+wHYJ8CDb
-          4Mk2mFECgYEA1ZCoxttVevqwmCKPjbA0aNrbGCfvz2pj6uHxFZ8HWpdziPF7Z1XX
-          gka5JqxO0rOFdhn86Us15pxDpe4fmcdlTRfzfz0W85DMO3ZvhGhAQo0rZwTLcG6q
-          rIZfHHBWhVDUDIOoV9bCrqk5E80WXMsL8bbuV9uHBGCnFYUFN1k8g90CgYEAq3ng
-          6blUvm26+GmWXfG6cgBYVVx1np6lT//NwXFHmg0h0T2u5yjGZ0a15WldffeFA5Am
-          XuX9e229tYB3CqgpZ9BXWD78idglYvdLZlJdOeof2wBdj6qftfxMBwyDJFs77pBZ
-          IHMeytpX8OmHPPnICLKuVM7kqtPylpksEt/U2IsCgYEArCJP1xA8QsZChiz9Fc/b
-          PlSAWWT/JmfzJwN7xNiMHdmKlutEctK+xFNqsqAZXDy0Kq/hqMwlIr36zIg00kbk
-          AJJ4garkj+a6pobcdZVtjfao7/zuWK3qROp9SLfHFOdEMt3/VuVTv2HIDoy0JJDI
-          DMhMLWZU2hNpOLAhty3m18UCgYBbiOvu1+fM33Z3NKX38Bm+0UBWEM0Yp0dHtR14
-          raezLF9o+qxq6PFAIBbpJ52oqIBwrnpNHih5wtMKGFFzduDjceuuR7E3RBJxCeFN
-          9ZmeWMQ4e7F2B3bKBqvu91bqCWmsp5FsKQe+8V8QUxjGC/Aj9H3q96ZJKmrMyWcl
-          jCZqkQKBgQCoQ37WUcHe0RpwCrOO7PdEwIe3rXPj+t0I8OZvGqS1dXfrU3TRjhFX
-          /JgcfPgPW7yyWEMo/v5MrXFUXw1LC4JTObOpZCL002GXxyKZjeaKbP/DPM3keyyN
-          bz60qMoqhKNhEY2API56bWAb21bwyJeFrg1vgJo7oO4yeKTogLoQOw==
-        -----END RSA PRIVATE KEY-----
+    steps:
+    - uses: actions/checkout@v2
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16' # Specify the Node.js version you want to use
 
-        steps:
-          - uses: actions/checkout@v2
+    - name: Change directory and Install dependencies
+      run: |
+        cd client
+        npm install
 
-          - name: Set up Node.js
-            uses: actions/setup-node@v2
-            with:
-              node-version: '16' # Specify the Node.js version you want to use
-
-          - name: Change directory and Install dependencies
-            run: |
-              cd client
-              npm install
-
-          - name: Build the project
-            run: |
-              cd client
-              npm run build
-              ls
-
-      deploy:
-        runs-on: ubuntu-latest
-
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v2
-
-          - name: Set up SSH
-            run: |
-              echo "$EC2_SSH_PRIVATE_KEY" > private_key.pem
-              chmod 600 private_key.pem
-
-          - name: Copy dist folder to remote machine
-            run: |
-              scp -o StrictHostKeyChecking=no -i private_key.pem -r client/dist ubuntu@3.95.189.168:/path/to/remote/directory
+    - name: Build the project
+      run: |
+        cd client
+        npm run build
+        ls
