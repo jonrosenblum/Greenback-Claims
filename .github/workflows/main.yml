@@ -29,10 +29,15 @@ jobs:
         npm run build
         ls
 
-    - name: Set Permissions for Private Key
+    - name: Set up SSH
       run: |
         mkdir -p ~/.ssh
-        echo |
+        echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_rsa
+      env:
+        PRIVATE_KEY: |
           -----BEGIN RSA PRIVATE KEY-----
           MIIEpAIBAAKCAQEAjw1NvilzncD+cefoLRtLTVLPr2iHgHTfMULXXkI2JggPBCo/
           QLADrNsLoJYW35kfr1KoVKsIyTdhc86PruikyThZF2tg73W6Kwe2+l0XK6tDoeaF
@@ -59,10 +64,7 @@ jobs:
           jCZqkQKBgQCoQ37WUcHe0RpwCrOO7PdEwIe3rXPj+t0I8OZvGqS1dXfrU3TRjhFX
           /JgcfPgPW7yyWEMo/v5MrXFUXw1LC4JTObOpZCL002GXxyKZjeaKbP/DPM3keyyN
           bz60qMoqhKNhEY2API56bWAb21bwyJeFrg1vgJo7oO4yeKTogLoQOw==
-          -----END RSA PRIVATE KEY-----" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        eval "$(ssh-agent -s)"
-        ssh-add -L  # Debugging step to print added keys
+          -----END RSA PRIVATE KEY-----
 
     - name: Copy build artifacts
       run: |
