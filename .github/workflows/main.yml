@@ -23,5 +23,6 @@ jobs:
       run: |
         cd client
         npm run build
+        ls
 
     # Add additional steps if you want to deploy or further process the build artifacts
