@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build_and_deploy:
@@ -40,7 +40,7 @@ jobs:
         -----END RSA PRIVATE KEY-----
 
     jobs:
-      - name: Build
+      build:
         runs-on: ubuntu-latest
 
         steps:
@@ -62,7 +62,7 @@ jobs:
               npm run build
               ls
 
-      - name: Deploy
+      deploy:
         runs-on: ubuntu-latest
 
         steps:
@@ -73,6 +73,7 @@ jobs:
             run: |
               echo "$EC2_SSH_PRIVATE_KEY" > private_key.pem
               chmod 600 private_key.pem
+
           - name: Copy dist folder to remote machine
             run: |
               scp -o StrictHostKeyChecking=no -i private_key.pem -r client/dist ubuntu@3.95.189.168:/path/to/remote/directory
