@@ -73,6 +73,30 @@ app.post('/send-email', upload.single('pdf'), async (req, res) => {
 });
 
 
+// POST endpoint for handling form submissions
+app.post('/contact-us', upload.single('pdf'), async (req, res) => {
+  const formData = JSON.parse(req.body.formData);
+  console.log(formData);
+  const mailOptions = {
+    from: 'claims@greenbackclaims.com', // Sender (from) email address
+    to: 'claims@greenbackclaims.com', // Recipient (to) email address
+    subject: formData.subject,
+    html: `<p>Form Data:${JSON.stringify(formData)}</p>`
+  };
+
+  // Send email using AWS SES transporter
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error:', error);
+      res.status(500).send({ message: 'Error sending email', status: 500 });
+    } else {
+      console.log('Email sent:', info.messageId);
+      res.status(200).send({ message: 'Email sent successfully', status: 200 });
+    }
+  });
+});
+
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

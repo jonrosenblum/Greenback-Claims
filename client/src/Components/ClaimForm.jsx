@@ -3,9 +3,12 @@ import SignatureCanvas from 'react-signature-canvas'
 import jsPDF from 'jspdf';
 import Loader from './Loader';
 import toast, { Toaster } from 'react-hot-toast';
+import PropTypes from 'prop-types';
 
-
-export default function ClaimForm() {
+ClaimForm.propTypes = {
+  onEmailSent: PropTypes.func.isRequired,
+};
+export default function ClaimForm({ onEmailSent }) {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 4; // Total number of form pages
 
@@ -234,6 +237,7 @@ export default function ClaimForm() {
                   fontWeight: 'bold'
                 },
               });
+              onEmailSent();
             } 
             if (data.status == 500){
               toast.error(data.message, {
@@ -446,9 +450,10 @@ export default function ClaimForm() {
               </div>
             </div>
           </div>
-          <button className='absolute bottom-0 right-0 bg-blue-500 p-2 rounded-md' onClick={nextPage}>Next</button>
         </div>
-
+        <div className='flex justify-end w-full mt-10'>
+            <button className=' bottom-0 right-0 bg-blue-500 p-2 rounded-md' onClick={nextPage}>Next</button>
+          </div>
 
         <div className={`pl-3 pr-3 pb-3 ${page !== 2 && 'hidden'}`}>
       <div className="text-sm m-2 p-4">
