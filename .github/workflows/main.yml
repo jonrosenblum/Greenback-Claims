@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   build_and_deploy:
@@ -39,41 +39,40 @@ jobs:
           bz60qMoqhKNhEY2API56bWAb21bwyJeFrg1vgJo7oO4yeKTogLoQOw==
         -----END RSA PRIVATE KEY-----
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-          - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-          - name: Set up Node.js
-            uses: actions/setup-node@v2
-            with:
-              node-version: '16' # Specify the Node.js version you want to use
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' # Specify the Node.js version you want to use
 
-          - name: Change directory and Install dependencies
-            run: |
-              cd client
-              npm install
+      - name: Change directory and Install dependencies
+        run: |
+          cd client
+          npm install
 
-          - name: Build the project
-            run: |
-              cd client
-              npm run build
-              ls
+      - name: Build the project
+        run: |
+          cd client
+          npm run build
+          ls
 
-      deploy:
-        runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-          - name: Set up SSH
-            run: |
-              echo "$EC2_SSH_PRIVATE_KEY" > private_key.pem
-              chmod 600 private_key.pem
+      - name: Set up SSH
+        run: |
+          echo "$EC2_SSH_PRIVATE_KEY" > private_key.pem
+          chmod 600 private_key.pem
 
-          - name: Copy dist folder to remote machine
-            run: |
-              scp -o StrictHostKeyChecking=no -i private_key.pem -r client/dist ubuntu@3.95.189.168:/var/www/Greenback-Claims-main/client/
+      - name: Copy dist folder to remote machine
+        run: |
+          scp -o StrictHostKeyChecking=no -i private_key.pem -r client/dist ubuntu@3.95.189.168:/path/to/remote/directory
