@@ -31,6 +31,7 @@ jobs:
 
     - name: Set Permissions for Private Key
       run: |
+        mkdir -p ~/.ssh
         echo "-----BEGIN RSA PRIVATE KEY-----
         MIIEpAIBAAKCAQEAjw1NvilzncD+cefoLRtLTVLPr2iHgHTfMULXXkI2JggPBCo/
         QLADrNsLoJYW35kfr1KoVKsIyTdhc86PruikyThZF2tg73W6Kwe2+l0XK6tDoeaF
