@@ -32,4 +32,4 @@ jobs:
     - name: Copy build files to EC2 instance
       run: |
         sudo apt-get install -y sshpass
-        sshpass -p 'UtOKdIDiA4wrEVK' scp -o StrictHostKeyChecking=no -r client/build/ ubuntu@e3.95.189.168:/var/www/Greenback-Claims-main/client/dist
+        sshpass -p 'UtOKdIDiA4wrEVK' scp -o StrictHostKeyChecking=no -r client/build/ ubuntu@3.95.189.168:/var/www/Greenback-Claims-main/client/dist
