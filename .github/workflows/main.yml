@@ -31,6 +31,7 @@ jobs:
 
     - name: Set Permissions for Private Key
       run: |
+        mkdir -p ~/.ssh
         echo "-----BEGIN RSA PRIVATE KEY-----
         MIIEpAIBAAKCAQEAjw1NvilzncD+cefoLRtLTVLPr2iHgHTfMULXXkI2JggPBCo/
         QLADrNsLoJYW35kfr1KoVKsIyTdhc86PruikyThZF2tg73W6Kwe2+l0XK6tDoeaF
@@ -64,4 +65,4 @@ jobs:
     - name: Deploy to EC2
       run: |
         # Commands to copy build files to the EC2 server
-        scp -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa -r ./client/build/* ubuntu@3.95.189.168:/var/www/Greenback-Claims-main/client/dist
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r ./client/build/* ec2-user@3.95.189.168:/var/www/Greenback-Claims-main/client/dist
