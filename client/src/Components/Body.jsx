@@ -19,7 +19,7 @@ export default function Body() {
             {visa && (
                 <section id="about" className="bg-white dark:bg-gray-900 text-white">
                     <div className="bg-bgg p-[35px]">
-                        <div className="b bg-bgg grid grid-cols-2 text-[1.3rem] border border-gray-400">
+                        <div className="b bg-bgg grid grid-cols-1 sm:grid-cols-2 text-[1.3rem] border border-gray-400">
                             <button className={`p-2 font-bold ${visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaTrue}>Visa & Mastercard Anti-Trust Lawsuit</button>
                             <button className={`p-2 font-bold ${!visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaFalse}>Employee Retention Credit (ERC)</button>
                         </div>
@@ -47,7 +47,10 @@ export default function Body() {
                                             You must receive a confirming email from Greenback Claims stating your retainer has been accepted along with the file number assigned. If you do not receive an email within 24 hours the documents were not received or accepted.
                                         </p>
                                         <p>Please email <a href="mailto:claims@greenbackclaims.com" className="text-blue-500 hover:underline cursor-pointer">claims@greenbackclaims.com</a> with any questions.</p>
-                                        </div> : <ClaimForm onEmailSent={() => setEmailSent('claimForm')} />}
+                                        <div className={`flex justify-end w-full mt-8`}>
+                                            <button className=' bottom-0 right-0 bg-blue-500 p-2 hover:bg-blue-500/70 rounded-md' onClick={() => setEmailSent('')}>Reset Form</button>
+                                        </div>
+                                    </div> : <ClaimForm onEmailSent={() => setEmailSent('claimForm')} />}
                                 </div>
                             </div>
                         </div>
@@ -86,7 +89,10 @@ export default function Body() {
                                             You must receive a confirming email from Greenback Claims stating your retainer has been accepted along with the file number assigned. If you do not receive an email within 24 hours the documents were not received or accepted.
                                         </p>
                                         <p>Please email <a href="mailto:claims@greenbackclaims.com" className="text-blue-500 hover:underline cursor-pointer">claims@greenbackclaims.com</a> with any questions.</p>
-                                        </div> : <SendEmail onEmailSent={() => setEmailSent('contactForm')} />}
+                                        <div className={`flex justify-end w-full mt-8`}>
+                                            <button className=' bottom-0 right-0 bg-blue-500 p-2 hover:bg-blue-500/70 rounded-md' onClick={() => setEmailSent('')}>Reset Form</button>
+                                        </div>
+                                    </div> : <SendEmail onEmailSent={() => setEmailSent('contactForm')} />}
                                 </div>
                             </div>
                         </div>

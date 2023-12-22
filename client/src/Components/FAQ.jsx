@@ -47,7 +47,7 @@ export default function FAQ() {
   };
 
   return (
-    <div id='fqs' className=' md:p-10  lg;p-32 lg:w-[60%] md:w-[75%]  w-[90%] m-auto'>
+    <div id='fqs' className='pt-10 md:p-10  lg;p-32 lg:w-[60%] md:w-[75%]  w-[90%] m-auto'>
       <h1 className='text-center text-2xl font-bold mb-5'>Frequently Asked Questions</h1>
       {faqs.map((faq, index) => (
         <div key={index} className="mb-4">
