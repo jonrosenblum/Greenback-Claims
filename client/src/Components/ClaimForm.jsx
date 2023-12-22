@@ -82,7 +82,7 @@ export default function ClaimForm({ onEmailSent }) {
               in connection with any claim Client may have as a member of the Rule 23(b)(3)
               Settlement Class pursuant to any settlement or court award in the above-referenced action,
               which is currently pending in the United States District Court for the Eastern District
-              of New York.
+              of New York.<sup>[1]</sup>
             </p>
             <p className='indent-14 mt-3'>
               Client represents that it has received Notice of this settlement or that Client
@@ -107,6 +107,9 @@ export default function ClaimForm({ onEmailSent }) {
               and any calculation of Client’s claim. Client agrees to promptly provide the Firms with
               all documentation needed to substantiate Client’s claim pursuant to the court-approved
               claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions
+            </p>
+            <p className='mt-3'>
+              <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
             </p>
             <p className='indent-14 mt-3'>
               The Firms shall consult with and obtain Client’s approval regarding any major decisions
@@ -609,7 +612,7 @@ export default function ClaimForm({ onEmailSent }) {
                   and Stabile Law Firm, LLC (the “Firms”) to represent : <span className='underline'>{formData.businessName}</span>  (“Client”) in connection with any claim Client may have as a member of the Rule 23(b)(3)
                   Settlement Class pursuant to any settlement or court award in the above-referenced action,
                   which is currently pending in the United States District Court for the Eastern District
-                  of New York.
+                  of New York.<sup>[1]</sup>
                 </p>
                 <p className='indent-14 mt-3'>
                   Client represents that it has received Notice of this settlement or that Client
@@ -634,6 +637,9 @@ export default function ClaimForm({ onEmailSent }) {
                   and any calculation of Client’s claim. Client agrees to promptly provide the Firms with
                   all documentation needed to substantiate Client’s claim pursuant to the court-approved
                   claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions
+                </p>
+                <p className='mt-3'>
+                  <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
                 </p>
                 <p className='indent-14 mt-3'>
                   The Firms shall consult with and obtain Client’s approval regarding any major decisions
