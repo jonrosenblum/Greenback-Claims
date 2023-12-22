@@ -274,7 +274,7 @@ export default function ClaimForm({ onEmailSent }) {
               (3) communicating, as necessary, with the Claims Administrator as to Client’s claim
               and any calculation of Client’s claim. Client agrees to promptly provide the Firms with
               all documentation needed to substantiate Client’s claim pursuant to the court-approved
-              claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions
+              claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions.
             </p>
             <p className='mt-3 text-xs'>
               <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
@@ -301,9 +301,9 @@ export default function ClaimForm({ onEmailSent }) {
               Although we do not expect any disputes to arise between the Client and the Firms,
               if a dispute does in fact arise, all parties agree that the exclusive venue for
               any action arising under or in any way related to this Agreement shall be Miami-Dade County,
-              Florida.  The parties expressly waive any objection or defense that such venue is an
+              Florida. The parties expressly waive any objection or defense that such venue is an
               inconvenient or otherwise improper forum for any dispute arising under or in any way related
-              to this Agreement.  The parties also waive any and all objections to personal jurisdiction
+              to this Agreement. The parties also waive any and all objections to personal jurisdiction
               as they may relate to the enforcement of the terms of this Agreement in Miami-Dade County,
               Florida.
             </p>
@@ -315,24 +315,24 @@ export default function ClaimForm({ onEmailSent }) {
             <p className='mt-3 font-bold text-center underline'>Entire Understanding Between Parties</p>
             <p className='indent-14 mt-1  mb-10'>
               This Agreement represents the entire Agreement between the parties with respect to the
-              engagement of the Firm for the Client in this matter.  The parties acknowledge that they
+              engagement of the Firm for the Client in this matter. The parties acknowledge that they
               have not relied upon any representations made by another party or other person as an inducement
-              to enter into this Agreement.  Client acknowledges that the Firms have made no guarantee as
+              to enter into this Agreement. Client acknowledges that the Firms have made no guarantee as
               to the outcome of this matter or the amount recoverable in connection with Client’s claim.
               Further, the parties acknowledge that no representations have been made, other than those
-              expressly set forth in this Agreement.  No amendment, waiver or modification of any other
+              expressly set forth in this Agreement.No amendment, waiver or modification of any other
               terms and conditions set forth in this Agreement shall be effective unless in writing,
               signed by both parties.
             </p>
             <p className='indent-14 mt-3'>
               If this Agreement accurately reflects the terms of our representation of Client in this matter,
               please sign and date in the space provided below and e-mail an executed copy of the Agreement
-              to the Firms.  This Agreement may be signed in one or more counterparts, all of which shall
+              to the Firms. This Agreement may be signed in one or more counterparts, all of which shall
               be deemed original.
             </p>
             <p className='indent-14 mt-3'>
               We look forward to working with you in this matter and thank you again for your confidence
-              and trust
+              and trust.
             </p>
           </div>
           <div className='flex justify-end mt-10'>
@@ -841,7 +841,7 @@ export default function ClaimForm({ onEmailSent }) {
                   (3) communicating, as necessary, with the Claims Administrator as to Client’s claim
                   and any calculation of Client’s claim. Client agrees to promptly provide the Firms with
                   all documentation needed to substantiate Client’s claim pursuant to the court-approved
-                  claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions
+                  claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions.
                 </p>
                 <p className='mt-3 text-xs'>
                   <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
@@ -882,24 +882,24 @@ export default function ClaimForm({ onEmailSent }) {
                 <p className='mt-3 font-bold text-center underline'>Entire Understanding Between Parties</p>
                 <p className='indent-14 mt-1'>
                   This Agreement represents the entire Agreement between the parties with respect to the
-                  engagement of the Firm for the Client in this matter.  The parties acknowledge that they
+                  engagement of the Firm for the Client in this matter. The parties acknowledge that they
                   have not relied upon any representations made by another party or other person as an inducement
-                  to enter into this Agreement.  Client acknowledges that the Firms have made no guarantee as
+                  to enter into this Agreement. Client acknowledges that the Firms have made no guarantee as
                   to the outcome of this matter or the amount recoverable in connection with Client’s claim.
                   Further, the parties acknowledge that no representations have been made, other than those
-                  expressly set forth in this Agreement.  No amendment, waiver or modification of any other
+                  expressly set forth in this Agreement. No amendment, waiver or modification of any other
                   terms and conditions set forth in this Agreement shall be effective unless in writing,
                   signed by both parties.
                 </p>
                 <p className='indent-14 mt-3'>
                   If this Agreement accurately reflects the terms of our representation of Client in this matter,
                   please sign and date in the space provided below and e-mail an executed copy of the Agreement
-                  to the Firms.  This Agreement may be signed in one or more counterparts, all of which shall
+                  to the Firms. This Agreement may be signed in one or more counterparts, all of which shall
                   be deemed original.
                 </p>
                 <p className='indent-14 mt-3'>
                   We look forward to working with you in this matter and thank you again for your confidence
-                  and trust
+                  and trust.
                 </p>
               </div>
               <div className='flex justify-end mt-10'>
