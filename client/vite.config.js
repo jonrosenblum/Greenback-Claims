@@ -7,7 +7,7 @@ export default {
   server: {
     proxy: {
       '/api': {
-        target: 'http://api.greenbackclaims.com', // Replace with your backend server address
+        target: 'https://api.greenbackclaims.com', // Replace with your backend server address
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''), // Rewrite optional, if needed
       },
