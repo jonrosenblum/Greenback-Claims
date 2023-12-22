@@ -44,7 +44,7 @@ const ContactForm = ({ onEmailSent }) => (
         const formDataToSend = new FormData();
         formDataToSend.append('formData', JSON.stringify({ ...otherValues, subject }));
         console.log(formDataToSend);
-        fetch('http://localhost:3000/contact-us', {
+        fetch('https://api.greenbackclaims.com/contact-us', {
           method: 'POST',
           body: formDataToSend,
         })
