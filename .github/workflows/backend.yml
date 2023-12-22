@@ -22,6 +22,9 @@ jobs:
         # SSH into the server
         sshpass -p 'UtOKdIDiA4wrEVK' ssh -o StrictHostKeyChecking=no ubuntu@3.95.189.168 << 'ENDSSH'
           # Navigate to the project directory
+          # Stop the current PM2 process
+          sudo pm2 stop node
+          
           sudo chown -R ubuntu:ubuntu /var/www/Greenback-Claims
           cd /var/www/Greenback-Claims
           sudo git reset --hard HEAD
@@ -29,14 +32,13 @@ jobs:
 
           # Pull the latest changes
           sudo git pull origin main
+          sudo npm install
 
           # Navigate to the server directory
           cd server
 
-          # Stop the current PM2 process
-          sudo pm2 delete index.js --name "node"
-
+      
           # Start the new PM2 process
-          sudo pm2 start index.js --name "node"
+           sudo pm2 start node
         ENDSSH
         
