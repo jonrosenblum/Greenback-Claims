@@ -22,7 +22,8 @@ jobs:
         # SSH into the server
         sshpass -p 'UtOKdIDiA4wrEVK' ssh -o StrictHostKeyChecking=no ubuntu@3.95.189.168 << 'ENDSSH'
           # Navigate to the project directory
-          sudo cd /var/www/Greenback-Claims
+          sudo chown -R ubuntu:ubuntu /var/www/Greenback-Claims
+          cd /var/www/Greenback-Claims
           sudo git reset --hard HEAD
           sudo git clean -fd
 
