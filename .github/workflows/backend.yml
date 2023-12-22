@@ -22,7 +22,9 @@ jobs:
         # SSH into the server
         sshpass -p 'UtOKdIDiA4wrEVK' ssh -o StrictHostKeyChecking=no ubuntu@3.95.189.168 << 'ENDSSH'
           # Navigate to the project directory
-          cd /var/www/Greenback-Claims
+          sudo cd /var/www/Greenback-Claims
+          sudo git reset --hard HEAD
+          sudo git clean -fd
 
           # Pull the latest changes
           sudo git pull origin main
