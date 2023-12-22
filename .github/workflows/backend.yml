@@ -19,19 +19,19 @@ jobs:
         sudo apt-get install -y sshpass
 
         # SSH into the server
-        sshpass -p 'YourServerPassword' ssh -o StrictHostKeyChecking=no ubuntu@3.95.189.168 << 'ENDSSH'
+        sshpass -p 'UtOKdIDiA4wrEVK' ssh -o StrictHostKeyChecking=no ubuntu@3.95.189.168 << 'ENDSSH'
           # Navigate to the project directory
           cd /var/www/Greenback-Claims
 
           # Pull the latest changes
-          git pull origin main
+          sudo git pull origin main
 
           # Navigate to the server directory
           cd server
 
           # Stop the current PM2 process
-          pm2 delete index.js --name "node"
+          sudo pm2 delete index.js --name "node"
 
           # Start the new PM2 process
-          pm2 start index.js --name "node"
+          sudo pm2 start index.js --name "node"
         ENDSSH
