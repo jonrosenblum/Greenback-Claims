@@ -22,14 +22,14 @@ export default function BodySlider() {
       {/* First Slide */}
       <div className="bg-gray-900 text-md h-fit">
         <div
-          className="py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center h-[600px]"
+          className="py-20 sm:py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center h-[350px] sm:h-[600px]"
           style={{
             backgroundImage:
               'url("https://www.ncmic.com/webres/Image/0581-NCMIC-Website-Graphics_Finance_Credit-Card-Processing_Hero_1500x580.jpg")',
           }}
         >
           <div className="max-w-xl">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+            <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
               Did You Own A Business Between 2004 and 2019?
             </h1>
             <p className="text-md md:text-lg mb-8 max-w-sm font-medium">
@@ -49,13 +49,13 @@ export default function BodySlider() {
       {/* Second Slide */}
       <div className="bg-gray-900 text-md h-fit">
         <div
-          className="py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center h-[600px]"
+          className="py-20 sm:py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center h-[350px] sm:h-[600px]"
           style={{
             backgroundImage: `url(${erc})`,
           }}
         >
           <div className="max-w-xl">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+            <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
               What Is The Employee Retention Tax Credit?
             </h1>
             <p className="text-md md:text-lg mb-8 max-w-sm font-medium">

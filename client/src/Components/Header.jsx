@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <div>
-      <nav className="bg-gray-900 py-4">
+      <nav className="bg-gray-900 py-4 px-4 sm:px-0">
         <div className="container mx-auto flex justify-between items-center">
         {/* <Link to="/"> */}
          <a href="/">     <div className="text-white text-sm sm:text-2xl font-bold">
