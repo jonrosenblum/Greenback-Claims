@@ -4,7 +4,6 @@ import jsPDF from 'jspdf';
 import Loader from './Loader';
 import toast, { Toaster } from 'react-hot-toast';
 import PropTypes from 'prop-types';
-import { ErrorMessage } from 'formik';
 
 ClaimForm.propTypes = {
   onEmailSent: PropTypes.func.isRequired,
@@ -277,7 +276,7 @@ export default function ClaimForm({ onEmailSent }) {
               all documentation needed to substantiate Client’s claim pursuant to the court-approved
               claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions
             </p>
-            <p className='mt-3'>
+            <p className='mt-3 text-xs'>
               <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
             </p>
             <p className='indent-14 mt-3'>
@@ -844,7 +843,7 @@ export default function ClaimForm({ onEmailSent }) {
                   all documentation needed to substantiate Client’s claim pursuant to the court-approved
                   claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions
                 </p>
-                <p className='mt-3'>
+                <p className='mt-3 text-xs'>
                   <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
                 </p>
                 <p className='indent-14 mt-3'>
@@ -969,22 +968,6 @@ export default function ClaimForm({ onEmailSent }) {
 
   const submitForm = () => {
     convertToPdf()
-    // fetch('http://localhost:3000/send-email', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     // Handle response
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     // Handle error
-    //     console.error('Error:', error);
-    //   });
   };
 
   return (
