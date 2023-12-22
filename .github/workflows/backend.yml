@@ -36,3 +36,4 @@ jobs:
           # Start the new PM2 process
           sudo pm2 start index.js --name "node"
         ENDSSH
+        
