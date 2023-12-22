@@ -22,7 +22,7 @@ export default function Header() {
       <nav className="bg-gray-900 py-4">
         <div className="container mx-auto flex justify-between items-center">
         {/* <Link to="/"> */}
-         <a href="/">     <div className="text-white text-2xl font-bold">
+         <a href="/">     <div className="text-white text-sm sm:text-2xl font-bold">
                 Greenback Claims
               </div>
               </a>
