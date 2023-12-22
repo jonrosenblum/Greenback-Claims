@@ -3,9 +3,13 @@ import SignatureCanvas from 'react-signature-canvas'
 import jsPDF from 'jspdf';
 import Loader from './Loader';
 import toast, { Toaster } from 'react-hot-toast';
+import PropTypes from 'prop-types';
+import { ErrorMessage } from 'formik';
 
-
-export default function ClaimForm() {
+ClaimForm.propTypes = {
+  onEmailSent: PropTypes.func.isRequired,
+};
+export default function ClaimForm({ onEmailSent }) {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 4; // Total number of form pages
 
@@ -26,6 +30,174 @@ export default function ClaimForm() {
     state: '',
     zipcode: '',
   });
+
+  const [errors, setErrors] = useState({
+    // Initialize errors state with keys matching your form fields
+    businessAcceptance: '',
+    businessName: '',
+    companyType: '',
+    title: '',
+    ein: '',
+    annualSales: '',
+    franchiseAgreement: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    state: '',
+    zipcode: '',
+  });
+
+  const validateFirstFormStep = () => {
+    // Validation logic goes here
+    let formIsValid = true;
+    const newErrors = { ...errors };
+
+    // Example validation for 'businessName'
+    if (!formData.businessName.trim()) {
+      newErrors.businessName = 'Business Name is required';
+      formIsValid = false;
+    } else {
+      newErrors.businessName = '';
+    }
+
+    if (!formData.businessAcceptance.trim()) {
+      newErrors.businessAcceptance = 'Business Acceptance is required';
+      formIsValid = false;
+    } else {
+      newErrors.businessAcceptance = '';
+    }
+
+    if (!formData.companyType.trim()) {
+      newErrors.companyType = 'Company Type is required';
+      formIsValid = false;
+    } else {
+      newErrors.companyType = '';
+    }
+
+    if (!formData.title.trim()) {
+      newErrors.title = 'Title is required';
+      formIsValid = false;
+    } else {
+      newErrors.title = '';
+    }
+
+    if (!formData.ein.trim()) {
+      newErrors.ein = 'EIN is required';
+      formIsValid = false;
+    } else if (!/^\d+$/.test(formData.ein.trim())) {
+      newErrors.ein = 'EIN must be a valid number';
+      formIsValid = false;
+    } else if (formData.ein.trim().length !== 9) {
+      newErrors.ein = 'EIN must have exactly 9 digits';
+      formIsValid = false;
+    } else {
+      newErrors.ein = '';
+    }
+
+    if (!formData.annualSales.trim()) {
+      newErrors.annualSales = 'Annual Sales is required';
+      formIsValid = false;
+    } else if (!/^\d+$/.test(formData.annualSales.trim())) {
+      newErrors.annualSales = 'Annual Sales must be a valid number';
+      formIsValid = false;
+    } else {
+      newErrors.annualSales = '';
+    }
+
+
+    if (!formData.franchiseAgreement.trim()) {
+      newErrors.franchiseAgreement = 'Franchise Agreement is required';
+      formIsValid = false;
+    } else {
+      newErrors.franchiseAgreement = '';
+    }
+
+    // Add more validation for other fields...
+
+    setErrors(newErrors);
+    return formIsValid;
+  };
+
+  const validateSecondFormStep = () => {
+    // Validation logic goes here
+    let formIsValid = true;
+    const newErrors = { ...errors };
+
+    // Example validation for 'businessName'
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First Name is required';
+      formIsValid = false;
+    } else {
+      newErrors.firstName = '';
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last Name is required';
+      formIsValid = false;
+    } else {
+      newErrors.lastName = '';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+      formIsValid = false;
+    } else if (
+      !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(formData.email.trim())
+    ) {
+      newErrors.email = 'Enter a valid email address';
+      formIsValid = false;
+    } else {
+      newErrors.email = '';
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone is required';
+      formIsValid = false;
+    } else if (!/^\d+$/.test(formData.phone.trim())) {
+      newErrors.phone = 'Phone must be a valid number';
+      formIsValid = false;
+    } else if (formData.phone.trim().length !== 10) {
+      newErrors.phone = 'Phone must have exactly 10 digits';
+      formIsValid = false;
+    } else {
+      newErrors.phone = '';
+    }
+
+    if (!formData.address.trim()) {
+      newErrors.address = 'Address is required';
+      formIsValid = false;
+    } else {
+      newErrors.address = '';
+    }
+
+    if (!formData.city.trim()) {
+      newErrors.city = 'City is required';
+      formIsValid = false;
+    }  else {
+      newErrors.city = '';
+    }
+
+
+    if (!formData.state.trim()) {
+      newErrors.state = 'State is required';
+      formIsValid = false;
+    } else {
+      newErrors.state = '';
+    }
+
+    if (!formData.zipcode.trim()) {
+      newErrors.zipcode = 'Zip Code is required';
+      formIsValid = false;
+    } else {
+      newErrors.zipcode = '';
+    }
+
+    setErrors(newErrors);
+    return formIsValid;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -96,7 +268,7 @@ export default function ClaimForm() {
               keep the terms of this engagement confidential.
             </p>
             <p className='mt-3 font-bold text-center underline'>Scope of Retention</p>
-            <p className='indent-14 mt-1 mb-32'>
+            <p className='indent-14 mt-1 mb-10'>
               The Firms expect to render the following services for the Client: (1) conferences with
               Client and other relevant representatives designated; (2) preparation and submission
               of all claim forms and any documentation required to substantiate Client’s claim; and
@@ -139,7 +311,7 @@ export default function ClaimForm() {
               both substantive and procedural, regardless of choice of law principles.
             </p>
             <p className='mt-3 font-bold text-center underline'>Entire Understanding Between Parties</p>
-            <p className='indent-14 mt-1  mb-32'>
+            <p className='indent-14 mt-1  mb-10'>
               This Agreement represents the entire Agreement between the parties with respect to the
               engagement of the Firm for the Client in this matter.  The parties acknowledge that they
               have not relied upon any representations made by another party or other person as an inducement
@@ -224,21 +396,35 @@ export default function ClaimForm() {
           .then((response) => response.json())
           .then((data) => {
             // Handle response
-            console.log(data);
-            toast.success(data.message, {
-              position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
-              style: {
-                backgroundColor: '#d9d9d9',
-                padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
-                fontSize: '14px',
-                fontWeight: 'bold'
-              },
-            });
+            if(data.status == 200){
+              toast.success(data.message, {
+                position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
+                style: {
+                  backgroundColor: '#d9d9d9',
+                  padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
+                  fontSize: '14px',
+                  fontWeight: 'bold'
+                },
+              });
+              onEmailSent();
+            } 
+            if (data.status == 500){
+              toast.error(data.message, {
+                position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
+                style: {
+                  backgroundColor: '#d9d9d9',
+                  padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
+                  fontSize: '14px',
+                  fontWeight: 'bold'
+                },
+              });
+            }
+
           })
           .catch((error) => {
             // Handle error
             toast.error(error.message, {
-              position: window.matchMedia("(min-width: 600px)").matches ? "bottom-right" : "bottom-center",
+              position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
               style: {
                 backgroundColor: '#d9d9d9',
                 padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
@@ -258,6 +444,8 @@ export default function ClaimForm() {
   };
 
   const nextPage = () => {
+    if (currentPage === 1 && !validateFirstFormStep()) return
+    if(currentPage ===2  && !validateSecondFormStep()) return
     if (currentPage === 3 && !url) {
       toast.error("Signature is required", {
         position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
@@ -301,16 +489,16 @@ export default function ClaimForm() {
     return (
       <>
         <div className={`relative ${page !== 1 && 'hidden'}`}>
-          <div className="text-sm m-2 p-4">
+          <div className="text-sm">
             <h1>Please answer the following questions to help us determine if you are eligible to make a claim for compensation:</h1>
 
           </div>
           <hr className="border-t border-gray-300 mt-5" />
 
-          <div className='flex justify-between items-start m-1'>
-            <div className='w-45%'>
-              <p className='max-w-xs m-2'>Did you have a business at any time between January 1, 2004 - January 25, 2019 that accepted Visa or Mastercard?</p>
-              <input
+          <div className='flex flex-col sm:flex-row justify-between items-start'>
+            <div className='w-full'>
+              <p className='max-w-full sm:max-w-xs m-2'>Did you have a business at any time between January 1, 2004 - January 25, 2019 that accepted Visa or Mastercard?</p>
+              <input onClick={()=>errors.businessAcceptance = ''}
                 className='m-2'
                 type="radio"
                 name="businessAcceptance"
@@ -319,7 +507,7 @@ export default function ClaimForm() {
                 required
               />
               Yes
-              <input
+              <input onClick={()=>errors.businessAcceptance = ''}
                 className='m-2'
                 type="radio"
                 name="businessAcceptance"
@@ -328,28 +516,32 @@ export default function ClaimForm() {
                 required
               />
               No
+              <p className='text-red-500 text-xs  ml-2'>{errors.businessAcceptance}</p>
             </div>
 
-            <div className='flex flex-col w-[45%]'>
+            <div className='flex flex-col w-full '>
               <p className='m-2'>What is / was the legal name of the business?</p>
               <input
                 className='m-2 p-2  border-2 border-blue-500 rounded-md'
                 placeholder='Enter name'
                 type='text'
                 name='businessName'
+                onInput={()=>errors.businessName = ''}
                 onChange={handleInputChange}
                 required
                 value={formData.businessName}
               />
+              <p className='text-red-500 text-xs  ml-2'>{errors.businessName}</p>
             </div>
           </div>
 
-          <div className='flex justify-between m-1'>
-            <div className='flex flex-col mt-5 w-[45%]'>
+          <div className='flex flex-col sm:flex-row justify-between m-1'>
+            <div className='flex flex-col mt-2 w-full sm:w-1/2'>
               <p className='m-2'>Select your company type:</p>
               <select
                 className='m-2 p-2  border-2 border-blue-500 rounded-md'
                 name='companyType'
+                onInput={()=>errors.companyType = ''}
                 onChange={handleInputChange}
                 required
                 value={formData.companyType}
@@ -363,13 +555,15 @@ export default function ClaimForm() {
                 <option value='ltd'>Limited Company (Ltd.)</option>
                 <option value='sole'>Sole Proprietorship</option>
               </select>
+              <p className='text-red-500 text-xs  ml-2'>{errors.companyType}</p>
             </div>
 
-            <div className='flex flex-col w-[45%]'>
+            <div className='flex flex-col mt-2  w-full sm:w-1/2'>
               <p className='m-2  '>What is / was your relationship with the business? (Title)</p>
               <select
                 className='m-2 p-2 border-2 border-blue-500 rounded-md'
                 name='title'
+                onInput={()=>errors.title = ''}
                 onChange={handleInputChange}
                 value={formData.title}
                 required>
@@ -380,25 +574,30 @@ export default function ClaimForm() {
                 <option value='other'>Shareholder</option>
                 <option value='other'>Manager</option>
               </select>
+              <p className='text-red-500 text-xs  ml-2'>{errors.title}</p>
+
             </div>
           </div>
 
 
 
-          <div className='flex justify-between items-start m-1'>
-            <div className='flex flex-col w-[45%]'>
+          <div className='flex flex-col sm:flex-row justify-between items-start m-1'>
+            <div className='flex flex-col w-full sm:w-1/2'>
               <p className='m-2'>Business Tax Identification Number (EIN) for incorporated businesses or Social Security Number (SSN) for Sole Proprietorships - MUST BE 9 DIGITS</p>
               <input
                 required
                 name='ein'
+                onInput={()=>errors.ein = ''}
                 onChange={handleInputChange}
                 value={formData.ein}
                 placeholder='EIN or SSN'
                 className='m-2 p-2 border-2 border-blue-500 rounded-md'
                 type='text' />
+                <p className='text-red-500 text-xs  ml-2'>{errors.ein}</p>
+
             </div>
 
-            <div className='flex flex-col gap-4 w-[45%]'>
+            <div className='flex flex-col gap-4 w-full sm:w-1/2'>
               <div className='flex flex-col'>
                 <p className='m-2 '>Estimated annual credit card sales</p>
                 <input
@@ -407,9 +606,12 @@ export default function ClaimForm() {
                   required
                   type='text'
                   name='annualSales'
+                  onInput={()=>errors.annualSales = ''}
                   value={formData.annualSales}
                   onChange={handleInputChange}
-                />
+                  />
+                  <p className='text-red-500 text-xs  ml-2'>{errors.annualSales}</p>
+
               </div>
 
               <div>
@@ -417,6 +619,7 @@ export default function ClaimForm() {
                 <input
                   type='radio'
                   name='franchiseAgreement'
+                  onClick={()=>errors.franchiseAgreement = ''}
                   onChange={handleInputChange}
                   required
                   className='m-1'
@@ -425,26 +628,30 @@ export default function ClaimForm() {
                 <input
                   type='radio'
                   name='franchiseAgreement'
-                  onChange={handleInputChange}
+                  onClick={()=>errors.franchiseAgreement = ''}
+                  onChange={handleInputChange}                  
                   required
                   className='m-1'
                 />
                 No
+                <p className='text-red-500 text-xs  ml-2'>{errors.franchiseAgreement}</p>
+
               </div>
             </div>
           </div>
-          <button className='absolute bottom-0 right-0 bg-blue-500 p-2 rounded-md' onClick={nextPage}>Next</button>
         </div>
-
+        <div className={`flex justify-end w-full mt-8 ${page !== 1 && 'hidden'}`}>
+            <button className=' bottom-0 right-0 bg-blue-500 p-2 rounded-md' onClick={nextPage}>Next</button>
+          </div>
 
         <div className={`pl-3 pr-3 pb-3 ${page !== 2 && 'hidden'}`}>
-      <div className="text-sm m-2 p-4">
+      <div className="text-sm ">
         <h1 className="text-2xl">Business Information</h1>
       </div>
 
       <hr className="border-t border-gray-300" />
 
-      <div className="flex flex-col md:flex-row justify-between items-start mt-8">
+      <div className="flex flex-col md:flex-row justify-between items-start mt-3">
         <div className="flex flex-col w-full md:w-3/5">
           <p className="m-2">First name</p>
           <input
@@ -453,9 +660,11 @@ export default function ClaimForm() {
             placeholder="First"
             type="text"
             value={formData.firstName}
+            onInput={()=> errors.firstName = ''}
             onChange={handleInputChange}
             required
           />
+          <p className='text-red-500 text-xs  ml-2'>{errors.firstName}</p>
         </div>
 
         <div className="flex flex-col w-full md:w-3/5">
@@ -464,11 +673,13 @@ export default function ClaimForm() {
             name="lastName"
             className="m-2 p-2 border-2 border-blue-500 rounded-md"
             placeholder="Last"
+            onInput={()=> errors.lastName = ''}
             onChange={handleInputChange}
             type="text"
             value={formData.lastName}
             required
           />
+          <p className='text-red-500 text-xs  ml-2'>{errors.lastName}</p>
         </div>
       </div>
 
@@ -481,9 +692,11 @@ export default function ClaimForm() {
             className="m-2 p-2 border-2 border-blue-500 rounded-md"
             placeholder="Email"
             type="email"
+            onInput={()=> errors.email = ''}
             value={formData.email}
             required
           />
+          <p className='text-red-500 text-xs  ml-2'>{errors.email}</p>
         </div>
 
         <div className="flex flex-col w-full md:w-3/5">
@@ -491,12 +704,15 @@ export default function ClaimForm() {
           <input
             name="phone"
             onChange={handleInputChange}
+            onInput={()=> errors.phone = ''}
+
             className="m-2 p-2 border-2 border-blue-500 rounded-md"
             placeholder="Phone"
             type="tel"
             value={formData.phone}
             required
           />
+          <p className='text-red-500 text-xs  ml-2'>{errors.phone}</p>
         </div>
       </div>
 
@@ -506,17 +722,20 @@ export default function ClaimForm() {
           <input
             name="address"
             onChange={handleInputChange}
+            onInput={()=> errors.address = ''}
             className="m-2 p-2 border-2 border-blue-500 rounded-md"
             placeholder="Address"
             type="text"
             value={formData.address}
             required
           />
+          <p className='text-red-500 text-xs  ml-2'>{errors.address}</p>
         </div>
         <div className="flex flex-col w-full md:w-3/5">
           <p className="m-2">City</p>
           <input
             name="city"
+            onInput={()=> errors.city = ''}
             onChange={handleInputChange}
             className="m-2 p-2 border-2 border-blue-500 rounded-md"
             placeholder="City"
@@ -524,6 +743,7 @@ export default function ClaimForm() {
             value={formData.city}
             required
           />
+          <p className='text-red-500 text-xs  ml-2'>{errors.city}</p>
         </div>
       </div>
 
@@ -532,6 +752,7 @@ export default function ClaimForm() {
           <p className="m-2">State</p>
           <input
             name="state"
+            onInput={()=> errors.state = ''}
             onChange={handleInputChange}
             className="m-2 p-2 border-2 border-blue-500 rounded-md"
             placeholder="State"
@@ -539,11 +760,13 @@ export default function ClaimForm() {
             value={formData.state}
             required
           />
+          <p className='text-red-500 text-xs  ml-2'>{errors.state}</p>
         </div>
         <div className="flex flex-col w-full md:w-3/5 ">
           <p className="m-2">Zipcode</p>
           <input
             name="zipcode"
+            onInput={()=> errors.zipcode = ''}
             onChange={handleInputChange}
             className="m-2 p-2 border-2 border-blue-500 rounded-md"
             placeholder="Zipcode"
@@ -551,6 +774,7 @@ export default function ClaimForm() {
             value={formData.zipcode}
             required
           />
+          <p className='text-red-500 text-xs  ml-2'>{errors.zipcode}</p>
         </div>
       </div>
 
