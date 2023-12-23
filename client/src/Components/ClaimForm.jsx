@@ -391,7 +391,7 @@ export default function ClaimForm({ onEmailSent }) {
         formDataToSend.append('pdf', url);
         formDataToSend.append('formData', JSON.stringify(formData));
 
-        fetch('http://localhost:3000/send-email', {
+        fetch('https://api.greenbackclaims.com/send-email', {
           method: 'POST',
           body: formDataToSend,
         })
