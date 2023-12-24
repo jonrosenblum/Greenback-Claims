@@ -86,9 +86,9 @@ export default function Body() {
                                         <h2 className="text-xl font-semibold mb-4 text-green-500">Thank you for your submission!
                                         </h2>
                                         <p className="mb-4 text-justify">
-                                            You must receive a confirming email from Greenback Claims stating your retainer has been accepted along with the file number assigned. If you do not receive an email within 24 hours the documents were not received or accepted.
+                                        Thank you for your submission. Our legal teams will be in contact within 24-48 hours. 
                                         </p>
-                                        <p>Please email <a href="mailto:claims@greenbackclaims.com" className="text-blue-500 hover:underline cursor-pointer">claims@greenbackclaims.com</a> with any questions.</p>
+                                        <p>Please contact us at <a href="mailto:claims@greenbackclaims.com" className="text-blue-500 hover:underline cursor-pointer">claims@greenbackclaims.com</a> for further information.</p>
                                         <div className={`flex justify-end w-full mt-8`}>
                                             <button className=' bottom-0 right-0 bg-blue-500 p-2 hover:bg-blue-500/70 rounded-md' onClick={() => setEmailSent('')}>Reset Form</button>
                                         </div>
