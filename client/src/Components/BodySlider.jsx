@@ -1,6 +1,5 @@
 
 import Slider from 'react-slick';
-import useStore from '../zustand/store';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import erc from '../../public/erc.png';
@@ -15,7 +14,6 @@ export default function BodySlider() {
     autoplay: true,
     autoplaySpeed: 4000,
   };
-  const { setVisaTrue, setVisaFalse,  } = useStore();
 
   return (
     <Slider {...settings}>
