@@ -51,7 +51,7 @@ app.post('/send-email', upload.single('pdf'), async (req, res) => {
     to: 'claims@greenbackclaims.com', // Recipient (to) email address
     subject: 'Visa & Mastercard Claim',
     html: `<h3>Personal Information:</h3>
-    <p><b>Name:</b>&nbsp;&nbsp; ${formData.firstName + formData.lastName}</p>
+    <p><b>Name:</b>&nbsp;&nbsp; ${formData.firstName + ' ' + formData.lastName}</p>
     <p><b>Email:</b>&nbsp;&nbsp; ${formData.email}</p>
     <p><b>Phone:</b>&nbsp;&nbsp; ${formData.phone}</p>
     <p><b>Address:</b>&nbsp;&nbsp; ${formData.address}</p>
