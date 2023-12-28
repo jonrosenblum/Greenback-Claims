@@ -32,18 +32,18 @@ const ContactForm = ({ onEmailSent }) => (
         businessName: '',
         email: '',
         phone: '',
-        subject: 'ERC CLAIM',
+        // subject: 'ERC CLAIM',
         message: 'Hi, I am reaching out on behalf of my business to learn more about our ERC claim process.',
       }}
       validationSchema={ContactFormSchema}
       onSubmit={(values, { setSubmitting }) => {
         // Handle form submission logic here
-        const { businessName, ...otherValues } = values;
-        const subject = `ERC Claim for ${businessName}`;
-        console.log({ ...otherValues, subject });
+        // const { businessName, ...otherValues } = values;
+        // const subject = `ERC Claim for ${businessName}`;
+        // console.log({ ...otherValues, subject });
         const formDataToSend = new FormData();
-        formDataToSend.append('formData', JSON.stringify({ ...otherValues, subject }));
-        console.log(formDataToSend);
+        // formDataToSend.append('formData', JSON.stringify({ ...otherValues, subject }));
+        // console.log(formDataToSend);
         fetch('https://api.greenbackclaims.com/contact-us', {
           method: 'POST',
           body: formDataToSend,
@@ -124,13 +124,13 @@ const ContactForm = ({ onEmailSent }) => (
               <Field className="border p-2 mt-2 border-blue-400 rounded w-full text-black" id="phone" name="phone" placeholder="Phone Number" type="tel" />
               <ErrorMessage name="phone" component="div" className="text-red-500 text-[12px]" />
             </div>
-            <div className="hidden">
+            {/* <div className="hidden">
               <label className="font-medium text-black" htmlFor="subject">
                 Subject:
               </label>
               <Field className="border p-2 mt-2 border-blue-400 rounded w-full text-black" id="subject" name="subject" type="text" />
               <ErrorMessage name="subject" component="div" className="text-red-500 text-[12px]" />
-            </div>
+            </div> */}
             <div className="hidden">
               <label className="font-medium text-black" htmlFor="message">
                 Message:

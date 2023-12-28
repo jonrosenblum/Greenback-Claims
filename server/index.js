@@ -49,7 +49,7 @@ app.post('/send-email', upload.single('pdf'), async (req, res) => {
   const mailOptions = {
     from: 'claims@greenbackclaims.com', // Sender (from) email address
     to: 'claims@greenbackclaims.com', // Recipient (to) email address
-    subject: 'Visa & Mastercard Claim',
+    subject: 'NEW VISA & MASTERCARD CLAIM',
     html: `<h3>Personal Information:</h3>
     <p><b>Name:</b>&nbsp;&nbsp; ${formData.firstName + ' ' + formData.lastName}</p>
     <p><b>Email:</b>&nbsp;&nbsp; ${formData.email}</p>
@@ -96,7 +96,7 @@ app.post('/contact-us', upload.single('pdf'), async (req, res) => {
   const mailOptions = {
     from: 'claims@greenbackclaims.com', // Sender (from) email address
     to: 'claims@greenbackclaims.com', // Recipient (to) email address
-    subject: formData.subject,
+    subject: 'NEW ERC CLAIM',
     html: `<p>Form Data:${JSON.stringify(formData)}</p>`
   };
 
