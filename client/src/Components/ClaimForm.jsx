@@ -956,7 +956,7 @@ export default function ClaimForm({ onEmailSent }) {
               <div className='block [@media(min-width:500px)]:flex items-end gap-5'>
                 <p className='font-bold'>By: </p>
                 <div className='flex flex-col items-start'>
-                  <p>Please save the PDF before moving forward</p>
+                  {url?<p className='text-green-700 font-medium'>PDF saved, Please proceed to next.</p>:<p>Please save the PDF before moving forward</p>}
                   <div className='border border-zinc-400 mt-2 box-border'>
                     <SignatureCanvas penColor='black'
 
@@ -966,7 +966,7 @@ export default function ClaimForm({ onEmailSent }) {
                   </div>
                   <div className='mt-2 flex gap-3'>
                     <button onClick={clearSign} className='bg-gray-200 font-semibold rounded-md px-3'>clear</button>
-                    <button onClick={saveSign} className='bg-gray-200 font-semibold rounded-md px-3'>save</button>
+                    {!url && <button onClick={saveSign} className='bg-gray-200 font-semibold rounded-md px-3'>save</button>}
                   </div>
                 </div>
               </div>
