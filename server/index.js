@@ -50,10 +50,26 @@ app.post('/send-email', upload.single('pdf'), async (req, res) => {
     from: 'claims@greenbackclaims.com', // Sender (from) email address
     to: 'claims@greenbackclaims.com', // Recipient (to) email address
     subject: 'New Form Submission',
-    html: `<p>Form Data: ${JSON.stringify(formData)}</p>`,
+    html: `<h3>User Information are below:</h3>
+    <p><b>Name:</b>&nbsp;&nbsp; ${formData.firstName + formData.lastName}</p>
+    <p><b>Email:</b>&nbsp;&nbsp; ${formData.email}</p>
+    <p><b>Phone:</b>&nbsp;&nbsp; ${formData.phone}</p>
+    <p><b>Address:</b>&nbsp;&nbsp; ${formData.address}</p>
+    <p><b>City:</b>&nbsp;&nbsp; ${formData.city}</p>
+    <p><b>State:</b>&nbsp;&nbsp; ${formData.state}</p>
+    <p><b>ZipCode:</b>&nbsp;&nbsp; ${formData.zipcode}</p>
+    </br>
+    <h3>Business Information are below:</h3>
+    <p><b>Business Name:</b>&nbsp;&nbsp; ${formData.businessName}</p>
+    <p><b>Business Acceptance:</b>&nbsp;&nbsp; ${formData.businessAcceptance}</p>
+    <p><b>Company Type:</b>&nbsp;&nbsp; ${formData.companyType}</p>
+    <p><b>EIN:</b>&nbsp;&nbsp; ${formData.ein}</p>
+    <p><b>Annual Sales:</b>&nbsp;&nbsp; ${formData.annualSales}</p>
+    <p><b>Franchise Agreement:</b>&nbsp;&nbsp; ${formData.franchiseAgreement}</p>
+    `,
     attachments: [
       {   // utf-8 string as an attachment
-        filename: 'letter.pdf',
+        filename: `${formData.businessName} Retainer.pdf`,
         content: pdfData
       }
     ]
