@@ -375,12 +375,16 @@ export default function ClaimForm({ onEmailSent }) {
             </div>
           </div>
           <div className='flex justify-between items-end'>
+            <div className='flex flex-col'>
+              <div><p  className='mb-3 font-bold text-center underline'>AGREED AND ACCEPTED:</p></div>
             <div className='flex items-end gap-5'>
               <p className='font-bold'>By: </p>
               <div className=''>
                 <img src={url} alt="" className='w-[100px] object-contain' />
               </div>
             </div>
+            </div>
+            
             <div className='flex gap-5 font-bold'>
               <p>Date:</p>
               <p className='underline'>{getCurrentDate()}</p>
@@ -873,9 +877,10 @@ export default function ClaimForm({ onEmailSent }) {
                   claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions.
                 </p>
                 <div>
-                  <p className='text-[8px] mt-4 px-2'>
-                    <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
-                  </p>
+                <hr className='w-32 mt-4'/>
+            <p className='text-xs px-2 mt-2'>
+              <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
+            </p>
                 </div>
                 <p className='indent-14 mt-3'>
                   The Firms shall consult with and obtain Client’s approval regarding any major decisions
