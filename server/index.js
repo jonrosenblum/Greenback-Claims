@@ -96,7 +96,6 @@ app.post('/contact-us', upload.single('pdf'), async (req, res) => {
   const mailOptions = {
     from: 'claims@greenbackclaims.com', // Sender (from) email address
     to: 'claims@greenbackclaims.com', // Recipient (to) email address
-    subject: 'NEW ERC CLAIM',
     html: `<p>Form Data:${JSON.stringify(formData)}</p>`
   };
 

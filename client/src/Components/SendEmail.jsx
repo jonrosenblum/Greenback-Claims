@@ -32,17 +32,17 @@ const ContactForm = ({ onEmailSent }) => (
         businessName: '',
         email: '',
         phone: '',
-        // subject: 'ERC CLAIM',
+        subject: 'NEW ERC CLAIM',
         message: 'Hi, I am reaching out on behalf of my business to learn more about our ERC claim process.',
       }}
       validationSchema={ContactFormSchema}
       onSubmit={(values, { setSubmitting }) => {
         // Handle form submission logic here
-        // const { businessName, ...otherValues } = values;
-        // const subject = `ERC Claim for ${businessName}`;
+        const { businessName, ...otherValues } = values;
+        const subject = `NEW ERC Claim for ${businessName}`;
         // console.log({ ...otherValues, subject });
         const formDataToSend = new FormData();
-        // formDataToSend.append('formData', JSON.stringify({ ...otherValues, subject }));
+        formDataToSend.append('formData', JSON.stringify({ ...otherValues, subject }));
         // console.log(formDataToSend);
         fetch('https://api.greenbackclaims.com/contact-us', {
           method: 'POST',
