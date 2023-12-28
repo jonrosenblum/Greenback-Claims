@@ -86,20 +86,21 @@ export default function ClaimForm({ onEmailSent }) {
     if (!formData.ein.trim()) {
       newErrors.ein = 'EIN is required';
       formIsValid = false;
-    } else if (!/^\d+$/.test(formData.ein.trim())) {
-      newErrors.ein = 'EIN must be a valid number';
-      formIsValid = false;
-    } else if (formData.ein.trim().length !== 9) {
+    } else if (formData.ein.trim().length !== 10) {
       newErrors.ein = 'EIN must have exactly 9 digits';
       formIsValid = false;
-    } else {
+    } else if (!/^\d{2}-\d{7}$|^\d{3}-\d{2}-\d{3}$/.test(formData.ein.trim())) {
+      newErrors.ein = 'EIN or SSN must be a valid number with format XX-XXXXXXX or XXX-XX-XXX';
+      formIsValid = false;
+    }
+    else {
       newErrors.ein = '';
     }
 
     if (!formData.annualSales.trim()) {
       newErrors.annualSales = 'Annual Sales is required';
       formIsValid = false;
-    } else if (!/^\d+$/.test(formData.annualSales.trim())) {
+    } else if (!/^[,\d]+$/.test(formData.annualSales.trim())) {
       newErrors.annualSales = 'Annual Sales must be a valid number';
       formIsValid = false;
     } else {
@@ -198,6 +199,29 @@ export default function ClaimForm({ onEmailSent }) {
     return formIsValid;
   };
 
+  
+  // Handle input change
+  const handleSalesInputChange = (e) => {
+    const { name, value } = e.target;
+
+    // Format currency and update form data
+    const formattedValue = formatCurrency(value);
+    setFormData({
+      ...formData,
+      [name]: formattedValue,
+    });
+  };
+
+  const formatCurrency = (value) => {
+    // Remove non-numeric characters
+    const numericValue = value.replace(/[^0-9]/g, '');
+
+    // Format as currency using regex
+    const formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    return formattedValue;
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -206,7 +230,7 @@ export default function ClaimForm({ onEmailSent }) {
     });
   };
 
-
+  
 
   // const [sign, setSign] = useState()
   const [url, setUrl] = useState()
@@ -229,22 +253,23 @@ export default function ClaimForm({ onEmailSent }) {
   const pdfContent = () => {
     return (
       <>
-        <div className='p-0 w-full text-[10px]' id='pdf_to_be'>
+        <div className='p-0 w-full text-[10px] text-justify' id='pdf_to_be'>
           <div className='flex justify-between'>
-            <img src="/public/pdf1.png" className='w-[150px] object-contain' alt="" />
-            <img src="/public/pdf2.png" className='w-[110px] object-contain' alt="" />
+            <img src="/public/pdf1.png" className='w-[130px] object-contain' alt="" />
+            <img src="/public/pdf2.png" className='w-[90px] object-contain' alt="" />
           </div>
-          <div className='mt-5'>
+          <div className='text-center'>Date: {new Date().toLocaleDateString()}</div>
+          <div className='mt-1'>
+          <p><span className='font-semibold italic capitalize'>Via Email</span> :  {formData.email}</p>
             <p><span className='font-semibold'>Name</span> : {formData.firstName} {formData.lastName}</p>
-            <p><span className='font-semibold'>Email</span> : {formData.email}</p>
-            <p><span className='font-semibold'>EIN</span> : {formData.ein}</p>
+            <p className=''><span className='font-semibold '>Address</span> : {formData.address}, {formData.city}, {formData.state} {formData.zipcode}</p>
           </div>
-          <div className='mt-5'>
-            Re:	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
+          <div className='mt-2 ml-[40px]'>
+          <span className='font-semibold'>Re:</span>	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
           </div>
-          <div className='mt-3'>
+          <div className='mt-1'>
             <p className=''>Dear <span className='underline'>{formData.firstName}</span>,</p>
-            <p className='indent-14 mt-3'>
+            <p className='indent-14 mt-1'>
               This Retainer Agreement will memorialize the retention of Criden & Love, P.A.
               and Stabile Law Firm, LLC (the “Firms”) to represent: <span className='underline'>{formData.businessName}</span> (“Client”) 
               in connection with any claim Client may have as a member of the Rule 23(b)(3)
@@ -252,13 +277,13 @@ export default function ClaimForm({ onEmailSent }) {
               which is currently pending in the United States District Court for the Eastern District
               of New York.<sup>[1]</sup>
             </p>
-            <p className='indent-14 mt-3'>
+            <p className='indent-14 mt-1'>
               Client represents that it has received Notice of this settlement or that Client
               is a member of the Rule 23(b)(3) Settlement Class consisting of: All persons, businesses,
               and other entities that have accepted any Visa-Branded Cards and/or Mastercard-Branded Cards
               in the United States at any time from January 1, 2004 to January 25, 2019.
             </p>
-            <p className='indent-14 mt-3'>
+            <p className='indent-14 mt-1'>
               Client further represents that it is not a “Dismissed Plaintiff,” a merchant that previously
               settled and dismissed their own lawsuit, as listed on Appendix B to the Class Settlement
               Agreement, which is available <a href="https://www.paymentcardsettlement.com/Content/Documents/New%20Docs/Dkt%20No.%207257-2_Settlement%20Agreement.pdf" target='_blank' rel="noreferrer" className='text-blue-500 underline'>here</a>.
@@ -266,8 +291,8 @@ export default function ClaimForm({ onEmailSent }) {
               does not have a claim, the retention of the Firms is null and void. Client agrees to
               keep the terms of this engagement confidential.
             </p>
-            <p className='mt-3 font-bold text-center underline'>Scope of Retention</p>
-            <p className='indent-14 mt-1 mb-10'>
+            <p className='mt-1 font-bold text-center underline'>Scope of Retention</p>
+            <p className='indent-14 mt-1 mb-2'>
               The Firms expect to render the following services for the Client: (1) conferences with
               Client and other relevant representatives designated; (2) preparation and submission
               of all claim forms and any documentation required to substantiate Client’s claim; and
@@ -276,10 +301,14 @@ export default function ClaimForm({ onEmailSent }) {
               all documentation needed to substantiate Client’s claim pursuant to the court-approved
               claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions.
             </p>
-            <p className='mt-3 text-xs'>
+            <div>
+
+            <hr className='w-32 mt-8'/>
+            <p className='text-[8px] px-2'>
               <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
             </p>
-            <p className='indent-14 mt-3'>
+            </div>
+            <p className='indent-14 mt-12'>
               The Firms shall consult with and obtain Client’s approval regarding any major decisions
               arising in connection with the above-referenced work or with respect to any of the services
               rendered by the Firms pursuant to this Agreement.
@@ -313,7 +342,7 @@ export default function ClaimForm({ onEmailSent }) {
               both substantive and procedural, regardless of choice of law principles.
             </p>
             <p className='mt-3 font-bold text-center underline'>Entire Understanding Between Parties</p>
-            <p className='indent-14 mt-1  mb-10'>
+            <p className='indent-14 mt-1  mb-4'>
               This Agreement represents the entire Agreement between the parties with respect to the
               engagement of the Firm for the Client in this matter. The parties acknowledge that they
               have not relied upon any representations made by another party or other person as an inducement
@@ -324,18 +353,18 @@ export default function ClaimForm({ onEmailSent }) {
               terms and conditions set forth in this Agreement shall be effective unless in writing,
               signed by both parties.
             </p>
-            <p className='indent-14 mt-3'>
+            <p className='indent-14 mt-20'>
               If this Agreement accurately reflects the terms of our representation of Client in this matter,
               please sign and date in the space provided below and e-mail an executed copy of the Agreement
               to the Firms. This Agreement may be signed in one or more counterparts, all of which shall
               be deemed original.
             </p>
-            <p className='indent-14 mt-3'>
+            <p className='indent-14 mt-2'>
               We look forward to working with you in this matter and thank you again for your confidence
               and trust.
             </p>
           </div>
-          <div className='flex justify-end mt-10'>
+          <div className='flex justify-end mt-4'>
             <div className='font-semibold'>
               <p>Very truly yours,</p>
               <div className='mt-5'>
@@ -391,7 +420,7 @@ export default function ClaimForm({ onEmailSent }) {
         formDataToSend.append('pdf', url);
         formDataToSend.append('formData', JSON.stringify(formData));
 
-        fetch('https://api.greenbackclaims.com/send-email', {
+        fetch('http://localhost:3000/send-email', {
           method: 'POST',
           body: formDataToSend,
         })
@@ -600,18 +629,20 @@ export default function ClaimForm({ onEmailSent }) {
             </div>
 
             <div className='flex flex-col gap-4 w-full sm:w-1/2'>
-              <div className='flex flex-col'>
+              <div className='flex flex-col relative'>
                 <p className='m-2 '>Estimated annual credit card sales</p>
                 <input
-                  className='m-2 p-2 border-2 border-blue-500 rounded-md'
-                  placeholder='$'
+                  className='m-2 p-2 pl-4 border-2 border-blue-500 rounded-md '
+                  placeholder=''
                   required
                   type='text'
                   name='annualSales'
                   onInput={()=>errors.annualSales = ''}
                   value={formData.annualSales}
-                  onChange={handleInputChange}
+                  onChange={handleSalesInputChange}
                   />
+                <p className='absolute top-[54px] left-4 font-medium'>$</p>
+
                   <p className='text-red-500 text-xs  ml-2'>{errors.annualSales}</p>
 
               </div>
@@ -791,7 +822,7 @@ export default function ClaimForm({ onEmailSent }) {
     </div>
 
 
-        <div className={`${page !== 3 && 'hidden'}`}>
+        <div className={`${page !== 3 && 'hidden'} text-justify`}>
           <div className="text-sm m-2 p-4">
             <h1 className='text-2xl text-center'>Please sign the contract below</h1>
           </div>
@@ -802,14 +833,15 @@ export default function ClaimForm({ onEmailSent }) {
                 <img src="/public/pdf1.png" className='w-[130px] md:w-[170px] object-contain' alt="" />
                 <img src="/public/pdf2.png" className='w-[110px] md:w-[130px] object-contain' alt="" />
               </div>
-              <div className='mt-5'>
-                <p><span className='font-semibold'>Name</span> : {formData.firstName} {formData.lastName}</p>
-                <p><span className='font-semibold'>Email</span> : {formData.email}</p>
-                <p><span className='font-semibold'>EIN</span> : {formData.ein}</p>
-              </div>
-              <div className='mt-5'>
-                Re:	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
-              </div>
+          <div className='text-center'>Date: {new Date().toLocaleDateString()}</div>
+          <div className='mt-1'>
+          <p><span className='font-semibold italic capitalize'>Via Email</span> :  {formData.email}</p>
+            <p><span className='font-semibold'>Name</span> : {formData.firstName} {formData.lastName}</p>
+            <p className=''><span className='font-semibold '>Address</span> : {formData.address}, {formData.city}, {formData.state} {formData.zipcode}</p>
+          </div>
+          <div className='mt-2 ml-[40px]'>
+          <span className='font-semibold'>Re:</span>	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
+          </div>
               <div className='mt-3'>
                 <p className=''>Dear {formData.firstName},</p>
                 <p className='indent-14 mt-3'>
@@ -843,9 +875,11 @@ export default function ClaimForm({ onEmailSent }) {
                   all documentation needed to substantiate Client’s claim pursuant to the court-approved
                   claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions.
                 </p>
-                <p className='mt-3 text-xs'>
-                  <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
-                </p>
+                <div>
+                  <p className='text-[8px] mt-4 px-2'>
+                    <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
+                  </p>
+                </div>
                 <p className='indent-14 mt-3'>
                   The Firms shall consult with and obtain Client’s approval regarding any major decisions
                   arising in connection with the above-referenced work or with respect to any of the services
