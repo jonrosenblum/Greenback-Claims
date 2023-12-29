@@ -86,7 +86,7 @@ export default function ClaimForm({ onEmailSent }) {
     if (!formData.ein.trim()) {
       newErrors.ein = 'EIN is required';
       formIsValid = false;
-    } else if (!/^\d{2}-\d{6}$|^\d{3}-\d{2}-\d{4}$/.test(formData.ein.trim())) {
+    } else if (!/^\d{2}-\d{7}$|^\d{3}-\d{2}-\d{4}$/.test(formData.ein.trim())) {
       newErrors.ein = 'EIN or SSN must be a valid number with format XX-XXXXXXX or XXX-XX-XXX';
       formIsValid = false;
     }
