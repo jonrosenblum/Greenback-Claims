@@ -19,9 +19,9 @@ export default function Body() {
             {visa && (
                 <section id="about" className="bg-white dark:bg-gray-900 text-white">
                     <div className="bg-bgg p-[35px]">
-                        <div className="b bg-bgg grid grid-cols-1 sm:grid-cols-2 text-[1.3rem] border border-gray-400">
-                            <button className={`p-2 font-bold ${visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaTrue}>Visa & Mastercard Anti-Trust Lawsuit</button>
-                            <button className={`p-2 font-bold ${!visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaFalse}>Employee Retention Credit (ERC)</button>
+                        <div className="b bg-slate-950 grid grid-cols-1 sm:grid-cols-2 text-[1.3rem] border border-gray-400 p-2">
+                            <button className={`p-2 font-bold ${visa ? 'bg-gray-200 text-black rounded-tr-2xl rounded-tl-2xl' : ''}`} onClick={setVisaTrue}>Visa & Mastercard Anti-Trust Lawsuit</button>
+                            <button className={`p-2 font-bold ${!visa ? 'bg-gray-200 text-black' : 'border-b rounded-tr-2xl rounded-tl-2xl hover:bg-gray-200/10'}`} onClick={setVisaFalse}>Employee Retention Credit (ERC)</button>
                         </div>
                     </div>
                     <section id="about" className="bg-bgg dark:bg-bgg text-white">
@@ -62,9 +62,9 @@ export default function Body() {
             {!visa && (
                 <section id="about" className="bg-white dark:bg-gray-900 text-white">
                     <div className="bg-bgg p-[35px]">
-                        <div className="b bg-bgg grid grid-cols-1 sm:grid-cols-2 text-[1.3rem] border border-gray-400">
-                            <button className={`p-2 font-bold ${visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaTrue}>Visa & Mastercard Anti-Trust Lawsuit</button>
-                            <button className={`p-2 font-bold ${!visa ? 'bg-gray-200 text-black' : ''}`} onClick={setVisaFalse}>Employee Retention Credit (ERC)</button>
+                    <div className="b bg-slate-950 grid grid-cols-1 sm:grid-cols-2 text-[1.3rem] border border-gray-400 p-2">
+                            <button className={`p-2 font-bold ${visa ? 'bg-gray-200 text-black ' : 'border-b rounded-tr-2xl rounded-tl-2xl hover:bg-gray-200/10'}`} onClick={setVisaTrue}>Visa & Mastercard Anti-Trust Lawsuit</button>
+                            <button className={`p-2 font-bold ${!visa ? 'bg-gray-200 text-black rounded-tr-2xl rounded-tl-2xl' : ''}`} onClick={setVisaFalse}>Employee Retention Credit (ERC)</button>
                         </div>
                     </div>
                     <section id="about" className="bg-bgg dark:bg-bgg text-white">
