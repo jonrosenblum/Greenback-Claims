@@ -654,6 +654,7 @@ export default function ClaimForm({ onEmailSent }) {
                   name='franchiseAgreement'
                   onClick={()=>errors.franchiseAgreement = ''}
                   onChange={handleInputChange}
+                  value='Yes'
                   required
                   className='m-1'
                 />
@@ -664,6 +665,7 @@ export default function ClaimForm({ onEmailSent }) {
                   onClick={()=>errors.franchiseAgreement = ''}
                   onChange={handleInputChange}                  
                   required
+                  value='No'
                   className='m-1'
                 />
                 No
