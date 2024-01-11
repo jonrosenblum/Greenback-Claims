@@ -312,12 +312,12 @@ export default function ClaimForm({ onEmailSent }) {
             <p className='mt-3 font-bold text-center underline'>Fees for Services Rendered</p>
             <p className='indent-14 mt-1'>
               In consideration of the services rendered, and to be rendered, pursuant to this Agreement,
-              Client has agreed to pay as fees to the Firms thirty percent (30%) of any recovery
+              Client has agreed to pay as fees to the Firms thirty-three percent (33%) of any recovery
               Client obtains from the Settlement Fund. All reasonable costs and out-of-pocket expenses
               necessary to prepare and submit Client’s claim, and to provide other services to be rendered
               pursuant to this Agreement as outlined above, will be advanced by the Firms, 100% of
               which will be reimbursed to the Firms solely out of any recovery after application of
-              the thirty percent contingency fee. The Firms’ engagement will conclude when the
+              the thirty-three percent contingency fee. The Firms’ engagement will conclude when the
               Claims Administrator makes payment. The Firms assume no responsibility for any associated
               allocation, distribution, tax or any post-payment issue(s).
             </p>
@@ -891,12 +891,12 @@ export default function ClaimForm({ onEmailSent }) {
                 <p className='mt-3 font-bold text-center underline'>Fees for Services Rendered</p>
                 <p className='indent-14 mt-1'>
                   In consideration of the services rendered, and to be rendered, pursuant to this Agreement,
-                  Client has agreed to pay as fees to the Firms thirty percent (30%) of any recovery
+                  Client has agreed to pay as fees to the Firms thirty-three percent (33%) of any recovery
                   Client obtains from the Settlement Fund. All reasonable costs and out-of-pocket expenses
                   necessary to prepare and submit Client’s claim, and to provide other services to be rendered
                   pursuant to this Agreement as outlined above, will be advanced by the Firms, 100% of
                   which will be reimbursed to the Firms solely out of any recovery after application of
-                  the thirty percent contingency fee. The Firms’ engagement will conclude when the
+                  the thirty-three percent contingency fee. The Firms’ engagement will conclude when the
                   Claims Administrator makes payment. The Firms assume no responsibility for any associated
                   allocation, distribution, tax or any post-payment issue(s).
                 </p>

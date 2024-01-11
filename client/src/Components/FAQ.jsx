@@ -30,7 +30,7 @@ export default function FAQ() {
     },
     {
       question: "Will I owe any fees to the lawyers if I'm ineligible?",
-      answer: 'No, you only incur fees if we successfully recover funds for your business. In the event that we secure a monetary return for your business, our lawyers receive 30% of the recovered amount.',
+      answer: 'No, you only incur fees if we successfully recover funds for your business. In the event that we secure a monetary return for your business, our lawyers receive 33% of the recovered amount.',
     },
     {
       question: 'Is it necessary to hire an attorney for assistance?',
