@@ -20,6 +20,8 @@ export default function ClaimForm({ onEmailSent }) {
     ein: '',
     annualSales: '',
     franchiseAgreement: '',
+    referral: '',
+    referralDetails: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -39,6 +41,8 @@ export default function ClaimForm({ onEmailSent }) {
     ein: '',
     annualSales: '',
     franchiseAgreement: '',
+    // referral: '',
+    // referralDetails: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -525,8 +529,10 @@ export default function ClaimForm({ onEmailSent }) {
 
           </div>
           <hr className="border-t border-gray-300 mt-5" />
+         
 
           <div className='flex flex-col sm:flex-row justify-between items-start'>
+          
             <div className='w-full'>
               <p className='max-w-full sm:max-w-xs m-2'>Did you have a business at any time between January 1, 2004 - January 25, 2019 that accepted Visa or Mastercard?</p>
               <input onClick={()=>errors.businessAcceptance = ''}
@@ -674,6 +680,38 @@ export default function ClaimForm({ onEmailSent }) {
               </div>
             </div>
           </div>
+          <div className='flex flex-col sm:flex-row justify-between items-start'>
+          
+          <div className='w-full'>
+            <p className='max-w-full sm:max-w-xs m-2'>Were you referred to Greenback Claims? If yes, please share details</p>
+            <div className='flex items-center'>
+              {/* <input onClick={()=>errors.referral = ''} */}
+              <input
+                className='m-2'
+                type="radio"
+                name="referral"
+                value="Yes"
+                onChange={handleInputChange}
+                required
+              />
+              Yes
+              <input
+              // <input onClick={()=>errors.referral = ''}
+                className='m-2'
+                type="radio"
+                name="referral"
+                value="No"
+                onChange={handleInputChange}
+                required
+              />
+              No
+              {/* <p className='text-red-500 text-xs  ml-2'>{errors.referral}</p> */}
+            <input className='m-2 p-2 border-2 border-blue-500 rounded-md' placeholder='Please enter details' type="text" name="referralDetails" onChange={handleInputChange} value={formData.referralDetails} />
+
+            </div>
+          </div>
+          
+        </div>
         </div>
         <div className={`flex justify-end w-full mt-8 ${page !== 1 && 'hidden'}`}>
             <button className=' bottom-0 right-0 bg-blue-500 p-2 rounded-md' onClick={nextPage}>Next</button>

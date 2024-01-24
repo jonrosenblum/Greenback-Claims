@@ -59,6 +59,10 @@ app.post('/send-email', upload.single('pdf'), async (req, res) => {
     <p><b>State:</b>&nbsp;&nbsp; ${formData.state}</p>
     <p><b>ZipCode:</b>&nbsp;&nbsp; ${formData.zipcode}</p>
     </br>
+    <h3>Referral Information:</h3>
+    <p><b>Referral:</b>&nbsp;&nbsp; ${formData.referral}</p>
+    <p><b>Referral Name:</b>&nbsp;&nbsp; ${formData.referralDetails}</p>
+    </br>
     <h3>Business Information:</h3>
     <p><b>Business Name:</b>&nbsp;&nbsp; ${formData.businessName}</p>
     <p><b>Business Acceptance:</b>&nbsp;&nbsp; ${formData.businessAcceptance}</p>
