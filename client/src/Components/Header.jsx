@@ -7,7 +7,7 @@ import useStore from '../zustand/store';
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { visa, setVisaTrue, setVisaFalse } = useStore();
+  const { visa, setVisaTrue } = useStore();
   
   useEffect(() => {
     console.log('isLogged value changed:', visa);
@@ -29,10 +29,10 @@ export default function Header() {
           {/* </Link> */}
           <div className="flex space-x-4">
             
-        <Link to="about" className="text-white hover:text-gray-300" smooth={true} duration={500}>
+        <Link to="about" className="text-white hover:text-gray-300 cursor-pointer" smooth={true} duration={500}>
           About
         </Link>
-        <Link to="fqs" className="text-white hover:text-gray-300" smooth={true} duration={500}>
+        <Link to="fqs" className="text-white hover:text-gray-300 cursor-pointer" smooth={true} duration={500}>
             FAQs
         </Link>
             <div className="relative inline-block text-left">
@@ -59,14 +59,17 @@ export default function Header() {
                  Visa & Mastercard Anti-Trust Lawsuit
                 </a>
                 <a
-                  href="#about"
-                  onClick={setVisaFalse}
+                  // href="#about"
+                  // onClick={setVisaFalse}
                   className={`block px-4 py-2 rounded-b-lg text-gray-800 hover:bg-gray-200 ${!visa && 'bg-gray-200'}`}
                 >
-                 Employee Retention Credit (ERC)
+                 <s>Employee Retention Credit (ERC)</s>
                 </a>
               </div>
             </div>
+            <Link to="referrals" className="text-white hover:text-gray-300 cursor-pointer" smooth={true} duration={500}>
+            Referrals
+            </Link>
           </div>
         </div>
       </nav>
