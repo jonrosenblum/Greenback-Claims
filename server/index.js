@@ -10,7 +10,7 @@ const app = express();
 
 app.use(cors({
   origin: '*',
-  "Access-Control-Allow-Origin": 'https://greenbackclaims.com'
+  "Access-Control-Allow-Origin": 'https://www.greenbackclaims.com'
 }));
 
 app.use(express.json({ limit: '50mb' }));
