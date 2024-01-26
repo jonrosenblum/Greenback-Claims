@@ -26,7 +26,8 @@ jobs:
           sudo chown -R ubuntu:ubuntu /var/www/Greenback-Claims
           cd /var/www/Greenback-Claims
           sudo git reset --hard HEAD
-          sudo git clean -fd
+          sudo git fetch origin main
+          sudo git reset --hard origin/main
 
           # Pull the latest changes
           sudo git pull origin main
