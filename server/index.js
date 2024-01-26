@@ -9,7 +9,8 @@ const authController = require('./controllers/authController');
 const app = express();
 
 app.use(cors({
-  origin: '*'
+  origin: '*',
+  "Access-Control-Allow-Origin": 'https://greenbackclaims.com'
 }));
 
 app.use(express.json({ limit: '50mb' }));
