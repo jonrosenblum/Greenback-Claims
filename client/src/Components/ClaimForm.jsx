@@ -526,43 +526,51 @@ export default function ClaimForm({ onEmailSent }) {
     return (
       <>
         <div className={`relative ${page !== 1 && 'hidden'}`}>
-          <div className="text-sm">
+          <div className="text-sm font-medium">
             <h1>Please answer the following questions to help us determine if you are eligible to make a claim for compensation:</h1>
 
           </div>
           <hr className="border-t border-gray-300 mt-5" />
          
-
-          <div className='flex flex-col sm:flex-row justify-between items-start'>
-          
-            <div className='w-full'>
-              <p className='max-w-full sm:max-w-xs m-2'>Did you have a business at any time between January 1, 2004 - January 25, 2019 that accepted Visa or Mastercard?</p>
-              <input onClick={()=>errors.businessAcceptance = ''}
-                className='m-2'
-                type="radio"
-                name="businessAcceptance"
-                value="Yes"
-                onChange={handleInputChange}
-                required
-              />
-              Yes
-              <input onClick={()=>errors.businessAcceptance = ''}
-                className='m-2'
-                type="radio"
-                name="businessAcceptance"
-                value="No"
-                onChange={handleInputChange}
-                required
-              />
-              No
+          <div className="flex md:flex-row py-4 flex-col gap-6 mt-6">
+                      <div className="w-full sm:w-1/2">
+              <p className='max-w-full sm:max-w-xs ml-2'>Did you have a business at any time between January 1, 2004 - January 25, 2019 that accepted Visa or Mastercard?</p>
               <p className='text-red-500 text-xs  ml-2'>{errors.businessAcceptance}</p>
-            </div>
+                      
+                      </div>
+                      <div className="w-full sm:w-1/2 flex flex-row sm:flex-col sm:gap-1 gap-3">
+                        <div className="flex gap-1 items-center">
+                      <input onClick={()=>errors.businessAcceptance = ''}
+                        className='mt-1 w-6 h-6'
+                        type="radio"
+                        name="businessAcceptance"
+                        value="Yes"
+                        onChange={handleInputChange}
+                        required
+                      />
+                      <span className='text-xl'>Yes</span>
+                      </div>
+                      <div className="flex gap-1 items-center">
+                      <input onClick={()=>errors.businessAcceptance = ''}
+                        className='mt-1 w-6 h-6'
+                        type="radio"
+                        name="businessAcceptance"
+                        value="No"
+                        onChange={handleInputChange}
+                        required
+                      />
+                      <span className='text-xl'>No</span>
+                      </div>
+                      </div>
+                    </div>
 
-            <div className='flex flex-col w-full '>
-              <p className='m-2'>What is / was the legal name of the business?</p>
+          <div className='flex flex-col sm:flex-row justify-between items-start mt-2'>
+          
+            <div className='flex flex-col w-full sm:w-1/2 '>
+              <p className='mx-2 my-1'>What is / was the legal name of the business?</p>
               <input
-                className='m-2 p-2  border-2 border-blue-500 rounded-md'
-                placeholder='Enter name'
+                className='mx-2 p-2  border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500'
+                placeholder='Enter business name'
                 type='text'
                 name='businessName'
                 onInput={()=>errors.businessName = ''}
@@ -572,13 +580,32 @@ export default function ClaimForm({ onEmailSent }) {
               />
               <p className='text-red-500 text-xs  ml-2'>{errors.businessName}</p>
             </div>
+            <div className='flex flex-col w-full sm:w-1/2'>
+            <p className='m-1'>What is / was your relationship with the business? (Title)</p>
+              <select
+                className='mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500'
+                name='title'
+                onInput={()=>errors.title = ''}
+                onChange={handleInputChange}
+                value={formData.title}
+                required>
+                <option value=''>Please Select</option>
+                <option value='director'>Director</option>
+                <option value='owner'>Officer</option>
+                <option value='employee'>Owner</option>
+                <option value='other'>Shareholder</option>
+                <option value='other'>Manager</option>
+              </select>
+              <p className='text-red-500 text-xs  ml-2'>{errors.title}</p>
+            </div>
+
           </div>
 
           <div className='flex flex-col sm:flex-row justify-between m-1'>
             <div className='flex flex-col mt-2 w-full sm:w-1/2'>
-              <p className='m-2'>Select your company type:</p>
+              <p className='m-1'>Select your company type:</p>
               <select
-                className='m-2 p-2  border-2 border-blue-500 rounded-md'
+                className='mx-2 p-2  border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500'
                 name='companyType'
                 onInput={()=>errors.companyType = ''}
                 onChange={handleInputChange}
@@ -597,30 +624,56 @@ export default function ClaimForm({ onEmailSent }) {
               <p className='text-red-500 text-xs  ml-2'>{errors.companyType}</p>
             </div>
 
-            <div className='flex flex-col mt-2  w-full sm:w-1/2'>
-              <p className='m-2  '>What is / was your relationship with the business? (Title)</p>
-              <select
-                className='m-2 p-2 border-2 border-blue-500 rounded-md'
-                name='title'
-                onInput={()=>errors.title = ''}
-                onChange={handleInputChange}
-                value={formData.title}
-                required>
-                <option value=''>Please Select</option>
-                <option value='director'>Director</option>
-                <option value='owner'>Officer</option>
-                <option value='employee'>Owner</option>
-                <option value='other'>Shareholder</option>
-                <option value='other'>Manager</option>
-              </select>
-              <p className='text-red-500 text-xs  ml-2'>{errors.title}</p>
-
+            <div className='flex flex-col relative mt-2 w-full sm:w-1/2 m-1'>
+                <p className='m-1'>Estimated annual credit card sales</p>
+                <input
+                  className='mx-2 p-2 pl-4 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500 '
+                  placeholder=''
+                  required
+                  type='text'
+                  name='annualSales'
+                  onInput={()=>errors.annualSales = ''}
+                  value={formData.annualSales}
+                  onChange={handleSalesInputChange}
+                  />
+                <p className='absolute top-[40px] left-4 font-medium'>$</p>
+                  <p className='text-red-500 text-xs  ml-2'>{errors.annualSales}</p>
             </div>
           </div>
-
-
-
           <div className='flex flex-col sm:flex-row justify-between items-start m-1'>
+            <div className='flex flex-col gap-4 w-full sm:w-1/2'>
+              <div>
+                <p className='m-2'>Is / was  your business subject to a franchise agreement?*</p>
+                <p className='text-red-500 text-xs  ml-2'>{errors.franchiseAgreement}</p>
+                <div className='flex flex-row sm:flex-col sm:gap-1 gap-3 mb-4 sm:mb-0'>                  
+                <div className={`flex gap-1 mt-0 ${errors.franchiseAgreement?'sm:mt-[10px]':'sm:mt-[25px]'} items-center`}>
+                <input
+                  type='radio'
+                  name='franchiseAgreement'
+                  onClick={()=>errors.franchiseAgreement = ''}
+                  onChange={handleInputChange}
+                  value='Yes'
+                  required
+                  className='m-1 w-6 h-6'
+                />
+                <span className='text-xl'>Yes</span>
+                </div>
+                <div className="flex gap-1 items-center">
+                <input
+                  type='radio'
+                  name='franchiseAgreement'
+                  onClick={()=>errors.franchiseAgreement = ''}
+                  onChange={handleInputChange}                  
+                  required
+                  value='No'
+                  className='m-1 w-6 h-6'
+                />
+                <span className='text-xl'>No</span>
+                </div>
+                </div>
+
+              </div>
+            </div>
             <div className='flex flex-col w-full sm:w-1/2'>
               <p className='m-2'>Business Tax Identification Number (EIN) for incorporated businesses or Social Security Number (SSN) for Sole Proprietorships - MUST BE 9 DIGITS</p>
               <input
@@ -630,64 +683,16 @@ export default function ClaimForm({ onEmailSent }) {
                 onChange={handleInputChange}
                 value={formData.ein}
                 placeholder='EIN or SSN'
-                className='m-2 p-2 border-2 border-blue-500 rounded-md'
+                className='mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500'
                 type='text' />
                 <p className='text-red-500 text-xs  ml-2'>{errors.ein}</p>
-
-            </div>
-
-            <div className='flex flex-col gap-4 w-full sm:w-1/2'>
-              <div className='flex flex-col relative'>
-                <p className='m-2 '>Estimated annual credit card sales</p>
-                <input
-                  className='m-2 p-2 pl-4 border-2 border-blue-500 rounded-md '
-                  placeholder=''
-                  required
-                  type='text'
-                  name='annualSales'
-                  onInput={()=>errors.annualSales = ''}
-                  value={formData.annualSales}
-                  onChange={handleSalesInputChange}
-                  />
-                <p className='absolute top-[54px] left-4 font-medium'>$</p>
-
-                  <p className='text-red-500 text-xs  ml-2'>{errors.annualSales}</p>
-
-              </div>
-
-              <div>
-                <p className='m-2  '>Is / was  your business subject to a franchise agreement?*</p>
-                <input
-                  type='radio'
-                  name='franchiseAgreement'
-                  onClick={()=>errors.franchiseAgreement = ''}
-                  onChange={handleInputChange}
-                  value='Yes'
-                  required
-                  className='m-1'
-                />
-                Yes
-                <input
-                  type='radio'
-                  name='franchiseAgreement'
-                  onClick={()=>errors.franchiseAgreement = ''}
-                  onChange={handleInputChange}                  
-                  required
-                  value='No'
-                  className='m-1'
-                />
-                No
-                <p className='text-red-500 text-xs  ml-2'>{errors.franchiseAgreement}</p>
-
-              </div>
             </div>
           </div>
-          <div className='flex flex-col sm:flex-row justify-between items-start'>
+          {/* <div className='flex flex-col sm:flex-row justify-between items-start'>
           
           <div className='w-full'>
             <p className='max-w-full sm:max-w-xs m-2'>Were you referred to Greenback Claims? If yes, please share details</p>
             <div className='flex items-center'>
-              {/* <input onClick={()=>errors.referral = ''} */}
               <input
                 className='m-2'
                 type="radio"
@@ -698,7 +703,6 @@ export default function ClaimForm({ onEmailSent }) {
               />
               Yes
               <input
-              // <input onClick={()=>errors.referral = ''}
                 className='m-2'
                 type="radio"
                 name="referral"
@@ -707,32 +711,31 @@ export default function ClaimForm({ onEmailSent }) {
                 required
               />
               No
-              {/* <p className='text-red-500 text-xs  ml-2'>{errors.referral}</p> */}
-            <input className='m-2 p-2 border-2 border-blue-500 rounded-md' placeholder='Please enter details' type="text" name="referralDetails" onChange={handleInputChange} value={formData.referralDetails} />
+            <input className='mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500' placeholder='Please enter details' type="text" name="referralDetails" onChange={handleInputChange} value={formData.referralDetails} />
 
             </div>
           </div>
           
+        </div> */}
         </div>
-        </div>
-        <div className={`flex justify-end w-full mt-8 ${page !== 1 && 'hidden'}`}>
-            <button className=' bottom-0 right-0 bg-blue-500 p-2 rounded-md' onClick={nextPage}>Next</button>
+        <div className={`flex justify-center w-full mt-14 ${page !== 1 && 'hidden'}`}>
+            <button className='bottom-0 w-full right-0 bg-green-500 p-2 rounded-md font-medium text-white' onClick={nextPage}>Next</button>
           </div>
 
         <div className={`pl-3 pr-3 pb-3 ${page !== 2 && 'hidden'}`}>
       <div className="text-sm ">
-        <h1 className="text-2xl">Business Information</h1>
+        <h1 className="text-xl">Business Information</h1>
       </div>
 
-      <hr className="border-t border-gray-300" />
+      <hr className="border-t border-gray-300 mb-6 sm:mb-10" />
 
       <div className="flex flex-col md:flex-row justify-between items-start mt-3">
         <div className="flex flex-col w-full md:w-3/5">
           <p className="m-2">First name</p>
           <input
             name="firstName"
-            className="m-2 p-2 border-2 border-blue-500 rounded-md"
-            placeholder="First"
+            className="mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500"
+            placeholder="John"
             type="text"
             value={formData.firstName}
             onInput={()=> errors.firstName = ''}
@@ -746,8 +749,8 @@ export default function ClaimForm({ onEmailSent }) {
           <p className="m-2 ">Last name</p>
           <input
             name="lastName"
-            className="m-2 p-2 border-2 border-blue-500 rounded-md"
-            placeholder="Last"
+            className="mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500"
+            placeholder="Smith"
             onInput={()=> errors.lastName = ''}
             onChange={handleInputChange}
             type="text"
@@ -764,8 +767,8 @@ export default function ClaimForm({ onEmailSent }) {
           <input
             name="email"
             onChange={handleInputChange}
-            className="m-2 p-2 border-2 border-blue-500 rounded-md"
-            placeholder="Email"
+            className="mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500"
+            placeholder="johnsmith@gmail.com"
             type="email"
             onInput={()=> errors.email = ''}
             value={formData.email}
@@ -781,8 +784,8 @@ export default function ClaimForm({ onEmailSent }) {
             onChange={handleInputChange}
             onInput={()=> errors.phone = ''}
 
-            className="m-2 p-2 border-2 border-blue-500 rounded-md"
-            placeholder="Phone"
+            className="mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500"
+            placeholder="212-456-7890"
             type="tel"
             value={formData.phone}
             required
@@ -798,8 +801,8 @@ export default function ClaimForm({ onEmailSent }) {
             name="address"
             onChange={handleInputChange}
             onInput={()=> errors.address = ''}
-            className="m-2 p-2 border-2 border-blue-500 rounded-md"
-            placeholder="Address"
+            className="mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500"
+            placeholder="32, My Street, Kingston, New York 12401"
             type="text"
             value={formData.address}
             required
@@ -812,8 +815,8 @@ export default function ClaimForm({ onEmailSent }) {
             name="city"
             onInput={()=> errors.city = ''}
             onChange={handleInputChange}
-            className="m-2 p-2 border-2 border-blue-500 rounded-md"
-            placeholder="City"
+            className="mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500"
+            placeholder="Kingston"
             type="text"
             value={formData.city}
             required
@@ -829,8 +832,8 @@ export default function ClaimForm({ onEmailSent }) {
             name="state"
             onInput={()=> errors.state = ''}
             onChange={handleInputChange}
-            className="m-2 p-2 border-2 border-blue-500 rounded-md"
-            placeholder="State"
+            className="mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500"
+            placeholder="New York"
             type="text"
             value={formData.state}
             required
@@ -843,8 +846,8 @@ export default function ClaimForm({ onEmailSent }) {
             name="zipcode"
             onInput={()=> errors.zipcode = ''}
             onChange={handleInputChange}
-            className="m-2 p-2 border-2 border-blue-500 rounded-md"
-            placeholder="Zipcode"
+            className="mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500"
+            placeholder="12401"
             type="text"
             value={formData.zipcode}
             required
@@ -853,11 +856,11 @@ export default function ClaimForm({ onEmailSent }) {
         </div>
       </div>
 
-      <div className="flex justify-between mt-10">
-        <button className="bg-blue-500 p-2 rounded-md" onClick={prevPage}>
+      <div className="flex flex-col sm:flex-row gap-2 mt-10 sm:mt-20">
+        <button className="bg-blue-500 w-full sm:w-1/2 p-2 rounded-md text-white font-medium" onClick={prevPage}>
           Previous
         </button>
-        <button className="bg-blue-500 p-2 rounded-md" onClick={nextPage}>
+        <button className="bg-green-500 w-full sm:w-1/2 p-2 rounded-md text-white font-medium" onClick={nextPage}>
           Next
         </button>
       </div>
@@ -1017,10 +1020,15 @@ export default function ClaimForm({ onEmailSent }) {
               </div>
             </div>
           </div>
-          <div className='flex justify-between'>
-            <button className='bg-blue-500 rounded-md p-2' onClick={prevPage}>Previous</button>
-            <button className='bg-blue-500 rounded-md p-2' onClick={nextPage}>Next</button>
-          </div>
+          <div className="flex flex-col sm:flex-row gap-2 mt-10 sm:mt-20">
+        <button className="bg-blue-500 w-full sm:w-1/2 p-2 rounded-md text-white font-medium" onClick={prevPage}>
+          Previous
+        </button>
+        <button className="bg-green-500 w-full sm:w-1/2 p-2 rounded-md text-white font-medium" onClick={nextPage}>
+          Next
+        </button>
+      </div>
+          
         </div>
 
 
@@ -1032,10 +1040,15 @@ export default function ClaimForm({ onEmailSent }) {
           <div className='mt-5 mb-5'>
             {pdfContent()}
           </div>
-          <div className='flex justify-between'>
-            <button className='bg-blue-500 rounded-md p-2' onClick={prevPage}>Previous</button>
-            <button className='bg-blue-500 rounded-md p-2' disabled={loading} onClick={submitForm}>{loading ? <Loader height={'h-4'} width={'w-4'} /> : 'Submit'}</button>
-          </div>
+          <div className="flex flex-col sm:flex-row gap-2 mt-10 sm:mt-20">
+        <button className="bg-blue-500 w-full sm:w-1/2 p-2 rounded-md text-white font-medium" onClick={prevPage}>
+          Previous
+        </button>
+        <button className="bg-green-500 w-full sm:w-1/2 p-2 rounded-md text-white font-medium" disabled={loading} onClick={submitForm}>
+        {loading ? <Loader height={'h-4'} width={'w-4'} /> : 'Submit'}
+        </button>
+      </div>
+         
         </div>
       </>
     )
