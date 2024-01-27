@@ -1,17 +1,24 @@
-import Body from "./Components/Body"
-import Footer from "./Components/Footer"
-import Header from "./Components/Header"
-import './App.css'
+import Home from "./Components/Home"
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate
+} from "react-router-dom";
+import Dashboard from "./Modules/Dahboard/Dashboard";
 
 
 function App() {
 
   return (
-    <div>
-      <Header/>
-      <Body/>
-      <Footer/>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard/*" element={<Dashboard />} >
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
   )
 }
 

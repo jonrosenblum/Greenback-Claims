@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import { Link } from 'react-scroll';
 import useStore from '../zustand/store';
-
+import Login from './Login';
+import SignUp from './SignUp';
 
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showPopup, setShowPopup] = useState('');
   const { visa, setVisaTrue } = useStore();
   
   useEffect(() => {
@@ -67,12 +69,20 @@ export default function Header() {
                 </a>
               </div>
             </div>
-            <Link to="referrals" className="text-white hover:text-gray-300 cursor-pointer" smooth={true} duration={500}>
+            <a onClick={()=>{setShowPopup('login')}} className='text-white hover:text-gray-300 cursor-pointer'>
+            Login
+              </a>
+              <a href='/dashboard/referrals' className='text-white hover:text-gray-300 cursor-pointer'>
+              Referrals
+              </a>
+            {/* <Link to="Referrals" className="text-white hover:text-gray-300 cursor-pointer" smooth={true} duration={500}>
             Referrals
-            </Link>
+            </Link> */}
           </div>
         </div>
       </nav>
+      {showPopup == 'login' && <Login onClose={()=> setShowPopup('')} onSignUp={()=>setShowPopup('sign-up')} />}
+      {showPopup == 'sign-up' && <SignUp  onClose={()=> setShowPopup('')} onSignIn={()=>setShowPopup('login')}  />}
     </div>
   );
 }
