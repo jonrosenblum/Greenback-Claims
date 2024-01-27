@@ -25,7 +25,7 @@ jobs:
     - name: Build the project
       run: |
         cd client
-        npm run build
+        VITE_APP_API=https://api.greenbackclaims.com/ npm run build
         ls
 
     - name: Copy build files to EC2 instance

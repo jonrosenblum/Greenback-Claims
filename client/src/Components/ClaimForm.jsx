@@ -5,6 +5,9 @@ import Loader from './Loader';
 import toast, { Toaster } from 'react-hot-toast';
 import PropTypes from 'prop-types';
 
+const email_api_test = import.meta.env.VITE_APP_API+'send-email'
+console.log({email_api_test})
+
 ClaimForm.propTypes = {
   onEmailSent: PropTypes.func.isRequired,
 };
@@ -426,7 +429,11 @@ export default function ClaimForm({ onEmailSent }) {
         formDataToSend.append('pdf', url);
         formDataToSend.append('formData', JSON.stringify(formData));
 
-        fetch('https://api.greenbackclaims.com/send-email', {
+        const email_api = import.meta.env.VITE_APP_API+'send-email'
+        console.log({email_api})
+        fetch(email_api, {
+        // fetch('https://api.greenbackclaims.com/send-email', {
+        // fetch('http://localhost:3000/send-email', {
           method: 'POST',
           body: formDataToSend,
         })
