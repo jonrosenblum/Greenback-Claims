@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "pm2:start": "npx pm2 start index.js",
+    "pm2:start": "npx pm2 start node index.js",
     "pm2:stop": "npx pm2 stop node index",
     "pm2:logs": "npx pm2 logs -f",
     "pm2:list": "npx pm2 list"

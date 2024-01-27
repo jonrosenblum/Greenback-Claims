@@ -10,6 +10,9 @@
     "pm2:start": "npm --prefix server run pm2:start",
     "pm2:stop": "npm --prefix server run pm2:stop",
     "pm2:logs": "npm --prefix server run pm2:logs",
-    "pm2:list": "npm --prefix server run pm2:list"
+    "pm2:list": "npm --prefix server run pm2:list",
+    "install:server": "npm --prefix server run install:server",
+    "install:client": "npm --prefix client run install:client",
+    "postinstall": "npm run install:server && npm run install:client"
   }
 }
