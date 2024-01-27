@@ -8,7 +8,6 @@ const config = {
   region: process.env.AWS_REGION,
 };
 
-console.log({ emailEnvConfig: config });
 aws.config.update(config);
 
 const transporter = nodemailer.createTransport(
