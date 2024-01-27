@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "pm2:start": "npx pm2 start index.js",
+    "pm2:stop": "npx pm2 stop node index",
+    "pm2:logs": "npx pm2 logs -f",
+    "pm2:list": "npx pm2 list"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +26,7 @@
     "nodemailer-ses-transport": "^1.5.1",
     "nodemon": "^3.0.2",
     "pg": "^8.11.3",
-    "pg-promise": "^11.5.4"
+    "pg-promise": "^11.5.4",
+    "pm2": "^5.3.1"
   }
 }

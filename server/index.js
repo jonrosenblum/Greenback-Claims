@@ -1,27 +1,42 @@
-const express = require('express');
-const multer = require('multer');
-const cors = require('cors');
-const db = require('./models/User');
-const emailController = require('./controllers/emailController');
-const contactUsController = require('./controllers/contactUsController');
-const authController = require('./controllers/authController');
+const express = require("express");
+const multer = require("multer");
+const cors = require("cors");
+const db = require("./models/User");
+const emailController = require("./controllers/emailController");
+// const contactUsController = require("./controllers/contactUsController");
+const authController = require("./controllers/authController");
 
 const app = express();
 
-app.use(cors({
-  origin: '*',
-  "Access-Control-Allow-Origin": 'https://www.greenbackclaims.com'
-}));
+app.use(
+  cors({
+    origin: "*",
+    "Access-Control-Allow-Origin": "https://www.greenbackclaims.com",
+  })
+);
 
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-app.post('/send-email', upload.single('pdf'), emailController.sendEmail);
-app.post('/contact-us', upload.single('pdf'), contactUsController.contactUs);
-app.post('/signup', authController.signup);
-app.post('/login', authController.login);
+app.get("/", (req, res) =>
+  res.send(
+    "api healthy: " +
+      JSON.stringify(
+        {
+          utc: new Date().toUTCString(),
+          local: new Date().toLocaleString(),
+        },
+        null,
+        2
+      )
+  )
+);
+app.post("/send-email", upload.single("pdf"), emailController.sendEmail);
+// app.post("/contact-us", upload.single("pdf"), contactUsController.contactUs);
+app.post("/signup", authController.signup);
+app.post("/login", authController.login);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

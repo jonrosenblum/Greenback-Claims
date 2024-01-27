@@ -1,5 +1,15 @@
 {
   "dependencies": {
     "react-icons": "^4.12.0"
+  },
+  "scripts": {
+    "dev:client": "npm --prefix client run dev",
+    "build:client": "npm --prefix client run build",
+    "dev:server": "npm --prefix server run dev",
+    "dev": "npx concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "pm2:start": "npm --prefix server run pm2:start",
+    "pm2:stop": "npm --prefix server run pm2:stop",
+    "pm2:logs": "npm --prefix server run pm2:logs",
+    "pm2:list": "npm --prefix server run pm2:list"
   }
 }
