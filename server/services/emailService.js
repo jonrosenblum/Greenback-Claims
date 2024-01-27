@@ -1,16 +1,21 @@
-const nodemailer = require('nodemailer');
-const aws = require('aws-sdk');
-const sesTransport = require('nodemailer-ses-transport');
+const nodemailer = require("nodemailer");
+const aws = require("aws-sdk");
+const sesTransport = require("nodemailer-ses-transport");
 
-aws.config.update({
+const config = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: process.env.AWS_REGION,
-});
+};
 
-const transporter = nodemailer.createTransport(sesTransport({
-  ses: new aws.SES({ apiVersion: '2010-12-01' }),
-}));
+console.log({ emailEnvConfig: config });
+aws.config.update(config);
+
+const transporter = nodemailer.createTransport(
+  sesTransport({
+    ses: new aws.SES({ apiVersion: "2010-12-01" }),
+  })
+);
 
 const sendEmail = async (mailOptions) => {
   return transporter.sendMail(mailOptions);
