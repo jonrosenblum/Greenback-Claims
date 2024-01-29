@@ -47,7 +47,7 @@ function Login({onClose,onSignUp}) {
               </a>
             </div>
             <div className="w-3/4 flex items-center justify-center">
-              <button className="h-[60px] w-full rounded-[15px] bg-indigo-400 text-xl text-white shadow">
+              <button className="h-[60px] w-full rounded-[15px] bg-blue-600 text-xl text-white shadow">
                 Sign In
                 {/* <app-loading-spinner *ngIf="loading"></app-loading-spinner> */}
               </button>

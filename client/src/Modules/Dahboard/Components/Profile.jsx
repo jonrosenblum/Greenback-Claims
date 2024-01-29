@@ -1,5 +1,28 @@
+import { useRef, useState  } from 'react';
+import Alert from '../../../Components/Alert';
 
 function Profile() {
+
+  const paragraphRef = useRef(null);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+
+  const handleCopyClick = () => {
+    const range = document.createRange();
+    const selection = window.getSelection();
+
+    range.selectNode(paragraphRef.current);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    document.execCommand('copy');
+    selection.removeAllRanges();
+    setIsAlertVisible(true);
+
+    setTimeout(() => {
+      setIsAlertVisible(false);
+    }, 3000);
+  };
+
   return (
     <div className="ease-soft-in-out relative h-full max-h-screen  transition-all duration-200">
   
@@ -37,12 +60,43 @@ function Profile() {
           </div>
         </div>
       </div>
+      
     </div>
     <div className="w-full p-6 mx-auto">
-      {/* <router-outlet></router-outlet> */}
+      {isAlertVisible &&  <div className='my-3 px-3'>
+      <Alert message='Link copied to you clipboard successfully!'/>
+      </div>}
+    <div className="w-full px-3 mb-6 lg:mb-0 lg:flex-none">
+            <div className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
+              <div className="flex-auto p-4">
+                <div className="flex flex-wrap -mx-3">
+                  <div className="max-w-full px-3 lg:w-1/2 lg:flex-none">
+                    <div className="flex flex-col h-full">
+                      <p className="pt-2 mb-1 font-semibold">Auto Created</p>
+                      <h5 className="font-bold">Your Reference Link</h5>
+                      <p className="mb-12" ref={paragraphRef}>http://greenbackclaims/?ref=12345%YourReferalCode%67890%WithUniqueIdendifier%34985239390234</p>
+                      <a className="mt-auto mb-0 font-semibold leading-normal text-sm group text-slate-500" href="javascript:;">
+                        You can copy your referral link by pressing copy button and share with anyone. Thanks
+                      </a>
+                    </div>
+                  </div>
+                  <div className="max-w-full px-3 mt-12 ml-auto text-center lg:mt-0 lg:w-3/12 lg:flex-none hover:shadow-soft-xl">
+                    <div onClick={handleCopyClick} className="h-full bg-gradient-to-tl from-primary to-secondary rounded-xl hover:from-secondary  hover:to-primary cursor-pointer">
+                      {/* <img src="../assets/img/shapes/waves-white.svg" className="absolute top-0 hidden w-1/2 h-full lg:block" alt="waves" /> */}
+                      <div className="relative flex items-center justify-center h-full">
+                        {/* <img className="relative z-20 w-full pt-6" src="../assets/img/illustrations/rocket-white.png" alt="rocket" /> */}
+                        <i className="fa fa-copy text-white text-4xl"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
   </div>
   </div>
   )
 }
 
 export default Profile
+
