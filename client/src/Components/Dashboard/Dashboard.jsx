@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import { Routes, Route, Link } from 'react-router-dom';
-import Referrals from "./Components/Referrals";
-import Sidebar from "./Components/Sidebar";
-import Home from "./Components/Home";
-import Profile from "./Components/Profile";
+import Referrals from "./Pieces/Referrals";
+import Sidebar from "./Pieces/Sidebar";
+import Home from "./Pieces/Home";
+import Profile from "./Pieces/Profile";
 function Dashboard() {
     const location = useLocation();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);

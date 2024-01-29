@@ -2,11 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
-
-// const db = require("./models/User");
+const { Pool } = require("pg");
+const authController = require("./controllers/authController");
 const emailController = require("./controllers/emailController");
-// const contactUsController = require("./controllers/contactUsController");
-// const authController = require("./controllers/authController");
 
 const app = express();
 
@@ -20,25 +18,37 @@ app.use(
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
+// Set up a PostgreSQL connection pool
+const pool = new Pool({
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT || 5432,
+});
+
+// Use the connection pool for queries
+app.locals.pool = pool;
+
 const upload = multer({ storage: multer.memoryStorage() });
 
-app.get("/", (req, res) =>
-  res.send(
-    "api healthy: " +
-      JSON.stringify(
-        {
-          utc: new Date().toUTCString(),
-          local: new Date().toLocaleString(),
-        },
-        null,
-        2
-      )
-  )
-);
+app.get("/", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query('SELECT $1::text as message', ['Hello, PostgreSQL!']);
+    const data = result.rows[0].message;
+    client.release();
+    res.send(`API healthy: ${data}`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Use the authentication routes
+app.use("/api/auth", authController);
+
 app.post("/send-email", upload.single("pdf"), emailController.sendEmail);
-// app.post("/contact-us", upload.single("pdf"), contactUsController.contactUs);
-// app.post("/signup", authController.signup);
-// app.post("/login", authController.login);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Card from "../../../Components/Card";
+import Card from "../../Card";
 import BodyHeader from "./BodyHeader";
 import RecordNoTFound from "./RecordNoTFound";
 

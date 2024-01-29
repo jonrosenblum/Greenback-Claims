@@ -5,7 +5,7 @@ import {
   Routes,
   Navigate
 } from "react-router-dom";
-import Dashboard from "./Modules/Dahboard/Dashboard";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 
 function App() {

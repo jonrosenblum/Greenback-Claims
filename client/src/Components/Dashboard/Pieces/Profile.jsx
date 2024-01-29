@@ -1,5 +1,5 @@
 import { useRef, useState  } from 'react';
-import Alert from '../../../Components/Alert';
+import Alert from '../../Alert';
 
 function Profile() {
 
