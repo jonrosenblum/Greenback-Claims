@@ -23,7 +23,6 @@ export default function ClaimForm({ onEmailSent }) {
     ein: '',
     annualSales: '',
     franchiseAgreement: '',
-    referral: '',
     referralDetails: '',
     firstName: '',
     lastName: '',
@@ -44,8 +43,6 @@ export default function ClaimForm({ onEmailSent }) {
     ein: '',
     annualSales: '',
     franchiseAgreement: '',
-    // referral: '',
-    // referralDetails: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -695,35 +692,13 @@ export default function ClaimForm({ onEmailSent }) {
                 <p className='text-red-500 text-xs  ml-2'>{errors.ein}</p>
             </div>
           </div>
-          {/* <div className='flex flex-col sm:flex-row justify-between items-start'>
-          
-          <div className='w-full'>
-            <p className='max-w-full sm:max-w-xs m-2'>Were you referred to Greenback Claims? If yes, please share details</p>
-            <div className='flex items-center'>
-              <input
-                className='m-2'
-                type="radio"
-                name="referral"
-                value="Yes"
-                onChange={handleInputChange}
-                required
-              />
-              Yes
-              <input
-                className='m-2'
-                type="radio"
-                name="referral"
-                value="No"
-                onChange={handleInputChange}
-                required
-              />
-              No
-            <input className='mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500' placeholder='Please enter details' type="text" name="referralDetails" onChange={handleInputChange} value={formData.referralDetails} />
-
-            </div>
+          <div className='hidden'>
+            <input
+            type='url'
+            name='referralDetails'
+            onChange={handleInputChange}
+            value={formData.referralDetails}/>
           </div>
-          
-        </div> */}
         </div>
         <div className={`flex justify-center w-full mt-14 ${page !== 1 && 'hidden'}`}>
             <button className='bottom-0 w-full right-0 bg-green-500 p-2 rounded-md font-medium text-white' onClick={nextPage}>Next</button>

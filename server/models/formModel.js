@@ -32,7 +32,7 @@ async function saveFormData(formData) {
 
     const submissionName = `${formData.firstName} ${formData.lastName}`;
     const submissionBusiness = formData.businessName;
-    const referralLink = formData.referralLink;
+    const referralLink = formData.referralDetails;
 
     const result = await client.query(
       'INSERT INTO submissions (submissionname, submissionbusiness, referralid) VALUES ($1, $2, $3) RETURNING *',
