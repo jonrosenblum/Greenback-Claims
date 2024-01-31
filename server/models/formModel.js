@@ -16,8 +16,7 @@ async function createSubmissionsTableIfNotExists() {
         id SERIAL PRIMARY KEY,
         submissionname VARCHAR(255) NOT NULL,
         submissionbusiness VARCHAR(255) NOT NULL,
-        referralid VARCHAR(255) NOT NULL,
-        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        referralid VARCHAR(255) NOT NULL
       );
     `);
   } finally {
@@ -32,10 +31,12 @@ async function saveFormData(formData) {
   try {
 
     const submissionName = `${formData.firstName} ${formData.lastName}`;
+    const submissionBusiness = formData.businessName;
+    const referralLink = formData.referralLink;
 
     const result = await client.query(
       'INSERT INTO submissions (submissionname, submissionbusiness, referralid) VALUES ($1, $2, $3) RETURNING *',
-      [submissionName, formData.businessName, formData.referralLink]
+      [submissionName, submissionBusiness, referralLink ]
     );
     return result.rows[0];
   } finally {

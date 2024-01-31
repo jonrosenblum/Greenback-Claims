@@ -46,7 +46,6 @@ app.get("/", async (req, res) => {
   }
 });
 
-// Use the authentication routes
 
 app.use("/api/auth/", authController);
 app.post('/api/saveFormData', saveFormController.saveFormDataController);
