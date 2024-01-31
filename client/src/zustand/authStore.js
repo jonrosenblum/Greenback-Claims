@@ -1,6 +1,6 @@
 // src/zustand/authStore.js
-import create from 'zustand';
-import AuthService from '../../../server/services/authService'; // Update the path accordingly
+import {create} from 'zustand';
+import AuthService from '../../../server/services/authService';
 
 const useAuthStore = create((set) => ({
   user: null,

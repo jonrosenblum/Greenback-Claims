@@ -1,7 +1,13 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/userModel');
-const config = require('../../');
+
+const secretKey = process.env.JWT_SECRET
+
+if (!secretKey) {
+  console.error('JWT_SECRET is required');
+  process.exit(1);
+}
 
 async function signup(username, email, password) {
   try {
@@ -37,7 +43,7 @@ async function login(username, password) {
 
     if (passwordMatch) {
       // Generate a token
-      const token = jwt.sign({ userId: user.id }, config.JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ userId: user.id }, secretKey, { expiresIn: '1h' });
       return token;
     } else {
       throw new Error('Invalid username or password.');

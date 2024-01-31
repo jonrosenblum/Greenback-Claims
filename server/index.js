@@ -46,7 +46,8 @@ app.get("/", async (req, res) => {
 });
 
 // Use the authentication routes
-app.use("/api/auth", authController);
+
+app.use("/api/auth/", authController);
 
 app.post("/send-email", upload.single("pdf"), emailController.sendEmail);
 

@@ -1,6 +1,6 @@
 // Import necessary dependencies
 import { useState } from 'react';
-import useAuthStore from './path-to-authStore'; // Update the path accordingly
+import useAuthStore from '../zustand/authStore'; // Update the path accordingly
 
 import PopupModal from "./PopupModal";
 import PropTypes from 'prop-types';
