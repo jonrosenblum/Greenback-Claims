@@ -5,6 +5,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const authController = require("./controllers/authController");
 const emailController = require("./controllers/emailController");
+const saveFormController = require("./controllers/saveFormController");
 
 const app = express();
 
@@ -48,7 +49,7 @@ app.get("/", async (req, res) => {
 // Use the authentication routes
 
 app.use("/api/auth/", authController);
-
+app.post('/api/saveFormData', saveFormController.saveFormDataController);
 app.post("/send-email", upload.single("pdf"), emailController.sendEmail);
 
 const PORT = process.env.PORT || 3000;
