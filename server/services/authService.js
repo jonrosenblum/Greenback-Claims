@@ -9,7 +9,7 @@ if (!secretKey) {
   process.exit(1);
 }
 
-async function signup(username, email, password) {
+async function signup(username, email, password, weblink) {
   try {
     // Check if the username is already taken
     const existingUser = await userModel.findUserByUsername(username);
@@ -21,7 +21,7 @@ async function signup(username, email, password) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user
-    const newUser = await userModel.createUser(username, email, hashedPassword);
+    const newUser = await userModel.createUser(username, email, hashedPassword, weblink);
     return newUser;
   } catch (error) {
     throw new Error(error.message || 'Signup failed.');

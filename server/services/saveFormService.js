@@ -1,4 +1,4 @@
-const formModel = require("./formModel");
+const formModel = require("../models/formModel");
 
 async function saveFormDataService(formData) {
   try {

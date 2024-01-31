@@ -16,7 +16,8 @@ async function createUserTableIfNotExists() {
         id SERIAL PRIMARY KEY,
         username VARCHAR(255) NOT NULL UNIQUE,
         email VARCHAR(255) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL
+        password VARCHAR(255) NOT NULL,
+        weblink VARCHAR(255) NOT NULL UNIQUE
       );
     `);
   } finally {
@@ -24,14 +25,14 @@ async function createUserTableIfNotExists() {
   }
 }
 
-async function createUser(username, email, password) {
+async function createUser(username, email, password, weblink) {
   await createUserTableIfNotExists();
 
   const client = await pool.connect();
   try {
     const result = await client.query(
-      'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
-      [username, email, password]
+      'INSERT INTO users (username, email, password, weblink) VALUES ($1, $2, $3, $4) RETURNING *',
+      [username, email, password, weblink]
     );
     return result.rows[0];
   } finally {
