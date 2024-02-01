@@ -1,28 +1,26 @@
-// src/zustand/authStore.js
 import {create} from 'zustand';
-import AuthService from '../../../server/services/authService';
+import { jwtDecode } from "jwt-decode";
 
-const useAuthStore = create((set) => ({
-  user: null,
-  loginUser: async (userData) => {
-    try {
-      const token = await AuthService.login(userData);
-      set({ user: { username: userData.username, token } });
-    } catch (error) {
-      console.error('Login error:', error.message);
-      throw new Error('Login failed.');
-    }
-  },
-  logoutUser: () => set({ user: null }),
-  registerUser: async (userData) => {
-    try {
-      const newUser = await AuthService.signup(userData);
-      set({ user: newUser });
-    } catch (error) {
-      console.error('Signup error:', error.message);
-      throw new Error('Signup failed.');
-    }
-  },
-}));
+const useAuthStore = create((set) => {
+  const storedToken = localStorage.getItem('token');
+  const initialState = {
+    user: storedToken ? jwtDecode(storedToken) : null,
+    isAuthenticated: !!storedToken,
+  };
+
+  return {
+    ...initialState,
+
+    login: (token) => {
+      set(() => ({ user: jwtDecode(token), isAuthenticated: true }));
+      localStorage.setItem('token', token);
+    },
+
+    logout: () => {
+      set(() => ({ user: null, isAuthenticated: false }));
+      localStorage.removeItem('token');
+    },
+  };
+});
 
 export default useAuthStore;

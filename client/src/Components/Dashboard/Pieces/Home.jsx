@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 import welcome from './../../../../assets/images/Welcome.svg'
+import useAuthStore from '../../../zustand/authStore';
 
 function Home() {
+  const { user } = useAuthStore();
+
   return (
      <div className="w-full px-6 py-6 mx-auto">
         <div className="flex flex-wrap mt-6 my-2 mb-6 -mx-3">
@@ -12,12 +15,12 @@ function Home() {
                   <div className="max-w-full px-3 lg:w-1/2 lg:flex-none">
                     <div className="flex flex-col h-full">
                       <p className="pt-2 mb-1 font-semibold">Have a safe landing:)</p>
-                      <h5 className="font-bold">Hi USERNAME! Welcome to Dashboard</h5>
+                      <h5 className="font-bold">Hi {user.username}! Welcome to Dashboard</h5>
                       <p className="mb-12">This dashboard is specially design for the managing the referrals users. Share your referral link to anyone.</p>
-                      {/* <a className="mt-auto mb-0 font-semibold leading-normal text-sm group text-slate-500" href="javascript:;">
-                        My Profile
+                      <Link className="mt-auto mb-0 font-semibold leading-normal text-sm group text-slate-500" to="/dashboard/profile">
+                        Share Referral Link
                         <i className="fa fa-arrow-right ease-bounce text-sm group-hover:translate-x-1.25 ml-1 leading-normal transition-all duration-200"></i>
-                      </a> */}
+                      </Link>
                     </div>
                   </div>
                   <div className="max-w-full px-3 mt-12 ml-auto text-center lg:mt-0 lg:w-5/12 lg:flex-none">

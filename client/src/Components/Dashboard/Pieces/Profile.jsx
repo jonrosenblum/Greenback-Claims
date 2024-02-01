@@ -1,8 +1,10 @@
 import { useRef, useState  } from 'react';
 import Alert from '../../Alert';
+import useAuthStore from '../../../zustand/authStore';
 
 function Profile() {
 
+  const { user } = useAuthStore();
   const paragraphRef = useRef(null);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
 
@@ -44,9 +46,8 @@ function Profile() {
           </div>
           <div className="flex w-auto max-w-full px-3 my-auto">
             <div className="h-full">
-              <h5 className="font-medium text-xl">Naeem Akram</h5>
-              <p className="mb-0 font-semibold leading-normal text-sm">naeem@yopmail.com
-              </p>              
+              <h5 className="font-medium text-xl">{user.username}</h5>
+              <p className="mb-0 font-semibold leading-normal text-sm">{user.email}</p>              
             </div>
           </div>
           <div className="w-auto max-w-full px-3 justify-end mx-auto mt-4 sm:my-auto sm:mr-0 md:flex-none">
@@ -70,12 +71,12 @@ function Profile() {
             <div className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
               <div className="flex-auto p-4">
                 <div className="flex flex-wrap -mx-3">
-                  <div className="max-w-full px-3 lg:w-1/2 lg:flex-none">
+                  <div className="max-w-full px-3 lg:w-3/4 lg:flex-none">
                     <div className="flex flex-col h-full">
                       <p className="pt-2 mb-1 font-semibold">Auto Created</p>
                       <h5 className="font-bold">Your Reference Link</h5>
-                      <p className="mb-12" ref={paragraphRef}>http://greenbackclaims/?ref=12345%YourReferalCode%67890%WithUniqueIdendifier%34985239390234</p>
-                      <a className="mt-auto mb-0 font-semibold leading-normal text-sm group text-slate-500" href="javascript:;">
+                      <p className="mb-12" ref={paragraphRef}>http://greenbackclaims/?ref={user.referralLink}</p>
+                      <a className="mt-auto mb-0 font-semibold leading-normal text-sm group text-slate-500" href="">
                         You can copy your referral link by pressing copy button and share with anyone. Thanks
                       </a>
                     </div>

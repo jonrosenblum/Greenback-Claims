@@ -17,9 +17,9 @@ async function createUserTableIfNotExists() {
         username VARCHAR(255) NOT NULL UNIQUE,
         email VARCHAR(255) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
-        referrallink VARCHAR(255) NOT NULL UNIQUE,
-        formsubmissions INTEGER NOT NULL DEFAULT 0,
-        referrallinkfreuency INTEGER NOT NULL DEFAULT 0
+        referralLink VARCHAR(255) NOT NULL UNIQUE,
+        formSubmissions INTEGER NOT NULL DEFAULT 0,
+        referralLinkFrequency INTEGER NOT NULL DEFAULT 0
       );
     `);
   } finally {
@@ -27,14 +27,14 @@ async function createUserTableIfNotExists() {
   }
 }
 
-async function createUser(username, email, password, referrallink) {
+async function createUser(username, email, password, referralLink) {
   await createUserTableIfNotExists();
 
   const client = await pool.connect();
   try {
     const result = await client.query(
       'INSERT INTO users (username, email, password, referrallink) VALUES ($1, $2, $3, $4) RETURNING *',
-      [username, email, password, referrallink]
+      [username, email, password, referralLink]
     );
     return result.rows[0];
   } finally {

@@ -5,11 +5,17 @@ import Referrals from "./Pieces/Referrals";
 import Sidebar from "./Pieces/Sidebar";
 import Home from "./Pieces/Home";
 import Profile from "./Pieces/Profile";
+import useAuthStore from "../../zustand/authStore";
 function Dashboard() {
     const location = useLocation();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [currentPath, setCurrentPath] = useState(location.pathname);
+    const { user } = useAuthStore();
 
+    useEffect(() => {
+      console.log("user isLogged:", user);
+    }, [user]);
+  
     useEffect(() => {
         // Do something when the location changes
         setCurrentPath(location.pathname);
@@ -32,7 +38,7 @@ function Dashboard() {
               </li>
               <li className="flex items-center">
                 <span className="flex items-center gap-2 px-0 py-2 text-sm font-semibold transition-all ease-nav-brand text-slate-500">
-                  <h6 className="hidden sm:inline font-bold capitalize">USERNAME</h6>
+                  <h6 className="hidden sm:inline font-bold capitalize">{user.username}</h6>
                 </span>
               </li>
               
