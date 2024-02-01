@@ -6,6 +6,8 @@ const { Pool } = require("pg");
 const authController = require("./controllers/authController");
 const emailController = require("./controllers/emailController");
 const saveFormController = require("./controllers/saveFormController");
+const countController = require('./controllers/countController');
+
 
 const app = express();
 
@@ -50,6 +52,9 @@ app.get("/", async (req, res) => {
 app.use("/api/auth/", authController);
 app.post('/api/saveFormData', saveFormController.saveFormDataController);
 app.post("/send-email", upload.single("pdf"), emailController.sendEmail);
+
+app.get('/api/submissions/:referralID', countController.getMatchingSubmissionsController);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

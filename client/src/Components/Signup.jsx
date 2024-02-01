@@ -159,7 +159,7 @@ function SignUp({ onClose, onSignIn }) {
       :<form className="w-full flex flex-col items-center justify-center gap-3">
       <div className=" w-3/4 items-center justify-start">
          <p className='font-medium text-green-700 text-center'>Your account is created successfully!</p>
-         <p className='text-center'>Now you can login to your referral dashboard with <b>Username</b> and <b>Password</b>. </p>
+         <p className='text-center'>You can now login to your referral dashboard with <b>Username</b> and <b>Password</b>. </p>
       </div>
       <div className="w-3/4 flex items-center justify-center my-6">
       <button onClick={onSignIn} className="h-[60px] w-full flex justify-center items-center gap-2 rounded-[15px] bg-blue-600 text-xl text-white shadow">

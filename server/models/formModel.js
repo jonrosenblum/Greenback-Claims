@@ -44,6 +44,25 @@ async function saveFormData(formData) {
   }
 }
 
+async function getMatchingSubmissions(referralID) {
+  await createSubmissionsTableIfNotExists();
+
+  const client = await pool.connect();
+  try {
+    // Retrieve matching submissions
+    const matchingSubmissions = await client.query(
+      'SELECT * FROM submissions WHERE referralid = $1',
+      [referralID]
+    );
+
+    return matchingSubmissions.rows;
+  } finally {
+    client.release();
+  }
+}
+
 module.exports = {
   saveFormData,
+  getMatchingSubmissions,
+  createSubmissionsTableIfNotExists,
 };
