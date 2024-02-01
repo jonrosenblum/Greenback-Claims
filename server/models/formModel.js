@@ -14,9 +14,9 @@ async function createSubmissionsTableIfNotExists() {
     await client.query(`
       CREATE TABLE IF NOT EXISTS submissions (
         id SERIAL PRIMARY KEY,
-        submissionname VARCHAR(255) NOT NULL,
-        submissionbusiness VARCHAR(255) NOT NULL,
-        referralid VARCHAR(255) NOT NULL
+        submission_name VARCHAR(255) NOT NULL,
+        submission_business VARCHAR(255) NOT NULL,
+        referral_id VARCHAR(255) NOT NULL
       );
     `);
   } finally {
@@ -30,13 +30,17 @@ async function saveFormData(formData) {
   const client = await pool.connect();
   try {
 
+    if (!formData || !formData.firstName || !formData.lastName || !formData.businessName) {
+      throw new Error('Invalid form data');
+    }
+
     const submissionName = `${formData.firstName} ${formData.lastName}`;
     const submissionBusiness = formData.businessName;
-    const referralLink = formData.referralDetails;
+    const referralID = formData.referralID;
 
     const result = await client.query(
-      'INSERT INTO submissions (submissionname, submissionbusiness, referralid) VALUES ($1, $2, $3) RETURNING *',
-      [submissionName, submissionBusiness, referralLink ]
+      'INSERT INTO submissions (submission_name, submission_business, referral_id) VALUES ($1, $2, $3) RETURNING *',
+      [submissionName, submissionBusiness, referralID ]
     );
     return result.rows[0];
   } finally {
@@ -51,7 +55,7 @@ async function getMatchingSubmissions(referralID) {
   try {
     // Retrieve matching submissions
     const matchingSubmissions = await client.query(
-      'SELECT * FROM submissions WHERE referralid = $1',
+      'SELECT * FROM submissions WHERE referral_id = $1',
       [referralID]
     );
 

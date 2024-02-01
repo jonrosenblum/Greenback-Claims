@@ -8,7 +8,7 @@ if (!secretKey) {
   process.exit(1);
 }
 
-async function signup(username, email, password) {
+async function signup(username, email, password, referral_ID) {
   try {
     const existingUser = await userModel.findUserByUsername(username);
     if (existingUser) {
@@ -16,8 +16,8 @@ async function signup(username, email, password) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const referralLink = username+'_' + (await bcrypt.hash(username, 5));
-    const newUser = await userModel.createUser(username, email, hashedPassword, referralLink);
+    // const referralLink = username+'_' + (await bcrypt.hash(username, 5));
+    const newUser = await userModel.createUser(username, email, hashedPassword, referral_ID);
     delete newUser.password
     return newUser;
   } catch (error) {
@@ -35,7 +35,7 @@ async function login(username, password) {
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (passwordMatch) {
-      const token = jwt.sign({ userId: user.id, username:user.username, email:user.email, referralLink:user.referrallink,formSubmissions:user.formsubmissions,referralLinkFrequency:user.referrallinkfrequency }, secretKey, { expiresIn: '1h' });
+      const token = jwt.sign({ userId: user.id, username:user.username, email:user.email, referral_ID:user.referral_ID,formSubmissions:user.formsubmissions,referralLinkFrequency:user.referrallinkfrequency }, secretKey, { expiresIn: '1h' });
       return token;
     } else {
       throw new Error('Invalid username or password.');
