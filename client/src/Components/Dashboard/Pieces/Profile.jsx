@@ -1,13 +1,12 @@
 import { useRef, useState  } from 'react';
 import Alert from '../../Alert';
 import useAuthStore from '../../../zustand/authStore';
-
 function Profile() {
 
   const { user } = useAuthStore();
   const paragraphRef = useRef(null);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
-
+  const baseUrl = import.meta.env.VITE_APP_URL;
   const handleCopyClick = () => {
     const range = document.createRange();
     const selection = window.getSelection();
@@ -75,7 +74,7 @@ function Profile() {
                     <div className="flex flex-col h-full">
                       <p className="pt-2 mb-1 font-semibold">Auto Created</p>
                       <h5 className="font-bold">Your Reference Link</h5>
-                      <p className="mb-12" ref={paragraphRef}>http://greenbackclaims/?ref={user.referralLink}</p>
+                      <p className="mb-12" ref={paragraphRef}>{baseUrl}?ref={user.referral_id}</p>
                       <a className="mt-auto mb-0 font-semibold leading-normal text-sm group text-slate-500" href="">
                         You can copy your referral link by pressing copy button and share with anyone. Thanks
                       </a>

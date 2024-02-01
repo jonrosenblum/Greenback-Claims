@@ -16,6 +16,8 @@ async function createSubmissionsTableIfNotExists() {
         id SERIAL PRIMARY KEY,
         submission_name VARCHAR(255) NOT NULL,
         submission_business VARCHAR(255) NOT NULL,
+        submission_phone VARCHAR(255) NOT NULL,
+        submission_address VARCHAR(255) NOT NULL,
         referral_id VARCHAR(255) NOT NULL
       );
     `);
@@ -30,17 +32,19 @@ async function saveFormData(formData) {
   const client = await pool.connect();
   try {
 
-    if (!formData || !formData.firstName || !formData.lastName || !formData.businessName) {
+    if (!formData || !formData.firstName || !formData.lastName || !formData.businessName || !formData.phone || !formData.address) {
       throw new Error('Invalid form data');
     }
 
     const submissionName = `${formData.firstName} ${formData.lastName}`;
     const submissionBusiness = formData.businessName;
+    const submissionPhone = formData.phone;
+    const submissionAddress = formData.address;
     const referralID = formData.referralID;
 
     const result = await client.query(
-      'INSERT INTO submissions (submission_name, submission_business, referral_id) VALUES ($1, $2, $3) RETURNING *',
-      [submissionName, submissionBusiness, referralID ]
+      'INSERT INTO submissions (submission_name, submission_business, submission_phone, submission_address, referral_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [submissionName, submissionBusiness, submissionPhone, submissionAddress, referralID ]
     );
     return result.rows[0];
   } finally {

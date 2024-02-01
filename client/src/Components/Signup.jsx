@@ -30,12 +30,14 @@ function SignUp({ onClose, onSignIn }) {
       event.preventDefault(); // Prevent the default form submission behavior
       if(!validateForm()) return
       setLoading(true)
+      //generate referral ID with username and random string
+      const referral_ID = username+'_'+ Math.random().toString(16).substring(2)
       const response = await fetch(signUpAPI, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ username, email, password,referral_ID }),
       });
 
       if (!response.ok) {

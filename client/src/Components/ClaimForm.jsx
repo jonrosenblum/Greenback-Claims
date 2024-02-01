@@ -1,9 +1,10 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SignatureCanvas from 'react-signature-canvas'
 import jsPDF from 'jspdf';
 import Loader from './Loader';
 import toast, { Toaster } from 'react-hot-toast';
 import PropTypes from 'prop-types';
+import { saveFormData } from '../Utils/ApiUtils';
 
 const email_api_test = import.meta.env.VITE_APP_API+'send-email'
 console.log({email_api_test})
@@ -11,7 +12,16 @@ console.log({email_api_test})
 ClaimForm.propTypes = {
   onEmailSent: PropTypes.func.isRequired,
 };
+
 export default function ClaimForm({ onEmailSent }) {
+  const [referralID, setReferralID] = useState('');
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'ref' parameter
+    const refParam = urlParams.get('ref');
+    setReferralID(refParam)
+  }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 4; // Total number of form pages
 
@@ -435,9 +445,25 @@ export default function ClaimForm({ onEmailSent }) {
           body: formDataToSend,
         })
           .then((response) => response.json())
-          .then((data) => {
+          .then(async (data) => {
             // Handle response
             if(data.status == 200){
+              if(referralID){
+                  const response = await fetch(saveFormData, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ firstName:formData.firstName, lastName:formData.lastName, businessName:formData.businessName, phone:formData.phone, address:formData.address+' '+formData.city+', '+ formData.state+', '+formData.zipcode, referralID }),
+                  });
+            
+                  if (!response.ok) {
+                    throw new Error();
+                  }
+                  const data = await response.json();
+                  console.log(data)
+              
+              }
               toast.success(data.message, {
                 position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
                 style: {
@@ -691,13 +717,6 @@ export default function ClaimForm({ onEmailSent }) {
                 type='text' />
                 <p className='text-red-500 text-xs  ml-2'>{errors.ein}</p>
             </div>
-          </div>
-          <div className='hidden'>
-            <input
-            type='url'
-            name='referralDetails'
-            onChange={handleInputChange}
-            value={formData.referralDetails}/>
           </div>
         </div>
         <div className={`flex justify-center w-full mt-14 ${page !== 1 && 'hidden'}`}>

@@ -32,10 +32,9 @@ async function login(username, password) {
     if (!user) {
       throw new Error('Invalid username or password.');
     }
-
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (passwordMatch) {
-      const token = jwt.sign({ userId: user.id, username:user.username, email:user.email, referral_ID:user.referral_ID,formSubmissions:user.formsubmissions,referralLinkFrequency:user.referrallinkfrequency }, secretKey, { expiresIn: '1h' });
+      const token = jwt.sign({ userId: user.id, username:user.username, email:user.email, referral_id:user.referral_id,form_submissions:user.form_submissions,referral_frequency:user.referral_frequency }, secretKey, { expiresIn: '1h' });
       return token;
     } else {
       throw new Error('Invalid username or password.');
