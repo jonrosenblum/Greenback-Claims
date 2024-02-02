@@ -25,4 +25,16 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.get('/user/:userId', async (req, res)=> {
+  try {
+    const { userId } = req.params;
+    const user = await authService.findUserByID(userId);
+
+    res.json({ user });
+  } catch (error) {
+    console.error('Error getting user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
 module.exports = router;

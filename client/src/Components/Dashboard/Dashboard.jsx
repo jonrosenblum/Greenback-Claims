@@ -11,10 +11,6 @@ function Dashboard() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [currentPath, setCurrentPath] = useState(location.pathname);
     const { user } = useAuthStore();
-
-    useEffect(() => {
-      console.log("user isLogged:", user);
-    }, [user]);
   
     useEffect(() => {
         // Do something when the location changes

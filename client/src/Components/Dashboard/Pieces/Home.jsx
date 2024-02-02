@@ -1,17 +1,19 @@
 import { Link } from "react-router-dom";
 import welcome from "./../../../../assets/images/Welcome.svg";
 import useAuthStore from "../../../zustand/authStore";
-import { getFormSubmissions } from "../../../Utils/ApiUtils";
+import { getFormSubmissions, getUserAPI } from "../../../Utils/ApiUtils";
 import { useEffect, useState } from "react";
 import RecordNoTFound from "./RecordNoTFound";
 
 function Home() {
   const { user } = useAuthStore();
   const [formDataList, setFormDataList] = useState([]);
+  const [userObj, setUserObj] = useState([]);
 
   useEffect(() => {
     fetchFormSubmissions(user.referral_id);
-  }, [user.referral_id]);
+    fetchUserDetail(user.userId)
+  }, [user.referral_id,user.userId]);
 
   const fetchFormSubmissions = async (referralID) => {
     try {
@@ -29,6 +31,31 @@ function Home() {
       const data = await response.json();
       console.log(data.matchingSubmissions);
       setFormDataList(data.matchingSubmissions);
+
+      const userResponse = await fetch(getUserAPI + user.userId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const user = await userResponse.json();
+      console.log(user);
+      setUserObj(user)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchUserDetail = async (userId) => {
+    try {
+      const userResponse = await fetch(getUserAPI + userId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const user = await userResponse.json();
+      setUserObj(user.user)
     } catch (error) {
       console.log(error);
     }
@@ -89,7 +116,7 @@ function Home() {
                       {"Total User Forms via your Referral"}
                     </p>
                     <h5 className="mb-0 font-bold">
-                      {user.form_submissions ?? 0}
+                      {userObj.form_submissions ?? 0}
                     </h5>
                   </div>
                 </div>
@@ -113,7 +140,7 @@ function Home() {
                       {"Total User via your Referral"}
                     </p>
                     <h5 className="mb-0 font-bold">
-                      {user.referral_frequency ?? 0}
+                      {userObj.referral_frequency ?? 0}
                     </h5>
                   </div>
                 </div>
@@ -151,7 +178,7 @@ function Home() {
               )}
               {formDataList.length > 0 && (
                 <div className="flex-auto px-0 pb-2 pt-0">
-                  <div className="overflow-x-auto p-0">
+                  <div className="overflow-x-auto p-0  no-scrollbar">
                     <table className="mb-0 w-full items-center border-gray-200 align-top text-slate-500">
                       <thead className="align-bottom">
                         <tr>

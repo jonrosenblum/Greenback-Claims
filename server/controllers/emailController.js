@@ -29,7 +29,7 @@ const sendEmail = async (req, res) => {
     <p><b>ZipCode:</b>&nbsp;&nbsp; ${formData.zipcode}</p>
     </br>
     <h3>Referral Information:</h3>
-    <p><b>Referral:</b>&nbsp;&nbsp;</p>
+    <p><b>Referral:</b>&nbsp;&nbsp;${formData.referralDetails}</p>
     </br>
     <h3>Business Information:</h3>
     <p><b>Business Name:</b>&nbsp;&nbsp; ${formData.businessName}</p>

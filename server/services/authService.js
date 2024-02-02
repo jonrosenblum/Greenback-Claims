@@ -44,7 +44,21 @@ async function login(username, password) {
   }
 }
 
+async function findUserByID(userId) {
+  try {
+    const user = await userModel.findUserByID(userId);
+
+    if (!user) {
+      throw new Error('Invalid ID.');
+    }
+    return user
+  } catch (error) {
+    throw new Error(error.message || 'Login failed.');
+  }
+}
+
 module.exports = {
   signup,
   login,
+  findUserByID,
 };

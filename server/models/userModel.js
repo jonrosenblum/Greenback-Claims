@@ -54,6 +54,19 @@ async function findUserByUsername(username) {
   }
 }
 
+async function findUserByID(userId) {
+  await createUserTableIfNotExists();
+
+  const client = await pool.connect();
+  try {
+    const result = await client.query('SELECT * FROM users WHERE id = $1', [userId]);
+    return result.rows[0];
+  } finally {
+    client.release();
+  }
+}
+
+
 async function updateFormSubmissionsCount(referralID) {
   const client = await pool.connect();
   try {
@@ -69,8 +82,26 @@ async function updateFormSubmissionsCount(referralID) {
     client.release();
   }
 }
+
+async function updateReferralFrequencyCount(referralID) {
+  const client = await pool.connect();
+  try {
+    // Increment the form_submissions count for the given referralID
+    const result = await client.query(
+      'UPDATE users SET referral_frequency = referral_frequency + 1 WHERE referral_id = $1 RETURNING *',
+      [referralID]
+    );
+
+    const affectedRows = result.rowCount;
+    console.log(`Updated referral_frequency count for referralID ${referralID}. Affected rows: ${affectedRows}`);
+  } finally {
+    client.release();
+  }
+}
 module.exports = {
   createUser,
   findUserByUsername,
-  updateFormSubmissionsCount, // New function added
+  findUserByID,
+  updateFormSubmissionsCount, 
+  updateReferralFrequencyCount,
 };

@@ -13,7 +13,7 @@ async function saveFormDataService(formData) {
     const savedFormData = await formModel.saveFormData(formData);
 
     // Update form_submissions count for the user
-    await userModel.updateFormSubmissionsCount(formData.referralDetails);
+    await userModel.updateFormSubmissionsCount(formData.referralID);
 
     return savedFormData; // Optionally return the saved form data if needed
   } catch (error) {
