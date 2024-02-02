@@ -20,11 +20,11 @@ export default function ClaimForm({ onEmailSent }) {
     // Get the value of the 'ref' parameter
     const refParam = urlParams.get('ref');
     console.log(refParam);
-    if(refParam){
-      updateReferralFrequencyFunction(refParam)
-    }
+    // if(refParam){
+    //   updateReferralFrequencyFunction(refParam)
+    // }
     setReferralID(refParam);
-  }, [referralID]);
+  }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 4; // Total number of form pages
 

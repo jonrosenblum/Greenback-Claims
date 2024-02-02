@@ -31,16 +31,6 @@ function Home() {
       const data = await response.json();
       console.log(data.matchingSubmissions);
       setFormDataList(data.matchingSubmissions);
-
-      const userResponse = await fetch(getUserAPI + user.userId, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const user = await userResponse.json();
-      console.log(user);
-      setUserObj(user)
     } catch (error) {
       console.log(error);
     }
@@ -106,14 +96,14 @@ function Home() {
         </div>
       </div>
       <div className="flex flex-wrap -mx-3">
-        <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+        <div className="w-full max-w-full px-3 mb-6  sm:flex-none xl:mb-0 xl:w-1/2">
           <div className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
             <div className="flex-auto p-4">
               <div className="flex flex-row -mx-3">
                 <div className="flex-none w-2/3 max-w-full px-3">
                   <div>
                     <p className="mb-0 font-sans font-semibold leading-normal text-sm">
-                      {"Total User Forms via your Referral"}
+                      {"Form Submissions"}
                     </p>
                     <h5 className="mb-0 font-bold">
                       {userObj.form_submissions ?? 0}
@@ -130,14 +120,14 @@ function Home() {
           </div>
         </div>
 
-        <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+        {/* <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
           <div className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
             <div className="flex-auto p-4">
               <div className="flex flex-row -mx-3">
                 <div className="flex-none w-2/3 max-w-full px-3">
                   <div>
                     <p className="mb-0 font-sans font-semibold leading-normal text-sm">
-                      {"Total User via your Referral"}
+                      {"Referral Frequency"}
                     </p>
                     <h5 className="mb-0 font-bold">
                       {userObj.referral_frequency ?? 0}
@@ -152,7 +142,7 @@ function Home() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0">
           <div className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl  bg-clip-border">
