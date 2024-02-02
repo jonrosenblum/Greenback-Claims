@@ -54,7 +54,23 @@ async function findUserByUsername(username) {
   }
 }
 
+async function updateFormSubmissionsCount(referralID) {
+  const client = await pool.connect();
+  try {
+    // Increment the form_submissions count for the given referralID
+    const result = await client.query(
+      'UPDATE users SET form_submissions = form_submissions + 1 WHERE referral_id = $1 RETURNING *',
+      [referralID]
+    );
+
+    const affectedRows = result.rowCount;
+    console.log(`Updated form_submissions count for referralID ${referralID}. Affected rows: ${affectedRows}`);
+  } finally {
+    client.release();
+  }
+}
 module.exports = {
   createUser,
   findUserByUsername,
+  updateFormSubmissionsCount, // New function added
 };

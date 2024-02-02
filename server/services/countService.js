@@ -1,3 +1,4 @@
+const userModel = require('../models/userModel');
 const formModel = require('../models/formModel');
 
 async function getMatchingSubmissions(referralID) {
@@ -5,6 +6,9 @@ async function getMatchingSubmissions(referralID) {
     await formModel.createSubmissionsTableIfNotExists();
     // Retrieve matching submissions
     const matchingSubmissions = await formModel.getMatchingSubmissions(referralID);
+
+    // Update form_submissions count in users table
+    await userModel.updateFormSubmissionsCount(referralID);
 
     return matchingSubmissions;
   } catch (error) {

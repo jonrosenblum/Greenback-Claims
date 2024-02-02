@@ -7,6 +7,7 @@ async function getMatchingSubmissionsController(req, res) {
 
     // Respond with the matching submissions
     res.json({ matchingSubmissions });
+    console.log('Matching submissions:', matchingSubmissions);
   } catch (error) {
     console.error('Error getting matching submissions:', error);
     res.status(500).json({ error: 'Internal Server Error' });

@@ -1,5 +1,14 @@
 const emailService = require("../services/emailService");
 
+// const [referralID, setReferralID] = useState('');
+
+// useEffect(() => {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   // Get the value of the 'ref' parameter
+//   const refParam = urlParams.get('ref');
+//   setReferralID(refParam)
+// }, []);
+
 const sendEmail = async (req, res) => {
   try {
     const pdfData = req.file.buffer;
@@ -20,8 +29,7 @@ const sendEmail = async (req, res) => {
     <p><b>ZipCode:</b>&nbsp;&nbsp; ${formData.zipcode}</p>
     </br>
     <h3>Referral Information:</h3>
-    <p><b>Referral:</b>&nbsp;&nbsp; ${formData.referral}</p>
-    <p><b>Referral Name:</b>&nbsp;&nbsp; ${formData.referralDetails}</p>
+    <p><b>Referral:</b>&nbsp;&nbsp;</p>
     </br>
     <h3>Business Information:</h3>
     <p><b>Business Name:</b>&nbsp;&nbsp; ${formData.businessName}</p>

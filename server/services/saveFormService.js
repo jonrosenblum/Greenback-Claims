@@ -1,4 +1,5 @@
 const formModel = require("../models/formModel");
+const userModel = require("../models/userModel");
 
 async function saveFormDataService(formData) {
   try {
@@ -9,7 +10,12 @@ async function saveFormDataService(formData) {
     // }
 
     // Save the form data to the database
-    await formModel.saveFormData(formData);
+    const savedFormData = await formModel.saveFormData(formData);
+
+    // Update form_submissions count for the user
+    await userModel.updateFormSubmissionsCount(formData.referralDetails);
+
+    return savedFormData; // Optionally return the saved form data if needed
   } catch (error) {
     // Handle errors
     throw new Error(`Error saving form data: ${error.message}`);

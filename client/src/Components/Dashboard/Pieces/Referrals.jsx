@@ -13,7 +13,7 @@ function Referrals() {
     fetchFormSubmissions(user.referral_id)
   }, [user.referral_id]);
 
-  const  fetchFormSubmissions=async (referralID)=>{
+  const fetchFormSubmissions=async (referralID)=>{
     try {
       const response = await fetch(getFormSubmissions + referralID, {
         method: 'GET',
