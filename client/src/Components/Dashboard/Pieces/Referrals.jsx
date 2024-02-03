@@ -37,12 +37,12 @@ function Referrals() {
   return (
     <>
       <BodyHeader
-        title="Referral Users"
-        description="List of users which submit the form by using your referral link"
+        title="Referrals"
+        description="If your referral link has been used, form submissions will appear here."
       >
         <Card>
           {formDataList.length == 0 && (
-            <RecordNoTFound message="Record Not found. No one submit form through you referral link" />
+            <RecordNoTFound message="No records found." />
           )}
           {formDataList.length > 0 && (
             <div className="flex-auto px-0 pb-2 pt-0">
@@ -51,10 +51,10 @@ function Referrals() {
                   <thead className="align-bottom">
                     <tr>
                       <th className="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-left align-middle text-sm font-bold uppercase text-tsecondary opacity-70 shadow-none">
-                        User Name
+                        Name
                       </th>
                       <th className="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle text-sm font-bold uppercase text-tsecondary opacity-70 shadow-none">
-                        Business Name
+                        Business
                       </th>
                       <th className="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle text-sm font-bold uppercase text-tsecondary opacity-70 shadow-none">
                         Phone

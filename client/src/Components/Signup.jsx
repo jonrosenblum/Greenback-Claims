@@ -87,7 +87,7 @@ function SignUp({ onClose, onSignIn }) {
     return isValid;
   };
   return (
-      <PopupModal width={isSignUpSuccess?'md:w-1/2 lg:w-1/4':''} title={isSignUpSuccess?'Signup Successfully':"Register Account"} onClose={onClose}>
+      <PopupModal width={isSignUpSuccess?'md:w-1/2 lg:w-1/4':''} title={isSignUpSuccess?'Sign up successful':"Create an account"} onClose={onClose}>
        {!isSignUpSuccess? <form className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex w-3/4 items-center justify-start">
             {showAlert && <FormError type={alertType} message={alertMessage}  onClose={()=>setShowAlert(false)}/>}
@@ -142,7 +142,7 @@ function SignUp({ onClose, onSignIn }) {
           </div>
           <div className="w-3/4 flex items-center justify-center mt-6">
           <button disabled={isLoading} onClick={handleSignUp} className="h-[60px] w-full flex justify-center items-center gap-2 rounded-[15px] bg-blue-600 text-xl text-white shadow">
-             {!isLoading? <span>Sign Up</span> : <><span>Signing Up...</span> <Loader width={'w-4'} height={'h-4'} /></>}
+             {!isLoading? <span>Sign up</span> : <><span>Signing Up...</span> <Loader width={'w-4'} height={'h-4'} /></>}
               
             </button>
           </div>
@@ -152,15 +152,15 @@ function SignUp({ onClose, onSignIn }) {
             <hr className="h-[0px] w-2/4 border border-zinc-400" />
           </div>
           <div className="m-auto mb-10 sm:mb-20 text-center">
-            {"If you already have an account? "}
-            <a onClick={onSignIn} className="text-[#4560CB] cursor-pointer">
-              Login
-            </a>
+            {"Already have an account? "}
+            <button onClick={onSignIn} className="p-2 text-white rounded-md bg-blue-600 cursor-pointer">
+              Log in
+            </button>
           </div>
         </form>
       :<form className="w-full flex flex-col items-center justify-center gap-3">
       <div className=" w-3/4 items-center justify-start">
-         <p className='font-medium text-green-700 text-center'>Your account is created successfully!</p>
+         <p className='font-medium text-green-700 text-center'>Your account was created successfully!</p>
          <p className='text-center'>You can now login to your referral dashboard with <b>Username</b> and <b>Password</b>. </p>
       </div>
       <div className="w-3/4 flex items-center justify-center my-6">
