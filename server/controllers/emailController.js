@@ -5,7 +5,6 @@ const sendEmail = async (req, res) => {
     const pdfData = req.file.buffer;
     const formData = JSON.parse(req.body.formData);
 
-    // Email content
     const mailOptions = {
       from: "claims@greenbackclaims.com",
       to: "claims@greenbackclaims.com",
@@ -45,7 +44,6 @@ const sendEmail = async (req, res) => {
       ],
     };
 
-    // Send email using AWS SES transporter
     await emailService.sendEmail(mailOptions);
 
     res.status(200).send({ message: "Email sent successfully", status: 200 });

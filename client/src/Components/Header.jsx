@@ -21,12 +21,10 @@ export default function Header() {
     <div>
       <nav className="bg-gray-900 py-4 px-4 sm:px-0">
         <div className="container mx-auto flex justify-between items-center">
-        {/* <Link to="/"> */}
          <a href="/">     <div className="text-white text-sm sm:text-2xl font-bold">
                 Greenback Claims
               </div>
               </a>
-          {/* </Link> */}
           <div className="flex space-x-4">
             
         <Link to="about" className="text-white hover:text-gray-300 cursor-pointer" smooth={true} duration={500}>
@@ -46,7 +44,6 @@ export default function Header() {
                 </button>
               </div>
               <div
-              // style={{zIndex: '1000'}}
                 className={`z-10 absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg ${
                   isDropdownOpen ? '' : 'hidden'
                 }`}
@@ -59,8 +56,6 @@ export default function Header() {
                  Visa & Mastercard Anti-Trust Lawsuit
                 </a>
                 <a
-                  // href="#about"
-                  // onClick={setVisaFalse}
                   className={`block px-4 py-2 rounded-b-lg text-gray-800 hover:bg-gray-200 ${!visa && 'bg-gray-200'}`}
                 >
                  <s>Employee Retention Credit (ERC)</s>

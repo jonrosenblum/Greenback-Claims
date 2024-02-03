@@ -15,15 +15,8 @@ export default function Body() {
         <div>
             <BodySlider />
 
-            {/* visa */}
             {visa && (
                 <section id="about" className="bg-white dark:bg-gray-900 text-white">
-                    {/* <div className="bg-bgg p-[35px]">
-                        <div className="b bg-slate-950 grid grid-cols-1 sm:grid-cols-2 text-[1.3rem] border border-gray-400 p-2">
-                            <button className={`p-2 font-bold ${visa ? 'bg-gray-200 text-black rounded-tr-2xl rounded-tl-2xl' : ''}`} onClick={setVisaTrue}>Visa & Mastercard Anti-Trust Lawsuit</button>
-                            <button className={`p-2 font-bold ${!visa ? 'bg-gray-200 text-black' : 'border-b rounded-tr-2xl rounded-tl-2xl hover:bg-gray-200/10'}`} onClick={setVisaFalse}>Employee Retention Credit (ERC)</button>
-                        </div>
-                    </div> */}
                     <section id="about" className="bg-bgg dark:bg-bgg text-white">
                         <div className="block lg:flex bg-bgg w-full m-auto">
                             <div className="lg:w-1/2 p-2 text-white flex items-center">
@@ -58,7 +51,6 @@ export default function Body() {
                 </section>
             )}
 
-            {/* ERC */}
             {!visa && (
                 <section id="about" className="bg-white dark:bg-gray-900 text-white">
                     <div className="bg-bgg p-[35px]">
@@ -100,7 +92,6 @@ export default function Body() {
                 </section>
             )}
 
-            {/* FAQ */}
             {visa && (
                 <section id="faq">
                     <FAQ />

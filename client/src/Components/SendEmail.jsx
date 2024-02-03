@@ -37,20 +37,19 @@ const ContactForm = ({ onEmailSent }) => (
       }}
       validationSchema={ContactFormSchema}
       onSubmit={(values, { setSubmitting }) => {
-        // Handle form submission logic here
+
         const { businessName, ...otherValues } = values;
         const subject = `NEW ERC Claim for ${businessName}`;
-        // console.log({ ...otherValues, subject });
         const formDataToSend = new FormData();
+
         formDataToSend.append('formData', JSON.stringify({ ...otherValues, subject }));
-        // console.log(formDataToSend);
+       
         fetch('https://api.greenbackclaims.com/contact-us', {
           method: 'POST',
           body: formDataToSend,
         })
           .then((response) => response.json())
           .then((data) => {
-            // Handle response
             if(data.status == 200){
              console.log(200);
              onEmailSent();
@@ -69,7 +68,6 @@ const ContactForm = ({ onEmailSent }) => (
 
           })
           .catch((error) => {
-            // Handle error
             toast.error(error.message, {
               position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
               style: {
@@ -124,13 +122,6 @@ const ContactForm = ({ onEmailSent }) => (
               <Field className="border p-2 mt-2 border-blue-400 rounded w-full text-black" id="phone" name="phone" placeholder="Phone Number" type="tel" />
               <ErrorMessage name="phone" component="div" className="text-red-500 text-[12px]" />
             </div>
-            {/* <div className="hidden">
-              <label className="font-medium text-black" htmlFor="subject">
-                Subject:
-              </label>
-              <Field className="border p-2 mt-2 border-blue-400 rounded w-full text-black" id="subject" name="subject" type="text" />
-              <ErrorMessage name="subject" component="div" className="text-red-500 text-[12px]" />
-            </div> */}
             <div className="hidden">
               <label className="font-medium text-black" htmlFor="message">
                 Message:

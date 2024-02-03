@@ -13,7 +13,7 @@ ClaimForm.propTypes = {
 };
 export default function ClaimForm({ onEmailSent }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 4; // Total number of form pages
+  const totalPages = 4; 
 
   const [formData, setFormData] = useState({
     businessAcceptance: '',
@@ -36,7 +36,6 @@ export default function ClaimForm({ onEmailSent }) {
   });
 
   const [errors, setErrors] = useState({
-    // Initialize errors state with keys matching your form fields
     businessAcceptance: '',
     businessName: '',
     companyType: '',
@@ -44,8 +43,6 @@ export default function ClaimForm({ onEmailSent }) {
     ein: '',
     annualSales: '',
     franchiseAgreement: '',
-    // referral: '',
-    // referralDetails: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -57,11 +54,10 @@ export default function ClaimForm({ onEmailSent }) {
   });
 
   const validateFirstFormStep = () => {
-    // Validation logic goes here
+
     let formIsValid = true;
     const newErrors = { ...errors };
 
-    // Example validation for 'businessName'
     if (!formData.businessName.trim()) {
       newErrors.businessName = 'Business Name is required';
       formIsValid = false;
@@ -97,7 +93,7 @@ export default function ClaimForm({ onEmailSent }) {
       newErrors.ein = 'EIN or SSN must be a valid number with format XX-XXXXXXX or XXX-XX-XXXX';
       formIsValid = false;
     } else {
-      newErrors.ein = ''; // Clear the error if the input is valid
+      newErrors.ein = ''; 
     }
 
     if (!formData.annualSales.trim()) {
@@ -118,18 +114,15 @@ export default function ClaimForm({ onEmailSent }) {
       newErrors.franchiseAgreement = '';
     }
 
-    // Add more validation for other fields...
-
     setErrors(newErrors);
     return formIsValid;
   };
 
   const validateSecondFormStep = () => {
-    // Validation logic goes here
+
     let formIsValid = true;
     const newErrors = { ...errors };
 
-    // Example validation for 'businessName'
     if (!formData.firstName.trim()) {
       newErrors.firstName = 'First Name is required';
       formIsValid = false;
@@ -206,8 +199,6 @@ export default function ClaimForm({ onEmailSent }) {
   // Handle input change
   const handleSalesInputChange = (e) => {
     const { name, value } = e.target;
-
-    // Format currency and update form data
     const formattedValue = formatCurrency(value);
     setFormData({
       ...formData,
@@ -216,10 +207,8 @@ export default function ClaimForm({ onEmailSent }) {
   };
 
   const formatCurrency = (value) => {
-    // Remove non-numeric characters
-    const numericValue = value.replace(/[^0-9]/g, '');
 
-    // Format as currency using regex
+    const numericValue = value.replace(/[^0-9]/g, '');
     const formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
     return formattedValue;
@@ -235,13 +224,13 @@ export default function ClaimForm({ onEmailSent }) {
 
 
 
-  // const [sign, setSign] = useState()
+
   const [url, setUrl] = useState()
   const [loading, setLoading] = useState(false)
   const signatureRef = useRef()
 
   const clearSign = () => {
-    // console.log(sign.getTrimmedCanvas().toDataURL('image/png'));
+
     signatureRef.current.clear()
     setUrl('')
   }
@@ -406,7 +395,7 @@ export default function ClaimForm({ onEmailSent }) {
 
   const convertToPdf = () => {
     setLoading(true)
-    // pdfContent()
+
     var doc = new jsPDF({
       orientation: 'p',
       unit: 'px',
@@ -421,7 +410,7 @@ export default function ClaimForm({ onEmailSent }) {
     myDiv.style.width = "500px";
     myDiv.style.padding = "40px"
     myDiv.appendChild(pdfjs2)
-    // Convert HTML to PDF in JavaScript
+
     doc.html(myDiv, {
       callback: function (doc) {
         let url = doc.output('blob')
@@ -432,8 +421,6 @@ export default function ClaimForm({ onEmailSent }) {
         const email_api = import.meta.env.VITE_APP_API+'send-email'
         console.log({email_api})
         fetch(email_api, {
-        // fetch('https://api.greenbackclaims.com/send-email', {
-        // fetch('http://localhost:3000/send-email', {
           method: 'POST',
           body: formDataToSend,
         })
@@ -466,7 +453,6 @@ export default function ClaimForm({ onEmailSent }) {
 
           })
           .catch((error) => {
-            // Handle error
             toast.error(error.message, {
               position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
               style: {
@@ -517,13 +503,9 @@ export default function ClaimForm({ onEmailSent }) {
 
   function getCurrentDate() {
     var currentDate = new Date();
-
-    // Extract year, month, and day components
     var year = currentDate.getFullYear();
-    var month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
     var day = currentDate.getDate().toString().padStart(2, '0');
-
-    // Format the date as MM/DD/YYYY
     var formattedDate = month + '/' + day + '/' + year;
 
     return formattedDate;
@@ -695,35 +677,6 @@ export default function ClaimForm({ onEmailSent }) {
                 <p className='text-red-500 text-xs  ml-2'>{errors.ein}</p>
             </div>
           </div>
-          {/* <div className='flex flex-col sm:flex-row justify-between items-start'>
-          
-          <div className='w-full'>
-            <p className='max-w-full sm:max-w-xs m-2'>Were you referred to Greenback Claims? If yes, please share details</p>
-            <div className='flex items-center'>
-              <input
-                className='m-2'
-                type="radio"
-                name="referral"
-                value="Yes"
-                onChange={handleInputChange}
-                required
-              />
-              Yes
-              <input
-                className='m-2'
-                type="radio"
-                name="referral"
-                value="No"
-                onChange={handleInputChange}
-                required
-              />
-              No
-            <input className='mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500' placeholder='Please enter details' type="text" name="referralDetails" onChange={handleInputChange} value={formData.referralDetails} />
-
-            </div>
-          </div>
-          
-        </div> */}
         </div>
         <div className={`flex justify-center w-full mt-14 ${page !== 1 && 'hidden'}`}>
             <button className='bottom-0 w-full right-0 bg-green-500 p-2 rounded-md font-medium text-white' onClick={nextPage}>Next</button>

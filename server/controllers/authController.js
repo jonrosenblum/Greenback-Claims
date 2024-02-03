@@ -23,7 +23,7 @@ const login = async (req, res) => {
     if (!user || !await authService.comparePasswords(password, user.password)) {
       res.status(401).send({ message: 'Invalid username or password', status: 401 });
     } else {
-      // You can generate and send a JWT token for authentication here
+
       res.status(200).send({ message: 'Login successful', status: 200 });
     }
   } catch (error) {
