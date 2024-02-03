@@ -72,11 +72,11 @@ function Profile() {
                 <div className="flex flex-wrap -mx-3">
                   <div className="max-w-full px-3 lg:w-3/4 lg:flex-none">
                     <div className="flex flex-col h-full">
-                      <p className="pt-2 mb-1 font-semibold">Auto Created</p>
-                      <h5 className="font-bold">Your Reference Link</h5>
+                      {/* <p className="pt-2 mb-1 font-semibold">Auto Created</p> */}
+                      <h5 className="font-bold">Your Referral Link</h5>
                       <p className="mb-12" ref={paragraphRef}>{baseUrl}?ref={user.referral_id}</p>
                       <a className="mt-auto mb-0 font-semibold leading-normal text-sm group text-slate-500" href="">
-                        You can copy your referral link by pressing copy button and share with anyone. Thanks
+                        Press the button to copy your referral link and start sharing with others. 
                       </a>
                     </div>
                   </div>

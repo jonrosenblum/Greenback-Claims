@@ -68,7 +68,7 @@ function Home() {
                     </h5>
                     <p className="mb-12">
                       This dashboard is specially designed for managing your
-                      referrals to claims. Share your referral link to anyone.
+                      referrals to claims. Share your referral link with anyone to start earning money.
                     </p>
                     <Link
                       className="mt-auto mb-0 font-semibold leading-normal text-sm group text-slate-500"
@@ -150,7 +150,7 @@ function Home() {
               <div className="flex flex-row -mx-3 items-center mb-3">
                 <div className="flex-none w-2/3 max-w-full px-3">
                   <p className="mb-0 font-sans font-semibold leading-normal text-md">
-                    {"Latest Referral User Forms"}
+                    {"Latest Referrals"}
                   </p>
                 </div>
                 <div className="px-3 text-right basis-1/3">
@@ -173,7 +173,7 @@ function Home() {
                       <thead className="align-bottom">
                         <tr>
                           <th className="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-left align-middle text-sm font-bold uppercase text-tsecondary opacity-70 shadow-none">
-                            User Name
+                            Name
                           </th>
 
                           <th className="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle text-sm font-bold uppercase text-tsecondary opacity-70 shadow-none">

@@ -82,7 +82,7 @@ function Login({ onClose, onSignUp }) {
 
   return (
     <>
-      <PopupModal width={''} title="Login to Account" onClose={onClose}>
+      <PopupModal width={''} title="Sign in to Greenback Claims" onClose={onClose}>
         <form className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-col gap-1 w-3/4 items-center justify-start">
         {showAlert && <FormError type={alertType} message={alertMessage}  onClose={()=>setShowAlert(false)}/>}
@@ -133,10 +133,10 @@ function Login({ onClose, onSignUp }) {
             <hr className="h-[0px] w-2/4 border border-zinc-400" />
           </div>
           <div className="m-auto mb-10 sm:mb-20 text-center">
-            {"If you don't have an account?"}
+            {"Don't have an account?"}
             <a onClick={onSignUp} className="text-[#4560CB] cursor-pointer">
               {" "}
-              Signup
+              Sign up
             </a>
           </div>
         </form>
