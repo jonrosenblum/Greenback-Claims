@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - npm run build:$ENV
+      - npm run build
   post_build:
     commands:
       - aws s3 sync dist/ $S3_BUCKET
