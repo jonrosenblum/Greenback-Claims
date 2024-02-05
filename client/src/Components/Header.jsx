@@ -3,7 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-scroll";
 import useStore from "../zustand/store";
 import Login from "./Login";
-import SignUp from "./SignUp";
+import SignUp from "./Signup";
 import useAuthStore from "../zustand/authStore";
 
 export default function Header() {
