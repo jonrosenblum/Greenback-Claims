@@ -14,4 +14,4 @@ phases:
       - ls
   post_build:
     commands:
-      - aws s3 sync dist/dev-greenback-claims
+      - aws s3 sync dist /dev-greenback-claims
