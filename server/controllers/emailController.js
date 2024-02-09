@@ -1,10 +1,18 @@
 const emailService = require("../services/emailService");
 
+// const [referralID, setReferralID] = useState('');
+
+// useEffect(() => {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   // Get the value of the 'ref' parameter
+//   const refParam = urlParams.get('ref');
+//   setReferralID(refParam)
+// }, []);
+
 const sendEmail = async (req, res) => {
   try {
     const pdfData = req.file.buffer;
     const formData = JSON.parse(req.body.formData);
-
     const mailOptions = {
       from: "claims@greenbackclaims.com",
       to: "claims@greenbackclaims.com",
@@ -21,8 +29,7 @@ const sendEmail = async (req, res) => {
     <p><b>ZipCode:</b>&nbsp;&nbsp; ${formData.zipcode}</p>
     </br>
     <h3>Referral Information:</h3>
-    <p><b>Referral:</b>&nbsp;&nbsp; ${formData.referral}</p>
-    <p><b>Referral Name:</b>&nbsp;&nbsp; ${formData.referralDetails}</p>
+    <p><b>Referral:</b>&nbsp;&nbsp;${formData.referralDetails}</p>
     </br>
     <h3>Business Information:</h3>
     <p><b>Business Name:</b>&nbsp;&nbsp; ${formData.businessName}</p>
@@ -55,6 +62,35 @@ const sendEmail = async (req, res) => {
   }
 };
 
+
+const sendReferralEmail = async (req, res) => {
+  try {
+
+    const mailOptions = {
+      from: "claims@greenbackclaims.com",
+      to: "claims@greenbackclaims.com", // the referral user whos referral link is being used the email when they signed up
+      subject: "NEW VISA & MASTERCARD CLAIM",
+      html: `<h3>Referral Email Test</h3>`,
+    };
+
+
+    await emailService.sendReferralEmail(mailOptions);
+
+    res.status(200).send({
+      message: "Referral email sent successfully",
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({
+      message: "Error sending Referral email",
+      status: 500,
+      error,
+    });
+  }
+};
+
 module.exports = {
   sendEmail,
+  sendReferralEmail,
 };

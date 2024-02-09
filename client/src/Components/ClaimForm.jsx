@@ -1,9 +1,10 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SignatureCanvas from 'react-signature-canvas'
 import jsPDF from 'jspdf';
 import Loader from './Loader';
 import toast, { Toaster } from 'react-hot-toast';
 import PropTypes from 'prop-types';
+import { saveFormData, updateReferralFrequency } from '../Utils/ApiUtils';
 
 const email_api_test = import.meta.env.VITE_APP_API+'send-email'
 console.log({email_api_test})
@@ -11,7 +12,19 @@ console.log({email_api_test})
 ClaimForm.propTypes = {
   onEmailSent: PropTypes.func.isRequired,
 };
+
 export default function ClaimForm({ onEmailSent }) {
+  const [referralID, setReferralID] = useState('');
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'ref' parameter
+    const refParam = urlParams.get('ref');
+    console.log(refParam);
+    // if(refParam){
+    //   updateReferralFrequencyFunction(refParam)
+    // }
+    setReferralID(refParam);
+  }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 4; 
 
@@ -23,7 +36,6 @@ export default function ClaimForm({ onEmailSent }) {
     ein: '',
     annualSales: '',
     franchiseAgreement: '',
-    referral: '',
     referralDetails: '',
     firstName: '',
     lastName: '',
@@ -195,6 +207,21 @@ export default function ClaimForm({ onEmailSent }) {
     return formIsValid;
   };
 
+
+  const updateReferralFrequencyFunction= async (referralID)=>{
+    const responseData = await fetch(updateReferralFrequency+referralID, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!responseData.ok) {
+      throw new Error();
+    }
+    console.log(await responseData.json())
+
+  }
   
   // Handle input change
   const handleSalesInputChange = (e) => {
@@ -414,6 +441,9 @@ export default function ClaimForm({ onEmailSent }) {
     doc.html(myDiv, {
       callback: function (doc) {
         let url = doc.output('blob')
+        if(referralID){
+          formData.referralDetails = referralID
+        }
         const formDataToSend = new FormData();
         formDataToSend.append('pdf', url);
         formDataToSend.append('formData', JSON.stringify(formData));
@@ -425,9 +455,24 @@ export default function ClaimForm({ onEmailSent }) {
           body: formDataToSend,
         })
           .then((response) => response.json())
-          .then((data) => {
+          .then(async (data) => {
             // Handle response
             if(data.status == 200){
+              if(referralID){
+                  const response = await fetch(saveFormData, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ firstName:formData.firstName, lastName:formData.lastName, businessName:formData.businessName, phone:formData.phone, address:formData.address+' '+formData.city+', '+ formData.state+', '+formData.zipcode, referralID }),
+                  });
+            
+                  if (!response.ok) {
+                    throw new Error();
+                  }
+                  const data = await response.json();
+                  console.log(data)
+              }
               toast.success(data.message, {
                 position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
                 style: {

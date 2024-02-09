@@ -1,0 +1,18 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Installing node packages
+      - n 16.20.2
+      - cd client
+      - node -v
+      - npm install
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm run build
+      - ls
+  post_build:
+    commands:
+      - aws s3 sync dist/ s3://devtest-greemclaims
+      #- aws s3 sync dist /dev-greenback-claims
