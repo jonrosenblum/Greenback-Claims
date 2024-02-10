@@ -41,7 +41,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 app.get("/", async (req, res) => {
   try {
     const client = await pool.connect();
-    const result = await client.query('SELECT $1::text as message', ['Hello, PostgreSQL!']);
+    const result = await client.query('SELECT $1::text as message', ['Hello, PostgreSQL TEST!']);
     const data = result.rows[0].message;
     client.release();
     res.send(`API healthy: ${data}`);
