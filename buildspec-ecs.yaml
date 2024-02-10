@@ -13,6 +13,7 @@ phases:
       - cd server
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG -f Dockerfile .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - cd ..
   post_build:
     commands:
       - echo Build completed on `date`
@@ -23,4 +24,3 @@ phases:
       - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
-     
