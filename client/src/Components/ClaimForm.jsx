@@ -880,8 +880,8 @@ export default function ClaimForm({ onEmailSent }) {
           <div className='mt-5 mb-5'>
             <>
               <div className='flex justify-between'>
-                <img src="/public/pdf1.png" className='w-[130px] md:w-[170px] object-contain' alt="" />
-                <img src="/public/pdf2.png" className='w-[110px] md:w-[130px] object-contain' alt="" />
+                <img src="/pdf1.png" className='w-[130px] md:w-[170px] object-contain' alt="logo" />
+                <img src="/pdf2.png" className='w-[110px] md:w-[130px] object-contain' alt="logo" />
               </div>
           <div className='text-center'>Date: {new Date().toLocaleDateString()}</div>
           <div className='mt-1'>

@@ -2,7 +2,7 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import erc from '../../public/erc.png';
+import erc from '../../assets/images/erc.png';
 export default function BodySlider() {
   const settings = {
     dots: false,
