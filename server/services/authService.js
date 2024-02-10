@@ -2,6 +2,14 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/userModel');
 const secretKey = process.env.JWT_SECRET
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+const aws = require("aws-sdk");
+const sesTransport = require("nodemailer-ses-transport");
+
+
+
+
 
 if (!secretKey) {
   console.error('JWT_SECRET is required');
@@ -57,8 +65,101 @@ async function findUserByID(userId) {
   }
 }
 
+
+// Generate a secure random token
+function generateResetToken() {
+  const token = crypto.randomBytes(20).toString('hex');
+  return token;
+}
+
+// Send reset password email to the user
+async function sendResetPasswordEmail(email, resetToken) {
+  try {
+
+    const config = {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      region: process.env.AWS_REGION,
+    };
+    
+    aws.config.update(config);
+
+    const transporter = nodemailer.createTransport(
+      sesTransport({
+        ses: new aws.SES({ apiVersion: "2010-12-01" }),
+      })
+    );
+
+    const mailOptions = {
+      from: 'claims@greenbackclaims.com',
+      to: email,
+      subject: 'Password Reset',
+      text: `Use the following link to reset your password: ${resetToken}`
+    };
+
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    throw new Error('Failed to send reset password email.');
+  }
+}
+
+// Implement forgot password functionality
+async function forgotPassword(email) {
+  try {
+    const user = await userModel.findUserByEmail(email);
+    if (!user) {
+      throw new Error('User not found.');
+    }
+
+    // Generate reset password token
+    const resetToken = generateResetToken();
+
+    const expirationDate = new Date();
+    expirationDate.setHours(expirationDate.getHours() + 1); // Set expiration to one hour from now
+
+    // Save reset token to the database
+    await userModel.saveResetToken(email, resetToken, expirationDate);
+    
+    // Send resetToken to the user
+    await sendResetPasswordEmail(email, resetToken);
+
+
+    return resetToken; // Return the token for testing purposes or further use
+  } catch (error) {
+    throw new Error(error.message || 'Forgot password failed.');
+  }
+}
+
+async function resetPassword(token, newPassword) {
+  try {
+    // 1. Find user by reset token
+    const user = await userModel.findUserByResetToken(token);
+
+    if (!user || user.resetPasswordExpires < Date.now()) {
+      throw new Error('Invalid or expired reset token.');
+    }
+
+    // 2. Hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // 3. Update user's password in the database
+    await userModel.updateUserPassword(user.id, hashedPassword);
+
+    // 4. Clear reset token fields
+    await userModel.clearResetToken(user.id);
+
+    return { message: 'Password reset successful.' };
+  } catch (error) {
+    throw new Error(error.message || 'Password reset failed.');
+  }
+}
+
+
+
 module.exports = {
   signup,
   login,
   findUserByID,
+  forgotPassword,
+  resetPassword
 };

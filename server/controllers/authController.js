@@ -25,6 +25,17 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.post('/reset-password', async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+    await authService.resetPassword(token, newPassword);
+    res.json({ message: 'Password reset successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error.message || 'Password reset failed.' });
+  }
+});
+
 router.get('/user/:userId', async (req, res)=> {
   try {
     const { userId } = req.params;
@@ -36,5 +47,16 @@ router.get('/user/:userId', async (req, res)=> {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 })
+
+router.post('/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+    await authService.forgotPassword(email);
+    res.json({ message: 'Password reset email sent successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error.message || 'Forgot password failed.' });
+  }
+});
 
 module.exports = router;

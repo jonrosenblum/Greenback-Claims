@@ -1,4 +1,5 @@
 const { Pool } = require("pg");
+const bcrypt = require("bcrypt");
 
 const pool = new Pool({
   user: process.env.PG_USER,
@@ -19,7 +20,9 @@ async function createUserTableIfNotExists() {
         password VARCHAR(255) NOT NULL,
         referral_id VARCHAR(255) NOT NULL UNIQUE,
         form_submissions INTEGER NOT NULL DEFAULT 0,
-        referral_frequency INTEGER NOT NULL DEFAULT 0
+        referral_frequency INTEGER NOT NULL DEFAULT 0,
+        reset_token VARCHAR(255),
+        reset_token_expires TIMESTAMP
       );
     `);
   } finally {
@@ -30,11 +33,13 @@ async function createUserTableIfNotExists() {
 async function createUser(username, email, password, referralID) {
   await createUserTableIfNotExists();
 
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   const client = await pool.connect();
   try {
     const result = await client.query(
       'INSERT INTO users (username, email, password, referral_id) VALUES ($1, $2, $3, $4) RETURNING *',
-      [username, email, password, referralID]
+      [username, email, hashedPassword, referralID]
     );
     return result.rows[0];
   } finally {
@@ -66,7 +71,54 @@ async function findUserByID(userId) {
   }
 }
 
+async function findUserByEmail(email) {
+  await createUserTableIfNotExists();
 
+  const client = await pool.connect();
+  try {
+    const result = await client.query('SELECT * FROM users WHERE email = $1', [email]);
+    return result.rows[0];
+  } finally {
+    client.release();
+  }
+}
+
+async function saveResetToken(email, resetToken, expirationDate) {
+  const client = await pool.connect();
+  try {
+    await client.query('UPDATE users SET reset_token = $1, reset_token_expires = $2 WHERE email = $3', [resetToken, expirationDate, email]);
+  } finally {
+    client.release();
+  }
+}
+
+async function findUserByResetToken(token) {
+  const client = await pool.connect();
+  try {
+    const result = await client.query('SELECT * FROM users WHERE reset_token = $1', [token]);
+    return result.rows[0];
+  } finally {
+    client.release();
+  }
+}
+
+async function updateUserPassword(userId, newPassword) {
+  const client = await pool.connect();
+  try {
+    await client.query('UPDATE users SET password = $1 WHERE id = $2', [newPassword, userId]);
+  } finally {
+    client.release();
+  }
+}
+
+async function clearResetToken(userId) {
+  const client = await pool.connect();
+  try {
+    await client.query('UPDATE users SET reset_token = NULL, reset_token_expires = NULL WHERE id = $1', [userId]);
+  } finally {
+    client.release();
+  }
+}
 async function updateFormSubmissionsCount(referralID) {
   const client = await pool.connect();
   try {
@@ -98,10 +150,16 @@ async function updateReferralFrequencyCount(referralID) {
     client.release();
   }
 }
+
 module.exports = {
   createUser,
   findUserByUsername,
   findUserByID,
+  findUserByEmail,
+  updateUserPassword,
+  findUserByResetToken,
+  clearResetToken,
   updateFormSubmissionsCount, 
   updateReferralFrequencyCount,
+  saveResetToken
 };
