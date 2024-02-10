@@ -15,4 +15,4 @@ phases:
   post_build:
     commands:
       - aws s3 sync dist/ s3://$S3_BUCKET
-      #- aws s3 sync dist /dev-greenback-claims
+      - aws cloudfront create-invalidation --distribution-id=$DEV_CLOUDFRONT_DIST --paths '/*'
