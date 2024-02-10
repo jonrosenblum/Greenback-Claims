@@ -321,13 +321,14 @@ export default function ClaimForm({ onEmailSent }) {
               claim form. The Firms will <span className='font-bold underline italic'>not</span> provide any legal advice and/or opinions.
             </p>
             <div>
-
+            
             <hr className='w-32 mt-8'/>
             <p className='text-[8px] px-2'>
               <sup>[1] It is not necessary for class members to sign up for a third-party service to participate in any monetary relief, as no-cost assistance is available from the Class Administrator and Class Counsel during the claims-filing period. For more information, visit <a href="https://www.paymentcardsettlement.com/en" target='_blank' rel="noreferrer" className='text-blue-500 underline'>Payment Card Settlement | Official Court-Authorized Website - Home.</a>.</sup>
             </p>
             </div>
-            <br></br>
+            <br />
+            
             <p className='indent-14 mt-12'>
               The Firms shall consult with and obtain Client’s approval regarding any major decisions
               arising in connection with the above-referenced work or with respect to any of the services
@@ -361,6 +362,7 @@ export default function ClaimForm({ onEmailSent }) {
               This Agreement shall be interpreted and enforced pursuant to the laws of the State of Florida,
               both substantive and procedural, regardless of choice of law principles.
             </p>
+            
             <p className='mt-3 font-bold text-center underline'>Entire Understanding Between Parties</p>
             <p className='indent-14 mt-1  mb-4'>
               This Agreement represents the entire Agreement between the parties with respect to the
@@ -373,7 +375,6 @@ export default function ClaimForm({ onEmailSent }) {
               terms and conditions set forth in this Agreement shall be effective unless in writing,
               signed by both parties.
             </p>
-            <br></br>
             <p className='indent-14 mt-20'>
               If this Agreement accurately reflects the terms of our representation of Client in this matter,
               please sign and date in the space provided below and e-mail an executed copy of the Agreement
