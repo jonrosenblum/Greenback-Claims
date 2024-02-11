@@ -79,7 +79,7 @@ function Home() {
                     </Link>
                   </div>
                 </div>
-                <div className="max-w-full px-3 mt-12 ml-auto text-center lg:mt-0 lg:w-5/12 lg:flex-none">
+                <div className="max-w-full px-3 mt-12 ml-auto text-center lg:mt-0 lg:w-5/12 lg:flex-none lg:block hidden">
                   <div className="h-full bg-gradient-to-tl from-primary to-secondary rounded-xl">
                     <div className="relative flex items-center justify-center h-full">
                       <img
@@ -144,7 +144,7 @@ function Home() {
           </div>
         </div> */}
 
-        <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0">
+        <div className="w-full max-w-full px-3 mb-6 md:w-1/2 sm:flex-none xl:mb-0">
           <div className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl  bg-clip-border">
             <div className="flex-auto p-4">
               <div className="flex flex-row -mx-3 items-center mb-3">
@@ -156,10 +156,9 @@ function Home() {
                 <div className="px-3 text-right basis-1/3">
                   <Link
                     to="/dashboard/referrals"
-                    className="flex px-1 h-12 gap-2 text-center justify-center rounded-lg bg-gradient-to-tl from-primary items-center to-secondary"
+                    className="flex px-1 h-10 gap-2 text-center justify-center rounded-lg bg-gradient-to-tl from-primary items-center to-secondary"
                   >
-                    <i className="ni leading-none ni-world text-lg relative  text-white"></i>
-                    <p className="text-white">View All</p>
+                    <p className="text-white text-xs md:text-[16px]">View All</p>
                   </Link>
                 </div>
               </div>

@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import useAuthStore from "../../../zustand/authStore";
 
-function Sidebar({isSidebarOpen, currentPath}) {
+function Sidebar({isSidebarOpen, currentPath, closeSidebar}) {
   const { logout } = useAuthStore();
 
   return (
     <aside className={` max-w-62.5 ease-nav-brand no-scrollbar fixed inset-y-0 z-50 my-4 ml-4 block w-full flex-wrap items-center justify-between rounded-2xl bg-white p-0 antialiased shadow-none transition-transform duration-200 lg:left-0 lg:translate-x-0 lg:bg-transparent ${isSidebarOpen?'-translate-x-0 border-2 border-secondary':'-translate-x-full border-2'}`}>
       <div className="h-19.5">
-        {isSidebarOpen && <i className={`fa fa-times absolute right-0 top-0 cursor-pointer p-4 text-slate-400 opacity-50 lg:hidden`} aria-hidden="true"></i>}
+        {isSidebarOpen && <i onClick={()=>closeSidebar()} className={`fa fa-times absolute right-0 top-0 cursor-pointer p-3 text-black opacity-50 lg:hidden`} aria-hidden="true"></i>}
         <Link
           className="m-0 block whitespace-nowrap px-8 py-6 text-2xl font-bold text-slate-700"
           to="/"
@@ -43,6 +43,7 @@ function Sidebar({isSidebarOpen, currentPath}) {
 }
 Sidebar.propTypes = {
   isSidebarOpen:PropTypes.bool,
+  closeSidebar:PropTypes.func,
   currentPath:PropTypes.string
 };
 export default Sidebar;

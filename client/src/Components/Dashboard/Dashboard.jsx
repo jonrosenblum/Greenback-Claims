@@ -19,7 +19,7 @@ function Dashboard() {
     
   return (
     <div className="m-0 font-sans text-base antialiased h-[100vh] font-normal leading-default bg-gray-100 text-slate-500">
-    <Sidebar isSidebarOpen={isSidebarOpen} currentPath={currentPath}/>
+    <Sidebar isSidebarOpen={isSidebarOpen} currentPath={currentPath} closeSidebar={()=> {setIsSidebarOpen(!isSidebarOpen)}}/>
     <main className="ease-soft-in-out lg:ml-[18rem] ml-0 relative max-h-screen  rounded-xl transition-all duration-200">
       <nav className="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl xl:flex-nowrap xl:justify-start" >
         <div className="flex items-center justify-between w-full px-4 py-1 mx-auto ">
