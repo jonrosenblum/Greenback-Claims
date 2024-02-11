@@ -16,7 +16,7 @@ const sendEmail = async (req, res) => {
     const mailOptions = {
       from: "claims@greenbackclaims.com",
       to: "claims@greenbackclaims.com",
-      subject: "NEW VISA & MASTERCARD CLAIM",
+      subject: "NEW VISA & MASTERCARD CLAIM TEST",
       html: `<h3>Personal Information:</h3>
     <p><b>Name:</b>&nbsp;&nbsp; ${
       formData.firstName + " " + formData.lastName
