@@ -4,7 +4,7 @@ import jsPDF from 'jspdf';
 import Loader from './Loader';
 import toast, { Toaster } from 'react-hot-toast';
 import PropTypes from 'prop-types';
-import { saveFormData, updateReferralFrequency } from '../Utils/ApiUtils';
+import { saveFormData } from '../Utils/ApiUtils';
 
 const email_api_test = import.meta.env.VITE_APP_API+'send-email'
 console.log({email_api_test})
@@ -208,20 +208,20 @@ export default function ClaimForm({ onEmailSent }) {
   };
 
 
-  const updateReferralFrequencyFunction= async (referralID)=>{
-    const responseData = await fetch(updateReferralFrequency+referralID, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
+  // const updateReferralFrequencyFunction= async (referralID)=>{
+  //   const responseData = await fetch(updateReferralFrequency+referralID, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     }
+  //   });
 
-    if (!responseData.ok) {
-      throw new Error();
-    }
-    console.log(await responseData.json())
+  //   if (!responseData.ok) {
+  //     throw new Error();
+  //   }
+  //   console.log(await responseData.json())
 
-  }
+  // }
   
   // Handle input change
   const handleSalesInputChange = (e) => {
