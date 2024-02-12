@@ -6,6 +6,7 @@ import { logInAPI } from './../Utils/ApiUtils'
 import Loader from './Loader';
 import FormError from './FormError';
 import { useNavigate } from 'react-router-dom'
+import ForgotPassword from './ForgotPassword';
 
 function Login({ onClose, onSignUp }) {
   const { login } = useAuthStore();
@@ -14,6 +15,7 @@ function Login({ onClose, onSignUp }) {
   const [isLoading, setLoading] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPopup, setShowPopup] = useState("");
 
   //error state
   const [usernameError, setUsernameError] = useState('');
@@ -82,6 +84,12 @@ function Login({ onClose, onSignUp }) {
 
   return (
     <>
+      {showPopup == "forgotPassword" ? (
+        <ForgotPassword
+          onClose={() => setShowPopup("")}
+          onSignIn={() => setShowPopup("login")}
+        />
+      ):
       <PopupModal width={''} title="Sign in to Greenback Claims" onClose={onClose}>
         <form className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-col gap-1 w-3/4 items-center justify-start">
@@ -117,7 +125,7 @@ function Login({ onClose, onSignUp }) {
               />
               <span> Remember Me</span>
             </div>
-            <a href="#" className="text-[#4560CB]">
+            <a onClick={()=>setShowPopup('forgotPassword')} className="text-[#4560CB] hover:text-[#2b3768] cursor-pointer">
               Forgot Password
             </a>
           </div>
@@ -141,6 +149,7 @@ function Login({ onClose, onSignUp }) {
           </div>
         </form>
       </PopupModal>
+    }
     </>
   );
 }
