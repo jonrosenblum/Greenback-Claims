@@ -5,6 +5,7 @@ import Loader from './Loader';
 import toast, { Toaster } from 'react-hot-toast';
 import PropTypes from 'prop-types';
 import { saveFormData } from '../Utils/ApiUtils';
+import ResetPassword from './ResetPassword';
 
 const email_api_test = import.meta.env.VITE_APP_API+'send-email'
 console.log({email_api_test})
@@ -15,15 +16,17 @@ ClaimForm.propTypes = {
 
 export default function ClaimForm({ onEmailSent }) {
   const [referralID, setReferralID] = useState('');
+  const [passwordToken, setPasswordToken] = useState('');
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     // Get the value of the 'ref' parameter
     const refParam = urlParams.get('ref');
-    console.log(refParam);
-    // if(refParam){
-    //   updateReferralFrequencyFunction(refParam)
-    // }
-    setReferralID(refParam);
+    if(refParam) setReferralID(refParam);
+    // Get the value of the 'passwordToken' parameter
+    const passwordToken = urlParams.get('passwordToken');
+    console.log(passwordToken);
+    if(passwordToken) setPasswordToken(passwordToken);
+    
   }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 4; 
@@ -1067,6 +1070,8 @@ export default function ClaimForm({ onEmailSent }) {
   };
 
   return (
+    <>
+    {passwordToken && <ResetPassword token={passwordToken} onClose={()=>{setPasswordToken('')}} />}
     <div className="bg-white text-black pl-3 pr-3 pb-3 h-[700px] overflow-y-auto">
       <Toaster />
       <div className="p-0 xl:p-10">
@@ -1075,5 +1080,6 @@ export default function ClaimForm({ onEmailSent }) {
         </div>
       </div>
     </div>
+    </>
   );
 }
