@@ -23,9 +23,9 @@ async function signup(username, email, password, referral_ID) {
       throw new Error('Username is already taken.');
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
     // const referralLink = username+'_' + (await bcrypt.hash(username, 5));
-    const newUser = await userModel.createUser(username, email, hashedPassword, referral_ID);
+    const newUser = await userModel.createUser(username, email, password, referral_ID);
     delete newUser.password
     return newUser;
   } catch (error) {
@@ -36,11 +36,12 @@ async function signup(username, email, password, referral_ID) {
 async function login(username, password) {
   try {
     const user = await userModel.findUserByUsername(username);
-
+    console.log(user);
     if (!user) {
       throw new Error('Invalid username or password.');
     }
     const passwordMatch = await bcrypt.compare(password, user.password);
+    console.log(passwordMatch);
     if (passwordMatch) {
       const token = jwt.sign({ userId: user.id, username:user.username, email:user.email, referral_id:user.referral_id,form_submissions:user.form_submissions,referral_frequency:user.referral_frequency }, secretKey, { expiresIn: '1h' });
       return token;
