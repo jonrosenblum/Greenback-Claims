@@ -153,6 +153,7 @@ async function updateReferralFrequencyCount(referralID) {
 
 module.exports = {
   createUser,
+  createUserTableIfNotExists,
   findUserByUsername,
   findUserByID,
   findUserByEmail,
