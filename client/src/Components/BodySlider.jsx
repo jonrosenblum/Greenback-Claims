@@ -24,7 +24,7 @@ export default function BodySlider() {
         }}>
           <div className="absolute inset-0 bg-black opacity-70"></div>
           <div className="max-w-xl relative z-10">
-            <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 text-white">Did You Own A Business Between 2004 and 2021?</h1>
+            <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 text-white">Did You Own A Business Between 2004 and 2019?</h1>
             <p className="text-md md:text-lg mb-8 max-w-sm font-medium text-white">You could be eligible to reclaim funds as part of a $5.5 billion dollar settlement.</p>
             <a href="#about" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-2xl px-6 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit Claim</a>
           </div>
