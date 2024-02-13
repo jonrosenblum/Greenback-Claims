@@ -7,8 +7,6 @@ import PropTypes from 'prop-types';
 import { saveFormData } from '../Utils/ApiUtils';
 import ResetPassword from './ResetPassword';
 
-const email_api_test = import.meta.env.VITE_APP_API+'send-email'
-console.log({email_api_test})
 
 ClaimForm.propTypes = {
   onEmailSent: PropTypes.func.isRequired,
@@ -210,7 +208,7 @@ export default function ClaimForm({ onEmailSent }) {
     return formIsValid;
   };
 
-  
+
   // Handle input change
   const handleSalesInputChange = (e) => {
     const { name, value } = e.target;
@@ -453,7 +451,7 @@ export default function ClaimForm({ onEmailSent }) {
                     headers: {
                       'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ firstName:formData.firstName, lastName:formData.lastName, businessName:formData.businessName, phone:formData.phone, address:formData.address+' '+formData.city+', '+ formData.state+', '+formData.zipcode, referralID }),
+                    body: JSON.stringify({ firstName:formData.firstName, lastName:formData.lastName, businessName:formData.businessName, email: formData.email, ein: formData.ein, companyType: formData.companyType, annualSales: formData.annualSales, phone:formData.phone, franchiseAgreement: formData.franchiseAgreement, address:formData.address+' '+formData.city+', '+ formData.state+', '+formData.zipcode, referralID }),
                   });
             
                   if (!response.ok) {
