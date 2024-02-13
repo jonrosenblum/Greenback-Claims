@@ -427,7 +427,11 @@ export default function ClaimForm({ onEmailSent }) {
     doc.html(myDiv, {
       callback: function (doc) {
         let url = doc.output('blob')
-        
+        if (referralID) {
+          formData.referralDetails = referralID;
+        } else {
+          formData.referralDetails = null;
+        }
         const formDataToSend = new FormData();
         formDataToSend.append('pdf', url);
         formDataToSend.append('formData', JSON.stringify(formData));
