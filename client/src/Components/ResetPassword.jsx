@@ -11,10 +11,14 @@ function ResetPassword({ token, onClose }) {
   const navigate = useNavigate();
 
   const [isLoading, setLoading] = useState(false);
+  const [togglePassword, setTogglePassword] = useState(false);
+  const [toggleCPassword, setToggleCPassword] = useState(false);
   const [newPassword, setPassword] = useState("");
+  const [cPassword, setCPassword] = useState("");
 
   //error state
   const [passwordError, setPasswordError] = useState("");
+  const [cPasswordError, setCPasswordError] = useState("");
   const [alertType, setAlertType] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
@@ -59,6 +63,16 @@ function ResetPassword({ token, onClose }) {
       setPasswordError("");
     }
 
+    if (!cPassword.trim()) {
+      setCPasswordError("Confirm Password is required");
+      isValid = false;
+    } 
+
+    if(cPassword.trim() != newPassword.trim()){
+      isValid = false;
+      setCPasswordError("Confirm Password not matched");
+    } 
+
     return isValid;
   };
 
@@ -75,7 +89,7 @@ function ResetPassword({ token, onClose }) {
       >
         {!isResetPasswordSuccess ? (
           <form className="w-full flex flex-col items-center justify-center gap-3 mb-14">
-            <div className="flex flex-col gap-1 w-3/4 items-center justify-end">
+            <div className="flex flex-col gap-1 w-3/4 items-center justify-end relative">
               {showAlert && (
                 <FormError
                   type={alertType}
@@ -91,22 +105,49 @@ function ResetPassword({ token, onClose }) {
               </label>
 
               <input
-                type="password"
+                type={togglePassword?"text":"password"}
                 name="password"
                 placeholder="New Password"
                 value={newPassword}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {setPassword(e.target.value);setPasswordError('')}}
                 className={`h-[50px] w-full ${
                   passwordError ? "border-danger" : "border-zinc-400"
-                } rounded-[15px] border 00 text-black bg-white px-4 shadow focus:shadow-sm`}
+                }  rounded-[15px] border 00 text-black bg-white px-4 shadow focus:shadow-sm`}
               />
+              <i className={`fa fa-eye hover:text-black text-gray-600 absolute right-3 top-10 cursor-pointer hover:scale-[1.2]`} aria-hidden="true" onClick={()=>{setTogglePassword(!togglePassword)}}></i>
               {passwordError && (
                 <span className="text-red-500 text-sm w-full text-end">
                   {passwordError}
                 </span>
               )}
             </div>
-            <div className="w-3/4 flex items-center justify-center">
+            <div className="flex flex-col gap-1 w-3/4 items-center justify-end relative">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-left text-black w-full pl-2"
+              >
+                Confirm Password <span className="text-danger">*</span>
+              </label>
+
+              <input
+                type={toggleCPassword?"text":"password"}
+                name="confirm password"
+                placeholder="Confirm Password"
+                value={cPassword}
+                onChange={(e) => {setCPassword(e.target.value); setCPasswordError('')}}
+                className={`h-[50px] w-full ${
+                  cPasswordError ? "border-danger" : "border-zinc-400"
+                } rounded-[15px] border 00 text-black bg-white px-4 shadow focus:shadow-sm`}
+              />
+              <i className={`fa fa-eye hover:text-black text-gray-600 absolute right-3 top-10 cursor-pointer hover:scale-[1.2]`}  aria-hidden="true" onClick={()=>{setToggleCPassword(!toggleCPassword)}}></i>
+
+              {cPasswordError && (
+                <span className="text-red-500 text-sm w-full text-end">
+                  {cPasswordError}
+                </span>
+              )}
+            </div>
+            <div className="w-3/4 flex items-center justify-center mt-5">
               <button
                 disabled={isLoading}
                 onClick={handleResetPassword}

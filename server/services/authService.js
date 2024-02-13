@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const aws = require("aws-sdk");
 const sesTransport = require("nodemailer-ses-transport");
+const emailTemplates = require('../emails/emailTemplates'); 
 
 
 
@@ -93,7 +94,7 @@ async function sendUsernameInfoEmail(email, username) {
       from: 'claims@greenbackclaims.com',
       to: email,
       subject: 'Your Username',
-      text: `Your username is: ${username}`
+      html: emailTemplates.forgotUsernameEmailTemplate(process.env.FRONTEND_APP_URL,username)
     };
 
     await transporter.sendMail(mailOptions);
@@ -119,12 +120,11 @@ async function sendResetPasswordEmail(email, resetToken) {
         ses: new aws.SES({ apiVersion: "2010-12-01" }),
       })
     );
-
     const mailOptions = {
       from: 'claims@greenbackclaims.com',
       to: email,
       subject: 'Password Reset',
-      text: `Use the following link to reset your password: ${resetToken}`
+      html: emailTemplates.forgotPasswordEmailTemplate( process.env.FRONTEND_APP_URL,resetToken)
     };
 
     await transporter.sendMail(mailOptions);

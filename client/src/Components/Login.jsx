@@ -7,6 +7,7 @@ import Loader from './Loader';
 import FormError from './FormError';
 import { useNavigate } from 'react-router-dom'
 import ForgotPassword from './ForgotPassword';
+import ForgotUsername from './ForgotUsername';
 
 function Login({ onClose, onSignUp }) {
   const { login } = useAuthStore();
@@ -16,6 +17,7 @@ function Login({ onClose, onSignUp }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPopup, setShowPopup] = useState("");
+  const [togglePassword, setTogglePassword] = useState(false);
 
   //error state
   const [usernameError, setUsernameError] = useState('');
@@ -90,6 +92,12 @@ function Login({ onClose, onSignUp }) {
           onSignIn={() => setShowPopup("login")}
         />
       ):
+      showPopup == "forgotUsername" ?(
+        <ForgotUsername
+          onClose={() => setShowPopup("")}
+          onSignIn={() => setShowPopup("login")}
+        />
+      ):
       <PopupModal width={''} title="Sign in to Greenback Claims" onClose={onClose}>
         <form className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-col gap-1 w-3/4 items-center justify-start">
@@ -100,31 +108,28 @@ function Login({ onClose, onSignUp }) {
               id="username"
               required
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => {setUsername(e.target.value);setUsernameError('')}}
               className={`h-[50px] w-full ${usernameError?'border-danger':'border-zinc-400'} rounded-[15px] border  bg-white px-4 shadow focus:shadow-xl`}
             />
             {usernameError && <span className="text-red-500 text-xs text-left w-full pl-2">{usernameError}</span>}
           </div>
-          <div className="flex flex-col gap-1 w-3/4 items-center justify-start">
+          <div className="flex flex-col gap-1 w-3/4 items-center justify-start relative">
             <input
-              type="password"
+              type={togglePassword?'text':'password'}
               name="password"
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {setPassword(e.target.value);setPasswordError('')}}
               className={`h-[50px] w-full ${passwordError?'border-danger':'border-zinc-400'} rounded-[15px] border 00 bg-white px-4 shadow focus:shadow-xl`}
             />
-             {passwordError && <span className="text-red-500 text-sm">{passwordError}</span>}
+              <i className={`fa fa-eye hover:text-black text-gray-600 absolute right-3 top-4 cursor-pointer hover:scale-[1.2]`}  aria-hidden="true" onClick={()=>{setTogglePassword(!togglePassword)}}></i>
+
+             {passwordError && <span className="text-red-500 text-sm text-left w-full pl-2">{passwordError}</span>}
           </div>
           <div className="flex h-[50px] w-3/4 items-center justify-between">
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="savepin"
-                className="rounded-[15px] bg-white"
-              />
-              <span> Remember Me</span>
-            </div>
+            <a className="flex items-center gap-2 text-[#4560CB] hover:text-[#2b3768] cursor-pointer" onClick={()=>setShowPopup('forgotUsername')}>
+              <span> Forgot Username</span>
+            </a>
             <a onClick={()=>setShowPopup('forgotPassword')} className="text-[#4560CB] hover:text-[#2b3768] cursor-pointer">
               Forgot Password
             </a>
@@ -149,7 +154,7 @@ function Login({ onClose, onSignUp }) {
           </div>
         </form>
       </PopupModal>
-    }
+      }
     </>
   );
 }
