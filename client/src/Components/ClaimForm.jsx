@@ -37,7 +37,7 @@ export default function ClaimForm({ onEmailSent }) {
     ein: '',
     annualSales: '',
     franchiseAgreement: '',
-    referralDetails: '',
+    referralDetails: 'None',
     firstName: '',
     lastName: '',
     email: '',
@@ -428,49 +428,64 @@ export default function ClaimForm({ onEmailSent }) {
     doc.html(myDiv, {
       callback: function (doc) {
         let url = doc.output('blob')
-        if(referralID){
-          formData.referralDetails = referralID
-        }
+        
         const formDataToSend = new FormData();
         formDataToSend.append('pdf', url);
         formDataToSend.append('formData', JSON.stringify(formData));
 
-        const email_api = import.meta.env.VITE_APP_API+'send-email'
-        console.log({email_api})
+        if (referralID) {
+          formData.referralDetails = referralID;
+        } else {
+          formData.referralDetails = null;
+        }
+
+        const email_api = import.meta.env.VITE_APP_API + 'send-email';
+        console.log({email_api});
+
         fetch(email_api, {
           method: 'POST',
           body: formDataToSend,
         })
-          .then((response) => response.json())
-          .then(async (data) => {
+        .then((response) => response.json())
+        .then(async (data) => {
             // Handle response
             if(data.status == 200){
-              if(referralID){
-                  const response = await fetch(saveFormData, {
+                const response = await fetch(saveFormData, {
                     method: 'POST',
                     headers: {
-                      'Content-Type': 'application/json',
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ firstName:formData.firstName, lastName:formData.lastName, businessName:formData.businessName, email: formData.email, ein: formData.ein, companyType: formData.companyType, annualSales: formData.annualSales, phone:formData.phone, franchiseAgreement: formData.franchiseAgreement, address:formData.address+' '+formData.city+', '+ formData.state+', '+formData.zipcode, referralID }),
-                  });
-            
-                  if (!response.ok) {
+                    body: JSON.stringify({ 
+                        firstName: formData.firstName, 
+                        lastName: formData.lastName, 
+                        businessName: formData.businessName, 
+                        email: formData.email, 
+                        ein: formData.ein, 
+                        companyType: formData.companyType, 
+                        annualSales: formData.annualSales, 
+                        phone: formData.phone, 
+                        franchiseAgreement: formData.franchiseAgreement, 
+                        address: formData.address + ' ' + formData.city + ', ' + formData.state + ', ' + formData.zipcode 
+                    }),
+                });
+        
+                if (!response.ok) {
                     throw new Error();
-                  }
-                  const data = await response.json();
-                  console.log(data)
-              }
-              toast.success(data.message, {
-                position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
-                style: {
-                  backgroundColor: '#d9d9d9',
-                  padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
-                  fontSize: '14px',
-                  fontWeight: 'bold'
-                },
-              });
-              onEmailSent();
-            } 
+                }
+                const responseData = await response.json();
+                console.log(responseData);
+        
+                toast.success(data.message, {
+                    position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
+                    style: {
+                        backgroundColor: '#d9d9d9',
+                        padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
+                        fontSize: '14px',
+                        fontWeight: 'bold'
+                    },
+                });
+                onEmailSent();
+            }
             if (data.status == 500){
               toast.error(data.message, {
                 position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
