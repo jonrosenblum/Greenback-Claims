@@ -19,12 +19,12 @@ async function createSubmissionsTableIfNotExists() {
       CREATE TABLE IF NOT EXISTS submissions (
         id SERIAL PRIMARY KEY,
         submission_name VARCHAR(255) NOT NULL,
-        submission_email VARCHAR(255) NOT NULL,
+        submission_email VARCHAR(255),
         submission_business VARCHAR(255) NOT NULL,
-        ein_social VARCHAR(255) NOT NULL,
-        business_type VARCHAR(255) NOT NULL,
-        credit_card_sales VARCHAR(255) NOT NULL,
-        franchise_agreement VARCHAR(255) NOT NULL,
+        ein_social VARCHAR(255),
+        business_type VARCHAR(255),
+        credit_card_sales VARCHAR(255),
+        franchise_agreement VARCHAR(255),
         submission_phone VARCHAR(255) NOT NULL,
         submission_address VARCHAR(255) NOT NULL,
         referral_id VARCHAR(255)
