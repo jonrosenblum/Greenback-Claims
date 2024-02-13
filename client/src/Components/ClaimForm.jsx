@@ -329,7 +329,7 @@ export default function ClaimForm({ onEmailSent }) {
             </div>
             <br />
             
-            <p className='indent-14 mt-12'>
+            <p className='mt-5'>
               The Firms shall consult with and obtain Client’s approval regarding any major decisions
               arising in connection with the above-referenced work or with respect to any of the services
               rendered by the Firms pursuant to this Agreement.
@@ -375,7 +375,7 @@ export default function ClaimForm({ onEmailSent }) {
               terms and conditions set forth in this Agreement shall be effective unless in writing,
               signed by both parties.
             </p>
-            <p className='indent-14 mt-20'>
+            <p className='mt-14'>
               If this Agreement accurately reflects the terms of our representation of Client in this matter,
               please sign and date in the space provided below and e-mail an executed copy of the Agreement
               to the Firms. This Agreement may be signed in one or more counterparts, all of which shall
@@ -404,10 +404,10 @@ export default function ClaimForm({ onEmailSent }) {
               <div><p  className='mb-3 font-bold text-center underline'>AGREED AND ACCEPTED:</p></div>
             <div className='flex items-end gap-5'>
               <p className='font-bold'>By: </p>
-              <div className=''>
-                <img src={url} alt="" className='w-[100px] object-contain' />
+              <div className='w-[35px] h-[35px]'>
+                <img src={url} alt="" className='w-[100%] h-[100%] object-contain' />
               </div>
-            </div>
+            </div> 
             </div>
             
             <div className='flex gap-5 font-bold'>
