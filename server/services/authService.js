@@ -73,6 +73,35 @@ function generateResetToken() {
   return token;
 }
 
+async function sendUsernameInfoEmail(email, username) {
+  try {
+    const config = {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      region: process.env.AWS_REGION,
+    };
+
+    aws.config.update(config);
+
+    const transporter = nodemailer.createTransport(
+      sesTransport({
+        ses: new aws.SES({ apiVersion: "2010-12-01" }),
+      })
+    );
+
+    const mailOptions = {
+      from: 'claims@greenbackclaims.com',
+      to: email,
+      subject: 'Your Username',
+      text: `Your username is: ${username}`
+    };
+
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    throw new Error('Failed to send username information email.');
+  }
+}
+
 // Send reset password email to the user
 async function sendResetPasswordEmail(email, resetToken) {
   try {
@@ -155,6 +184,22 @@ async function resetPassword(token, newPassword) {
   }
 }
 
+async function forgotUsername(email) {
+  try {
+    const user = await userModel.findUserByEmail(email);
+    console.log(user);
+    if (!user) {
+      throw new Error('User not found.');
+    }
+
+    const username = user.username;
+
+    await sendUsernameInfoEmail(email, username);
+
+  } catch (error) {
+    throw new Error(error.message || 'Forgot username failed.');
+  }
+}
 
 
 module.exports = {
@@ -162,5 +207,6 @@ module.exports = {
   login,
   findUserByID,
   forgotPassword,
+  forgotUsername,
   resetPassword
 };
