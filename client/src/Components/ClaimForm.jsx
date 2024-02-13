@@ -465,7 +465,7 @@ export default function ClaimForm({ onEmailSent }) {
                         annualSales: formData.annualSales, 
                         phone: formData.phone, 
                         franchiseAgreement: formData.franchiseAgreement, 
-                        address: formData.address + ' ' + formData.city + ', ' + formData.state + ', ' + formData.zipcode 
+                        address: formData.address + ' ' + formData.city + ', ' + formData.state + ', ' + formData.zipcode
                     }),
                 });
         
