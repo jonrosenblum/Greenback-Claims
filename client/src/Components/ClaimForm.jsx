@@ -210,21 +210,6 @@ export default function ClaimForm({ onEmailSent }) {
     return formIsValid;
   };
 
-
-  // const updateReferralFrequencyFunction= async (referralID)=>{
-  //   const responseData = await fetch(updateReferralFrequency+referralID, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     }
-  //   });
-
-  //   if (!responseData.ok) {
-  //     throw new Error();
-  //   }
-  //   console.log(await responseData.json())
-
-  // }
   
   // Handle input change
   const handleSalesInputChange = (e) => {
