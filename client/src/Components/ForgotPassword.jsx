@@ -63,7 +63,7 @@ function ForgotPassword({ onClose, onSignIn }) {
     return isValid;
   };
   return (
-      <PopupModal width={isForgotSuccess?'md:w-1/2 lg:w-1/4':''} title={isForgotSuccess?'Email sent':"Forgot your Password"} onClose={onClose}>
+      <PopupModal width={isForgotSuccess?'md:w-1/2 lg:w-1/4':''} title={isForgotSuccess?'Email sent':"Reset your password"} onClose={onClose}>
        {!isForgotSuccess? <form className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex w-3/4 items-center justify-start">
             {showAlert && <FormError type={alertType} message={alertMessage}  onClose={()=>setShowAlert(false)}/>}
@@ -86,7 +86,7 @@ function ForgotPassword({ onClose, onSignIn }) {
           </div>
           <div className="w-3/4 flex items-center justify-center mt-6">
           <button disabled={isLoading} onClick={handleSignUp} className="h-[60px] w-full flex justify-center items-center gap-2 rounded-[15px] bg-blue-600 text-xl text-white shadow">
-             {!isLoading? <span>Forgot Password</span> : <><span>Wait Please...</span> <Loader width={'w-4'} height={'h-4'} /></>}
+             {!isLoading? <span>Reset Password</span> : <><span>Loading...</span> <Loader width={'w-4'} height={'h-4'} /></>}
               
             </button>
           </div>
@@ -104,8 +104,8 @@ function ForgotPassword({ onClose, onSignIn }) {
         </form>
       :<form className="w-full flex flex-col items-center justify-center gap-3">
       <div className=" w-3/4 items-center justify-start">
-         <p className='font-medium text-green-700 text-center'>Reset password email sent successfully!</p>
-         <p className='text-center text-black'>Check your email and follows the instructions to reset the password. </p>
+         <p className='font-medium text-green-700 text-center mb-4'>Reset password email sent successfully!</p>
+         <p className='text-center text-black'>Instructions to reset your password have been sent to your email. </p>
       </div>
       <div className="w-3/4 flex items-center justify-center my-6">
       <button onClick={onSignIn} className="h-[60px] w-full flex justify-center items-center gap-2 rounded-[15px] bg-blue-600 text-xl text-white shadow">
