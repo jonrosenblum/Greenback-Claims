@@ -59,4 +59,15 @@ router.post('/forgot-password', async (req, res) => {
   }
 });
 
+router.post('/forgot-username', async (req, res) => {
+  try {
+    const { email } = req.body;
+    await authService.forgotUsername(email);
+    res.json({ message: 'Username reset email sent successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error.message || 'Forgot username failed.' });
+  }
+});
+
 module.exports = router;
