@@ -23,8 +23,7 @@ async function createSubmissionsTableIfNotExists() {
         franchise_agreement VARCHAR(255) NOT NULL,
         submission_phone VARCHAR(255) NOT NULL,
         submission_address VARCHAR(255) NOT NULL,
-   
-        referral_id VARCHAR(255) NOT NULL
+        referral_id VARCHAR(255)
       );
     `);
   } finally {

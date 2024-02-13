@@ -794,7 +794,7 @@ export default function ClaimForm({ onEmailSent }) {
             onChange={handleInputChange}
             onInput={()=> errors.address = ''}
             className="mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500"
-            placeholder="32, My Street, Kingston, New York 12401"
+            placeholder="32 Fox Lane"
             type="text"
             value={formData.address}
             required
