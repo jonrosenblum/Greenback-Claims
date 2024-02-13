@@ -22,7 +22,6 @@ export default function ClaimForm({ onEmailSent }) {
     if(refParam) setReferralID(refParam);
     // Get the value of the 'passwordToken' parameter
     const passwordToken = urlParams.get('passwordToken');
-    console.log(passwordToken);
     if(passwordToken) setPasswordToken(passwordToken);
     
   }, []);
@@ -432,16 +431,7 @@ export default function ClaimForm({ onEmailSent }) {
         const formDataToSend = new FormData();
         formDataToSend.append('pdf', url);
         formDataToSend.append('formData', JSON.stringify(formData));
-
-        if (referralID) {
-          formData.referralDetails = referralID;
-        } else {
-          formData.referralDetails = null;
-        }
-
         const email_api = import.meta.env.VITE_APP_API + 'send-email';
-        console.log({email_api});
-
         fetch(email_api, {
           method: 'POST',
           body: formDataToSend,
@@ -464,6 +454,7 @@ export default function ClaimForm({ onEmailSent }) {
                         companyType: formData.companyType, 
                         annualSales: formData.annualSales, 
                         phone: formData.phone, 
+                        referralID: referralID?referralID:null, 
                         franchiseAgreement: formData.franchiseAgreement, 
                         address: formData.address + ' ' + formData.city + ', ' + formData.state + ', ' + formData.zipcode
                     }),
