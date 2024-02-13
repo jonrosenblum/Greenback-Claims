@@ -5,9 +5,8 @@ import Loader from './Loader';
 import toast, { Toaster } from 'react-hot-toast';
 import PropTypes from 'prop-types';
 import { saveFormData } from '../Utils/ApiUtils';
+import ResetPassword from './ResetPassword';
 
-const email_api_test = import.meta.env.VITE_APP_API+'send-email'
-console.log({email_api_test})
 
 ClaimForm.propTypes = {
   onEmailSent: PropTypes.func.isRequired,
@@ -15,15 +14,16 @@ ClaimForm.propTypes = {
 
 export default function ClaimForm({ onEmailSent }) {
   const [referralID, setReferralID] = useState('');
+  const [passwordToken, setPasswordToken] = useState('');
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     // Get the value of the 'ref' parameter
     const refParam = urlParams.get('ref');
-    console.log(refParam);
-    // if(refParam){
-    //   updateReferralFrequencyFunction(refParam)
-    // }
-    setReferralID(refParam);
+    if(refParam) setReferralID(refParam);
+    // Get the value of the 'passwordToken' parameter
+    const passwordToken = urlParams.get('passwordToken');
+    if(passwordToken) setPasswordToken(passwordToken);
+    
   }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 4; 
@@ -36,7 +36,7 @@ export default function ClaimForm({ onEmailSent }) {
     ein: '',
     annualSales: '',
     franchiseAgreement: '',
-    referralDetails: '',
+    referralDetails: 'None',
     firstName: '',
     lastName: '',
     email: '',
@@ -208,21 +208,6 @@ export default function ClaimForm({ onEmailSent }) {
   };
 
 
-  // const updateReferralFrequencyFunction= async (referralID)=>{
-  //   const responseData = await fetch(updateReferralFrequency+referralID, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     }
-  //   });
-
-  //   if (!responseData.ok) {
-  //     throw new Error();
-  //   }
-  //   console.log(await responseData.json())
-
-  // }
-  
   // Handle input change
   const handleSalesInputChange = (e) => {
     const { name, value } = e.target;
@@ -442,49 +427,60 @@ export default function ClaimForm({ onEmailSent }) {
     doc.html(myDiv, {
       callback: function (doc) {
         let url = doc.output('blob')
-        if(referralID){
-          formData.referralDetails = referralID
+        if (referralID) {
+          formData.referralDetails = referralID;
+        } else {
+          formData.referralDetails = null;
         }
         const formDataToSend = new FormData();
         formDataToSend.append('pdf', url);
         formDataToSend.append('formData', JSON.stringify(formData));
-
-        const email_api = import.meta.env.VITE_APP_API+'send-email'
-        console.log({email_api})
+        const email_api = import.meta.env.VITE_APP_API + 'send-email';
         fetch(email_api, {
           method: 'POST',
           body: formDataToSend,
         })
-          .then((response) => response.json())
-          .then(async (data) => {
+        .then((response) => response.json())
+        .then(async (data) => {
             // Handle response
             if(data.status == 200){
-              if(referralID){
-                  const response = await fetch(saveFormData, {
+                const response = await fetch(saveFormData, {
                     method: 'POST',
                     headers: {
-                      'Content-Type': 'application/json',
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ firstName:formData.firstName, lastName:formData.lastName, businessName:formData.businessName, phone:formData.phone, address:formData.address+' '+formData.city+', '+ formData.state+', '+formData.zipcode, referralID }),
-                  });
-            
-                  if (!response.ok) {
+                    body: JSON.stringify({ 
+                        firstName: formData.firstName, 
+                        lastName: formData.lastName, 
+                        businessName: formData.businessName, 
+                        email: formData.email, 
+                        ein: formData.ein, 
+                        companyType: formData.companyType, 
+                        annualSales: formData.annualSales, 
+                        phone: formData.phone, 
+                        referralID: referralID?referralID:null, 
+                        franchiseAgreement: formData.franchiseAgreement, 
+                        address: formData.address + ' ' + formData.city + ', ' + formData.state + ', ' + formData.zipcode
+                    }),
+                });
+        
+                if (!response.ok) {
                     throw new Error();
-                  }
-                  const data = await response.json();
-                  console.log(data)
-              }
-              toast.success(data.message, {
-                position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
-                style: {
-                  backgroundColor: '#d9d9d9',
-                  padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
-                  fontSize: '14px',
-                  fontWeight: 'bold'
-                },
-              });
-              onEmailSent();
-            } 
+                }
+                const responseData = await response.json();
+                console.log(responseData);
+        
+                toast.success(data.message, {
+                    position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
+                    style: {
+                        backgroundColor: '#d9d9d9',
+                        padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
+                        fontSize: '14px',
+                        fontWeight: 'bold'
+                    },
+                });
+                onEmailSent();
+            }
             if (data.status == 500){
               toast.error(data.message, {
                 position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
@@ -808,7 +804,7 @@ export default function ClaimForm({ onEmailSent }) {
             onChange={handleInputChange}
             onInput={()=> errors.address = ''}
             className="mx-2 p-2 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500"
-            placeholder="32, My Street, Kingston, New York 12401"
+            placeholder="32 Fox Lane"
             type="text"
             value={formData.address}
             required
@@ -1067,6 +1063,8 @@ export default function ClaimForm({ onEmailSent }) {
   };
 
   return (
+    <>
+    {passwordToken && <ResetPassword token={passwordToken} onClose={()=>{setPasswordToken('')}} />}
     <div className="bg-white text-black pl-3 pr-3 pb-3 h-[700px] overflow-y-auto">
       <Toaster />
       <div className="p-0 xl:p-10">
@@ -1075,5 +1073,6 @@ export default function ClaimForm({ onEmailSent }) {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -7,6 +7,7 @@ const authController = require("./controllers/authController");
 const emailController = require("./controllers/emailController");
 const saveFormController = require("./controllers/saveFormController");
 const countController = require('./controllers/countController');
+const adminController = require("./controllers/adminController");
 
 
 const app = express();
@@ -58,6 +59,7 @@ app.post("/send-email", upload.single("pdf"), emailController.sendEmail);
 app.post("/send-email", emailController.sendReferralEmail);
 app.get('/api/submissions/:referralID', countController.getMatchingSubmissionsController);
 app.post('/api/update-referral-frequency/:referralID', countController.updateReferralFrequencyCount);
+app.use("/api/admin/", adminController);
 
 
 const PORT = process.env.PORT || 3000;

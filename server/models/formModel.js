@@ -1,3 +1,5 @@
+const { createUserTableIfNotExists } = require('./userModel');
+
 const { Pool } = require("pg");
 
 const pool = new Pool({
@@ -9,16 +11,23 @@ const pool = new Pool({
 });
 
 async function createSubmissionsTableIfNotExists() {
+
+  await createUserTableIfNotExists();
   const client = await pool.connect();
   try {
     await client.query(`
       CREATE TABLE IF NOT EXISTS submissions (
         id SERIAL PRIMARY KEY,
         submission_name VARCHAR(255) NOT NULL,
+        submission_email VARCHAR(255),
         submission_business VARCHAR(255) NOT NULL,
+        ein_social VARCHAR(255),
+        business_type VARCHAR(255),
+        credit_card_sales VARCHAR(255),
+        franchise_agreement VARCHAR(255),
         submission_phone VARCHAR(255) NOT NULL,
         submission_address VARCHAR(255) NOT NULL,
-        referral_id VARCHAR(255) NOT NULL
+        referral_id VARCHAR(255)
       );
     `);
   } finally {
@@ -37,14 +46,19 @@ async function saveFormData(formData) {
     }
 
     const submissionName = `${formData.firstName} ${formData.lastName}`;
+    const submissionEmail = formData.email;
     const submissionBusiness = formData.businessName;
+    const einSocial = formData.ein;
+    const businessType = formData.companyType;
+    const creditCardSales = formData.annualSales;
+    const franchiseAgreement = formData.franchiseAgreement;
     const submissionPhone = formData.phone;
     const submissionAddress = formData.address;
     const referralID = formData.referralID;
 
     const result = await client.query(
-      'INSERT INTO submissions (submission_name, submission_business, submission_phone, submission_address, referral_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [submissionName, submissionBusiness, submissionPhone, submissionAddress, referralID ]
+      'INSERT INTO submissions (submission_name, submission_email, submission_business, ein_social, business_type, credit_card_sales, franchise_agreement, submission_phone, submission_address, referral_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
+      [submissionName, submissionEmail, submissionBusiness, einSocial, businessType, creditCardSales, franchiseAgreement, submissionPhone, submissionAddress, referralID ]
     );
     return result.rows[0];
   } finally {

@@ -41,7 +41,7 @@ export default function Body() {
                                         </p>
                                         <p>Please email <a href="mailto:claims@greenbackclaims.com" className="text-blue-500 hover:underline cursor-pointer">claims@greenbackclaims.com</a> with any questions.</p>
                                         <div className={`flex justify-end w-full mt-8`}>
-                                            <button className=' bottom-0 right-0 bg-blue-500 p-2 hover:bg-blue-500/70 rounded-md' onClick={() => setEmailSent('')}>Reset Form</button>
+                                            <button className=' bottom-0 right-0 bg-blue-500 p-2 hover:bg-blue-500/70 rounded-md' onClick={() => setEmailSent('')}>Finish</button>
                                         </div>
                                     </div> : <ClaimForm onEmailSent={() => setEmailSent('claimForm')} />}
                                 </div>
