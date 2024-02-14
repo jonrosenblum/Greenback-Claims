@@ -1,5 +1,5 @@
 const { createUserTableIfNotExists } = require('./userModel');
-
+const { createAdminTableIfNotExists } = require('./adminModel');
 const { Pool } = require("pg");
 
 const pool = new Pool({
@@ -36,6 +36,7 @@ async function createSubmissionsTableIfNotExists() {
 }
 
 async function createAdminSubmittedClaimsTable() {
+  await createAdminTableIfNotExists();
   const client = await pool.connect();
   try {
     await client.query(`

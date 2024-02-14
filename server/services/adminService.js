@@ -45,9 +45,9 @@ if (!secretKey) {
     }
   }
 
-  async function getAllSubmissions() {
+  async function getAllAdminSubmissions() {
     try {
-      const submissions = await adminModel.getAllSubmissions();
+      const submissions = await adminModel.getAllAdminSubmissions();
       return submissions;
     } catch (error) {
       throw new Error(error.message || 'Failed to get submissions.');
@@ -57,7 +57,7 @@ if (!secretKey) {
   module.exports = {
     signup,
     login,
-    getAllSubmissions
+    getAllAdminSubmissions
   };
   
   

@@ -56,10 +56,12 @@ async function findAdminByUsername(username) {
     }
   }
 
-  async function getAllSubmissions() {
+  async function getAllAdminSubmissions() {
+    await createAdminTableIfNotExists();
+
     const client = await pool.connect();
     try {
-      const result = await client.query('SELECT * FROM submissions');
+      const result = await client.query('SELECT * FROM adminsubmittedclaims');
       return result.rows;
     } finally {
       client.release();
@@ -70,6 +72,7 @@ async function findAdminByUsername(username) {
 module.exports = {
     createAdmin,
     findAdminByUsername,
-    getAllSubmissions
+    createAdminTableIfNotExists,
+    getAllAdminSubmissions
   };
   
