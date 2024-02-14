@@ -25,6 +25,8 @@ async function createAdminTableIfNotExists() {
   }
 }
 
+
+
 async function createAdmin(username, email, password) {
   await createAdminTableIfNotExists();
 
