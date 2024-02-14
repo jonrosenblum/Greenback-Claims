@@ -45,7 +45,7 @@ app.get("/", async (req, res) => {
     const result = await client.query('SELECT $1::text as message', ['Hello, PostgreSQL!']);
     const data = result.rows[0].message;
     client.release();
-    res.send(`API healthy: ${data}`);
+    res.send(`API healthy!: ${data}`);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
