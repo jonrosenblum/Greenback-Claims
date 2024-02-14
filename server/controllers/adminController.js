@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/all-submissions', async (req, res) => {
   try {
-    const submissions = await adminService.getAllSubmissions();
+    const submissions = await adminService.getAllAdminSubmissions();
     res.json(submissions);
   } catch (error) {
     console.error(error);

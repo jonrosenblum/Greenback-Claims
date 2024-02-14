@@ -1,5 +1,5 @@
 const { createUserTableIfNotExists } = require('./userModel');
-
+const { createAdminTableIfNotExists } = require('./adminModel');
 const { Pool } = require("pg");
 
 const pool = new Pool({
@@ -35,16 +35,34 @@ async function createSubmissionsTableIfNotExists() {
   }
 }
 
+async function createAdminSubmittedClaimsTable() {
+  await createAdminTableIfNotExists();
+  const client = await pool.connect();
+  try {
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS adminsubmittedclaims (
+        id SERIAL PRIMARY KEY,
+        holding VARCHAR(255),
+        business_name VARCHAR(255) NOT NULL,
+        business_ein VARCHAR(255) NOT NULL,
+        percentage VARCHAR(255),
+        referral VARCHAR(255),
+        contact_name VARCHAR(255) NOT NULL,
+        contact_phone_number VARCHAR(255) NOT NULL,
+        contact_address VARCHAR(255) NOT NULL
+      );
+    `);
+  } finally {
+    client.release();
+  }
+}
+
 async function saveFormData(formData) {
   await createSubmissionsTableIfNotExists();
+  await createAdminSubmittedClaimsTable();
 
   const client = await pool.connect();
   try {
-
-    if (!formData || !formData.firstName || !formData.lastName || !formData.businessName || !formData.phone || !formData.address) {
-      throw new Error('Invalid form data');
-    }
-
     const submissionName = `${formData.firstName} ${formData.lastName}`;
     const submissionEmail = formData.email;
     const submissionBusiness = formData.businessName;
@@ -56,11 +74,24 @@ async function saveFormData(formData) {
     const submissionAddress = formData.address;
     const referralID = formData.referralID;
 
-    const result = await client.query(
-      'INSERT INTO submissions (submission_name, submission_email, submission_business, ein_social, business_type, credit_card_sales, franchise_agreement, submission_phone, submission_address, referral_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
-      [submissionName, submissionEmail, submissionBusiness, einSocial, businessType, creditCardSales, franchiseAgreement, submissionPhone, submissionAddress, referralID ]
+    // Insert data into the submissions table
+    const submissionResult = await client.query(
+      'INSERT INTO submissions (submission_name, submission_email, submission_business, ein_social, business_type, credit_card_sales, franchise_agreement, submission_phone, submission_address, referral_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id',
+      [submissionName, submissionEmail, submissionBusiness, einSocial, businessType, creditCardSales, franchiseAgreement, submissionPhone, submissionAddress, referralID]
     );
-    return result.rows[0];
+    const submissionId = submissionResult.rows[0].id;
+
+    // Insert data into the adminsubmittedclaims table
+    const adminClaimResult = await client.query(
+      'INSERT INTO adminsubmittedclaims (business_name, business_ein, contact_name, contact_phone_number, contact_address) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+      [submissionBusiness, einSocial, submissionName, submissionPhone, submissionAddress]
+    );
+    const adminClaimId = adminClaimResult.rows[0].id;
+
+    return {
+      submissionId: submissionId,
+      adminClaimId: adminClaimId
+    };
   } finally {
     client.release();
   }
