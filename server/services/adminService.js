@@ -17,8 +17,7 @@ if (!secretKey) {
         throw new Error('Admin already exists.');
       }
   
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const newAdmin = await adminModel.createAdmin(username, email, hashedPassword);
+      const newAdmin = await adminModel.createAdmin(username, email, password);
       delete newAdmin.password
       return newAdmin;
     } catch (error) {
