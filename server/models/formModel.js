@@ -50,7 +50,7 @@ async function createAdminSubmittedClaimsTable() {
         contact_name VARCHAR(255) NOT NULL,
         contact_phone_number VARCHAR(255) NOT NULL,
         contact_address VARCHAR(255) NOT NULL,
-        notes VARCHAR(255),
+        notes VARCHAR(255)
       );
     `);
   } finally {
