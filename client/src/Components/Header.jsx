@@ -12,7 +12,7 @@ export default function Header() {
   const [showPopup, setShowPopup] = useState("");
   const { visa, setVisaTrue } = useStore();
 
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated,user } = useAuthStore();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -34,9 +34,9 @@ export default function Header() {
               </div>
             </div>
             <div className="flex flex-1 justify-center px-2  sm:justify-end">
-              <div className="w-full max-wLg sm:max-w-xs">
+              <div className="w-full max-wLg sm:max-w-lg">
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-6">
+                  <div className="flex space-x-6 sm:justify-end" >
                     <Link
                       to="about"
                       className="text-white hover:text-gray-300 cursor-pointer"
@@ -89,14 +89,20 @@ export default function Header() {
                         </a>
                       </div>
                     </div>
-                    {isAuthenticated ? (
-                      <RouterLink
+                    {isAuthenticated && user.role=='admin'&&   <RouterLink
+                        to="/dashboard"
+                        className="text-white hover:text-gray-300 cursor-pointer"
+                      >
+                        Dashboard
+                      </RouterLink>}
+
+                      {isAuthenticated && user.role=='user'&&   <RouterLink
                         to="/dashboard/referrals"
                         className="text-white hover:text-gray-300 cursor-pointer"
                       >
                         Referrals
-                      </RouterLink>
-                    ) : (
+                      </RouterLink>}
+                    {!isAuthenticated && (
                       <a
                         onClick={() => {
                           setShowPopup("login");

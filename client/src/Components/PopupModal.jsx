@@ -9,11 +9,11 @@ function PopupModal({ onClose, title, width, children  }) {
           <div className="mr-10 mt-4 flex w-full justify-end">
             <img src={closeIcon} alt="" className="cursor-pointer" onClick={onClose} />
           </div>
-          <div className="mb-3 sm:mb-5">
+          {title &&<div className="mb-3 sm:mb-5">
             <h1 className="text-xl md:text-2xl lg:text-2xl font-bold text-black/70">
             {title}
             </h1>
-          </div>
+          </div>}
           {children}
         </div>
       </div>
@@ -28,6 +28,6 @@ PopupModal.propTypes = {
     children:PropTypes.node,
     width:PropTypes.string,
     onClose: PropTypes.func,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
   };
 export default PopupModal

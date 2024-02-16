@@ -1,12 +1,32 @@
 const express = require('express');
 const authService = require('../services/authService');
-
 const router = express.Router();
 
+
+//******************************************************************/ 
+// CREATE USER ROLE
+//******************************************************************/ 
+
+router.post('/create-role', async (req, res) => {
+  try {
+    const { role_name } = req.body;
+    const newRole = await authService.createRole(role_name)
+    res.status(201).json({ message: 'User Role created successfully', role: newRole });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error.message || 'Create Role failed.' });
+  }
+});
+
+
+
+//******************************************************************/ 
+// SIGNUP USER
+//******************************************************************/ 
 router.post('/signup', async (req, res) => {
   try {
-    const { username, email, password, referral_ID } = req.body;
-    const newUser = await authService.signup(username, email, password, referral_ID);
+    const { username, email, password, role } = req.body;
+    const newUser = await authService.signup(username, email, password, role);
     res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (error) {
     console.error(error);
@@ -14,6 +34,11 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+
+
+//******************************************************************/ 
+// LOGIN USER
+//******************************************************************/ 
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -25,6 +50,11 @@ router.post('/login', async (req, res) => {
   }
 });
 
+
+
+//******************************************************************/ 
+// RESET PASSWORD
+//******************************************************************/ 
 router.post('/reset-password', async (req, res) => {
   try {
     const { token, newPassword } = req.body;
@@ -36,6 +66,11 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
+
+
+//******************************************************************/ 
+// GET USER DETAIL BY ID
+//******************************************************************/ 
 router.get('/user/:userId', async (req, res)=> {
   try {
     const { userId } = req.params;
@@ -48,6 +83,10 @@ router.get('/user/:userId', async (req, res)=> {
   }
 })
 
+
+//******************************************************************/ 
+// FORGOT PASSWORD
+//******************************************************************/ 
 router.post('/forgot-password', async (req, res) => {
   try {
     const { email } = req.body;
@@ -59,6 +98,10 @@ router.post('/forgot-password', async (req, res) => {
   }
 });
 
+
+//******************************************************************/ 
+// FORGOT USERNAME
+//******************************************************************/
 router.post('/forgot-username', async (req, res) => {
   try {
     const { email } = req.body;

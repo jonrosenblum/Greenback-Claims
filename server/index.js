@@ -8,6 +8,7 @@ const emailController = require("./controllers/emailController");
 const saveFormController = require("./controllers/saveFormController");
 const countController = require('./controllers/countController');
 const adminController = require("./controllers/adminController");
+const { initializeDatabase } = require("./db");
 
 
 const app = express();
@@ -21,31 +22,13 @@ app.use(
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-
-// Set up a PostgreSQL connection pool
-const pool = new Pool({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT || 5432,
-  ssl: {
-    rejectUnauthorized: false, // Set to true in production with a valid SSL certificate
-  },
-});
-
-// Use the connection pool for queries
-app.locals.pool = pool;
-
+// init DB
+initializeDatabase();
 const upload = multer({ storage: multer.memoryStorage() });
 
 app.get("/", async (req, res) => {
   try {
-    const client = await pool.connect();
-    const result = await client.query('SELECT $1::text as message', ['Hello, PostgreSQL!']);
-    const data = result.rows[0].message;
-    client.release();
-    res.send(`API healthy!: ${data}`);
+    res.send(`API healthy!`);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });

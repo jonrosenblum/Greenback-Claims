@@ -2,18 +2,20 @@ import { useState } from 'react';
 import useAuthStore from '../zustand/authStore'; // Update the path accordingly
 import PopupModal from "./PopupModal";
 import PropTypes from 'prop-types';
-import { logInAPI } from './../Utils/ApiUtils'
+import {logInAPI } from './../Utils/ApiUtils'
 import Loader from './Loader';
 import FormError from './FormError';
 import { useNavigate } from 'react-router-dom'
 import ForgotPassword from './ForgotPassword';
 import ForgotUsername from './ForgotUsername';
+import { jwtDecode } from "jwt-decode";
 
 function Login({ onClose, onSignUp }) {
   const { login } = useAuthStore();
   const navigate = useNavigate();
 
   const [isLoading, setLoading] = useState(false);
+  const [isAdminLogin, setAdminLogin] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPopup, setShowPopup] = useState("");
@@ -46,11 +48,25 @@ function Login({ onClose, onSignUp }) {
       const data = await response.json();
       console.log(data)
       const token = data.token;
+
+      console.log(jwtDecode(token));
+      if(jwtDecode(token).role === 'user' && isAdminLogin){
+        throw new Error("Invalid credentials")
+      }
+
+      if(jwtDecode(token).role === 'admin' && !isAdminLogin){
+        throw new Error("Invalid credentials")
+      }
+      
+      
       // Update the user state or perform other actions
       login(token);
+
+      
       setLoading(false);
       onClose(); // close the modal
       localStorage.setItem('token',token)
+      console.log(useAuthStore);
       navigate('/dashboard'); // Replace '/dashboard' with the desired route
 
 
@@ -98,7 +114,7 @@ function Login({ onClose, onSignUp }) {
           onSignIn={() => setShowPopup("login")}
         />
       ):
-      <PopupModal width={''} title="Sign in to Greenback Claims" onClose={onClose}>
+      <PopupModal width={''} title={isAdminLogin?"Sign in as Admin":"Sign in to Greenback Claims"} onClose={onClose}>
         <form className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-col gap-1 w-3/4 items-center justify-start">
         {showAlert && <FormError type={alertType} message={alertMessage}  onClose={()=>setShowAlert(false)}/>}
@@ -140,18 +156,37 @@ function Login({ onClose, onSignUp }) {
               
             </button>
           </div>
+          {!isAdminLogin?
+          <>
           <div className="flex h-[20px] w-3/4 items-center justify-between gap-6">
             <hr className="h-[0px] w-2/4 border border-zinc-400" />
             <p>OR</p>
             <hr className="h-[0px] w-2/4 border border-zinc-400" />
           </div>
-          <div className="m-auto mb-10 sm:mb-20 text-center">
+          <div className="m-auto mb-10 sm:mb-0 text-center">
             {"Don't have an account?"}
             <a onClick={onSignUp} className="text-[#4560CB] cursor-pointer">
               {" "}
               Sign up
             </a>
           </div>
+          <div className="m-auto mb-10 sm:mt-5 sm:mb-15 text-center">
+            {"If you are admin and want to access dashboard"}
+            <a onClick={()=>{setAdminLogin(true)}} className="text-[#4560CB] cursor-pointer">
+              {" "}
+              Admin Login
+            </a>
+          </div>
+          </>:
+          <div className="m-auto mb-10 sm:mt-5 sm:mb-15 text-center">
+          {"If you are not admin then"}
+          <a onClick={()=>{setAdminLogin(false)}} className="text-[#4560CB] cursor-pointer">
+            {" "}
+            User Login
+          </a>
+        </div>
+          }
+          
         </form>
       </PopupModal>
       }
