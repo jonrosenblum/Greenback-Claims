@@ -35,6 +35,20 @@ async function initializeDatabase() {
     `role_id SERIAL PRIMARY KEY,
     role_name VARCHAR(255) NOT NULL`
     );
+
+     // Check if roles exist, and if not, insert them
+     const rolesCountQuery = 'SELECT COUNT(*) FROM roles';
+     const rolesCountResult = await db.query(rolesCountQuery);
+ 
+     if (rolesCountResult.rows[0].count === '0') {
+       // Insert default roles (admin and user)
+       const insertRolesQuery = `
+         INSERT INTO roles (role_name) VALUES
+         ('admin'),
+         ('user')
+       `;
+       await db.query(insertRolesQuery);
+     }
     
     // Create user table
     await createTableIfNotExists(`users`, 
