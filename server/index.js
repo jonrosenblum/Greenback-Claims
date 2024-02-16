@@ -28,7 +28,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 app.get("/", async (req, res) => {
   try {
-    res.send(`API healthy!`);
+    res.send(`API healthy!!`);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
