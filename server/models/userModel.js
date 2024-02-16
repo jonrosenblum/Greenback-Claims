@@ -1,45 +1,14 @@
-const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
+const { db } = require("../db");
 
-const pool = new Pool({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT || 5432,
-});
-
-async function createUserTableIfNotExists() {
-  const client = await pool.connect();
-  try {
-    await client.query(`
-      CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
-        username VARCHAR(255) NOT NULL UNIQUE,
-        email VARCHAR(255) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL,
-        referral_id VARCHAR(255) NOT NULL UNIQUE,
-        form_submissions INTEGER NOT NULL DEFAULT 0,
-        referral_frequency INTEGER NOT NULL DEFAULT 0,
-        reset_token VARCHAR(255),
-        reset_token_expires TIMESTAMP
-      );
-    `);
-  } finally {
-    client.release();
-  }
-}
-
-async function createUser(username, email, password, referralID) {
-  await createUserTableIfNotExists();
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const client = await pool.connect();
+//******************************************************************/ 
+// USER ROLES
+//******************************************************************/ 
+async function createUserRole(roleName) {
+  const client = await db.connect();
   try {
     const result = await client.query(
-      'INSERT INTO users (username, email, password, referral_id) VALUES ($1, $2, $3, $4) RETURNING *',
-      [username, email, hashedPassword, referralID]
+      `INSERT INTO roles (role_name) VALUES ('${roleName}')`
     );
     return result.rows[0];
   } finally {
@@ -47,10 +16,52 @@ async function createUser(username, email, password, referralID) {
   }
 }
 
-async function findUserByUsername(username) {
-  await createUserTableIfNotExists();
 
-  const client = await pool.connect();
+async function findRoleByName(roleName) {
+  const client = await db.connect();
+  try {
+    const result = await client.query('SELECT * FROM roles WHERE role_name = $1', [roleName]);
+    return result.rows[0];
+  } finally {
+    client.release();
+  }
+}
+
+
+async function getUserRole(userId) {
+  try {
+    const user = await db.query('SELECT roles.role_name FROM users INNER JOIN roles ON users.role_id = roles.role_id WHERE users.id = $1', [userId]);
+    return user.rows[0];
+  } catch (error) {
+    throw new Error(error.message || 'Failed to get user role.');
+  }
+}
+
+
+//******************************************************************/ 
+// USER CREATION
+//******************************************************************/ 
+async function createUser(username, email, password, referralID,role) {
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const client = await db.connect();
+  try {
+    const result = await client.query(
+      'INSERT INTO users (username, email, password, referral_id, role_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [username, email, hashedPassword, referralID, role]
+    );
+    return result.rows[0];
+  } finally {
+    client.release();
+  }
+}
+
+
+//******************************************************************/ 
+// FIND USER BY USERNAME
+//******************************************************************/
+async function findUserByUsername(username) {
+  const client = await db.connect();
   try {
     const result = await client.query('SELECT * FROM users WHERE username = $1', [username]);
     return result.rows[0];
@@ -59,10 +70,12 @@ async function findUserByUsername(username) {
   }
 }
 
-async function findUserByID(userId) {
-  await createUserTableIfNotExists();
 
-  const client = await pool.connect();
+//******************************************************************/ 
+// FIND USER BY ID
+//******************************************************************/
+async function findUserByID(userId) {
+  const client = await db.connect();
   try {
     const result = await client.query('SELECT * FROM users WHERE id = $1', [userId]);
     return result.rows[0];
@@ -71,10 +84,11 @@ async function findUserByID(userId) {
   }
 }
 
+//******************************************************************/ 
+// FIND USER BY EMAIL
+//******************************************************************/
 async function findUserByEmail(email) {
-  await createUserTableIfNotExists();
-
-  const client = await pool.connect();
+  const client = await db.connect();
   try {
     const result = await client.query('SELECT * FROM users WHERE email = $1', [email]);
     return result.rows[0];
@@ -83,8 +97,12 @@ async function findUserByEmail(email) {
   }
 }
 
+
+//******************************************************************/ 
+// SAVE RESET PASSWORD TOKEN
+//******************************************************************/
 async function saveResetToken(email, resetToken, expirationDate) {
-  const client = await pool.connect();
+  const client = await db.connect();
   try {
     await client.query('UPDATE users SET reset_token = $1, reset_token_expires = $2 WHERE email = $3', [resetToken, expirationDate, email]);
   } finally {
@@ -92,8 +110,12 @@ async function saveResetToken(email, resetToken, expirationDate) {
   }
 }
 
+
+//******************************************************************/ 
+// FIND USER BY RESET TOKEN
+//******************************************************************/
 async function findUserByResetToken(token) {
-  const client = await pool.connect();
+  const client = await db.connect();
   try {
     const result = await client.query('SELECT * FROM users WHERE reset_token = $1', [token]);
     return result.rows[0];
@@ -102,8 +124,12 @@ async function findUserByResetToken(token) {
   }
 }
 
+
+//******************************************************************/ 
+// UPDATE USER PASSWORD 
+//******************************************************************/
 async function updateUserPassword(userId, newPassword) {
-  const client = await pool.connect();
+  const client = await db.connect();
   try {
     await client.query('UPDATE users SET password = $1 WHERE id = $2', [newPassword, userId]);
   } finally {
@@ -112,7 +138,7 @@ async function updateUserPassword(userId, newPassword) {
 }
 
 async function clearResetToken(userId) {
-  const client = await pool.connect();
+  const client = await db.connect();
   try {
     await client.query('UPDATE users SET reset_token = NULL, reset_token_expires = NULL WHERE id = $1', [userId]);
   } finally {
@@ -120,7 +146,7 @@ async function clearResetToken(userId) {
   }
 }
 async function updateFormSubmissionsCount(referralID) {
-  const client = await pool.connect();
+  const client = await db.connect();
   try {
     // Increment the form_submissions count for the given referralID
     const result = await client.query(
@@ -136,7 +162,7 @@ async function updateFormSubmissionsCount(referralID) {
 }
 
 async function updateReferralFrequencyCount(referralID) {
-  const client = await pool.connect();
+  const client = await db.connect();
   try {
     // Increment the form_submissions count for the given referralID
     const result = await client.query(
@@ -152,8 +178,10 @@ async function updateReferralFrequencyCount(referralID) {
 }
 
 module.exports = {
+  createUserRole,
+  findRoleByName,
+  getUserRole,
   createUser,
-  createUserTableIfNotExists,
   findUserByUsername,
   findUserByID,
   findUserByEmail,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link,Navigate } from 'react-router-dom';
 import Referrals from "./Pieces/Referrals";
 import Sidebar from "./Pieces/Sidebar";
 import Home from "./Pieces/Home";
@@ -16,6 +16,14 @@ function Dashboard() {
         // Do something when the location changes
         setCurrentPath(location.pathname);
     }, [location]);
+
+    const isAuthenticated = () => {
+      // Implement your authentication logic here
+      if(user.role == 'user')
+      return true;
+      else 
+      return false;
+    };
     
   return (
     <div className="m-0 font-sans text-base antialiased h-[100vh] font-normal leading-default bg-gray-100 text-slate-500">
@@ -53,8 +61,8 @@ function Dashboard() {
       <section className="max-h-[91vh] overflow-y-scroll no-scrollbar">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/referrals" element={<Referrals />} />
+          <Route path="/profile" element={isAuthenticated()?<Profile />:<Navigate to="/dashboard" />} />
+          <Route path="/referrals" element={isAuthenticated()?<Referrals />:<Navigate to="/dashboard" />} />
         </Routes>
       </section>
        

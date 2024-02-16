@@ -3,9 +3,12 @@ const userModel = require("../models/userModel");
 
 async function saveFormDataService(formData) {
   try {
+    const {referralID } = formData;
     const savedFormData = await formModel.saveFormData(formData);
 
-    await userModel.updateFormSubmissionsCount(formData.referralID);
+    if(referralID){
+      await userModel.updateFormSubmissionsCount(referralID);
+    }
 
     return savedFormData;
   } catch (error) {

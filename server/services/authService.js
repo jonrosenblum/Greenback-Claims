@@ -7,9 +7,7 @@ const nodemailer = require('nodemailer');
 const aws = require("aws-sdk");
 const sesTransport = require("nodemailer-ses-transport");
 const emailTemplates = require('../emails/emailTemplates'); 
-
-
-
+const emailService = require("../services/emailService");
 
 
 if (!secretKey) {
@@ -17,16 +15,35 @@ if (!secretKey) {
   process.exit(1);
 }
 
-async function signup(username, email, password, referral_ID) {
+//******************************************************************/ 
+// USER ROLES
+//******************************************************************/ 
+
+async function createRole(roleName) {
+  try {
+    const role = await userModel.findRoleByName(roleName);
+    if (role) {
+      throw new Error('Role is already exist.');
+    }
+    const newRole = await userModel.createUserRole(roleName);
+    return newRole;
+  } catch (error) {
+    throw new Error(error.message || 'Create Role failed.');
+  }
+}
+
+
+//******************************************************************/ 
+// USER SIGNUP
+//******************************************************************/ 
+async function signup(username, email, password,role = 2) {
   try {
     const existingUser = await userModel.findUserByUsername(username);
     if (existingUser) {
       throw new Error('Username is already taken.');
     }
-
-    // const hashedPassword = await bcrypt.hash(password, 10);
-    // const referralLink = username+'_' + (await bcrypt.hash(username, 5));
-    const newUser = await userModel.createUser(username, email, password, referral_ID);
+    const referral_ID = username+'_'+ Math.random().toString(16).substring(2)
+    const newUser = await userModel.createUser(username, email, password, referral_ID, role);
     delete newUser.password
     return newUser;
   } catch (error) {
@@ -34,36 +51,54 @@ async function signup(username, email, password, referral_ID) {
   }
 }
 
+
+//******************************************************************/ 
+// USER LOGIN
+//******************************************************************/ 
 async function login(username, password) {
   try {
     const user = await userModel.findUserByUsername(username);
-    console.log(user);
     if (!user) {
       throw new Error('Invalid username or password.');
     }
     const passwordMatch = await bcrypt.compare(password, user.password);
-    console.log(passwordMatch);
-    if (passwordMatch) {
-      const token = jwt.sign({ userId: user.id, username:user.username, email:user.email, referral_id:user.referral_id,form_submissions:user.form_submissions,referral_frequency:user.referral_frequency }, secretKey, { expiresIn: '1h' });
-      return token;
-    } else {
+    if(!passwordMatch){
       throw new Error('Invalid username or password.');
     }
+    
+    const role = await userModel.getUserRole(user.id);
+    const token = jwt.sign(
+      { userId: user.id,
+        username:user.username,
+        email:user.email, 
+        role:role.role_name, 
+        referral_id:user.referral_id,
+        form_submissions:user.form_submissions,
+        referral_frequency:user.referral_frequency
+       }, 
+       secretKey, { expiresIn: '1h' }
+       );
+    return token;
+
   } catch (error) {
     throw new Error(error.message || 'Login failed.');
   }
 }
 
+
+
+//******************************************************************/ 
+// FIND USER BY ID
+//******************************************************************/ 
 async function findUserByID(userId) {
   try {
     const user = await userModel.findUserByID(userId);
-
     if (!user) {
       throw new Error('Invalid ID.');
     }
     return user
   } catch (error) {
-    throw new Error(error.message || 'Login failed.');
+    throw new Error(error.message || 'User not found.');
   }
 }
 
@@ -74,66 +109,10 @@ function generateResetToken() {
   return token;
 }
 
-async function sendUsernameInfoEmail(email, username) {
-  try {
-    const config = {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      region: process.env.AWS_REGION,
-    };
 
-    aws.config.update(config);
-
-    const transporter = nodemailer.createTransport(
-      sesTransport({
-        ses: new aws.SES({ apiVersion: "2010-12-01" }),
-      })
-    );
-
-    const mailOptions = {
-      from: 'claims@greenbackclaims.com',
-      to: email,
-      subject: 'Your Username',
-      html: emailTemplates.forgotUsernameEmailTemplate(process.env.FRONTEND_APP_URL,username)
-    };
-
-    await transporter.sendMail(mailOptions);
-  } catch (error) {
-    throw new Error('Failed to send username information email.');
-  }
-}
-
-// Send reset password email to the user
-async function sendResetPasswordEmail(email, resetToken) {
-  try {
-
-    const config = {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      region: process.env.AWS_REGION,
-    };
-    
-    aws.config.update(config);
-
-    const transporter = nodemailer.createTransport(
-      sesTransport({
-        ses: new aws.SES({ apiVersion: "2010-12-01" }),
-      })
-    );
-    const mailOptions = {
-      from: 'claims@greenbackclaims.com',
-      to: email,
-      subject: 'Password Reset',
-      html: emailTemplates.forgotPasswordEmailTemplate( process.env.FRONTEND_APP_URL,resetToken)
-    };
-
-    await transporter.sendMail(mailOptions);
-  } catch (error) {
-    throw new Error('Failed to send reset password email.');
-  }
-}
-
-// Implement forgot password functionality
+//******************************************************************/ 
+// FORGOT PASSWORD
+//******************************************************************/ 
 async function forgotPassword(email) {
   try {
     const user = await userModel.findUserByEmail(email);
@@ -151,8 +130,14 @@ async function forgotPassword(email) {
     await userModel.saveResetToken(email, resetToken, expirationDate);
     
     // Send resetToken to the user
-    await sendResetPasswordEmail(email, resetToken);
+    const mailOptions = {
+      from: 'claims@greenbackclaims.com',
+      to: email,
+      subject: 'Password Reset',
+      html: emailTemplates.forgotPasswordEmailTemplate( process.env.FRONTEND_APP_URL,resetToken)
+    };
 
+    await emailService.sendEmail(mailOptions)
 
     return resetToken; // Return the token for testing purposes or further use
   } catch (error) {
@@ -160,6 +145,10 @@ async function forgotPassword(email) {
   }
 }
 
+
+//******************************************************************/ 
+// RESET PASSWORD
+//******************************************************************/ 
 async function resetPassword(token, newPassword) {
   try {
     // 1. Find user by reset token
@@ -184,25 +173,34 @@ async function resetPassword(token, newPassword) {
   }
 }
 
+
+//******************************************************************/ 
+// FORGOT USERNAME
+//******************************************************************/ 
 async function forgotUsername(email) {
   try {
     const user = await userModel.findUserByEmail(email);
-    console.log(user);
     if (!user) {
       throw new Error('User not found.');
     }
-
     const username = user.username;
+    const mailOptions = {
+      from: 'claims@greenbackclaims.com',
+      to: email,
+      subject: 'Your Username',
+      html: emailTemplates.forgotUsernameEmailTemplate( process.env.FRONTEND_APP_URL,username)
+    };
 
-    await sendUsernameInfoEmail(email, username);
-
+    await emailService.sendEmail(mailOptions)
   } catch (error) {
     throw new Error(error.message || 'Forgot username failed.');
   }
 }
 
 
+
 module.exports = {
+  createRole,
   signup,
   login,
   findUserByID,

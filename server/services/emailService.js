@@ -20,11 +20,7 @@ const sendEmail = async (mailOptions) => {
   return transporter.sendMail(mailOptions);
 };
 
-const sendReferralEmail = async (mailOptions) => {
-  return transporter.sendMail(mailOptions);
-};
 
 module.exports = {
-  sendEmail,
-  sendReferralEmail,
+  sendEmail
 };

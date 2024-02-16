@@ -1,14 +1,5 @@
 const emailService = require("../services/emailService");
 
-// const [referralID, setReferralID] = useState('');
-
-// useEffect(() => {
-//   const urlParams = new URLSearchParams(window.location.search);
-//   // Get the value of the 'ref' parameter
-//   const refParam = urlParams.get('ref');
-//   setReferralID(refParam)
-// }, []);
-
 const sendEmail = async (req, res) => {
   try {
     const pdfData = req.file.buffer;
@@ -74,7 +65,7 @@ const sendReferralEmail = async (req, res) => {
     };
 
 
-    await emailService.sendReferralEmail(mailOptions);
+    await emailService.sendEmail(mailOptions);
 
     res.status(200).send({
       message: "Referral email sent successfully",
