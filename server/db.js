@@ -8,7 +8,7 @@ const connection = {
     password: process.env.PG_PASSWORD,
     port: process.env.PG_PORT || 5432,
     ssl: {
-      rejectUnauthorized: false, // Set to true in production with a valid SSL certificate
+      rejectUnauthorized: false,
     },
 };
 
