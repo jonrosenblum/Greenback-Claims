@@ -248,7 +248,20 @@ export default function ClaimForm({ onEmailSent }) {
   }
 
   const saveSign = () => {
-    setUrl(signatureRef.current.getTrimmedCanvas().toDataURL('image/png'))
+    if (signatureRef.current.isEmpty()) {
+      toast.error("Signature is required", {
+        position: window.matchMedia("(min-width: 600px)").matches ? "top-right" : "top-center",
+        style: {
+          backgroundColor: '#d9d9d9',
+          padding: window.matchMedia("(min-width: 600px)").matches ? "20px 30px" : "15px 20px",
+          fontSize: '14px',
+          fontWeight: 'bold'
+        },
+      });
+      return
+    }else{
+      setUrl(signatureRef.current.getTrimmedCanvas().toDataURL('image/png'))
+    }
   }
 
 
