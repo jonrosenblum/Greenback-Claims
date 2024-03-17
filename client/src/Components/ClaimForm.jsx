@@ -270,7 +270,7 @@ export default function ClaimForm({ onEmailSent }) {
   const pdfContent = () => {
     return (
       <>
-        <div className='p-0 w-full text-[10px] text-justify' style="letter-spacing: 0.01px;" id='pdf_to_be'>
+        <div className='p-0 w-full text-[10px] text-justify' style={{letterSpacing: '0.2px'}} id='pdf_to_be'>
           <div className='flex justify-between'>
             <img src="/pdf1.png" className='w-[130px] object-contain' alt="" />
             <img src="/pdf2.png" className='w-[90px] object-contain' alt="" />
@@ -527,7 +527,12 @@ export default function ClaimForm({ onEmailSent }) {
       x: 10,
       y: 10,
       margin:[0,0,20,0],
-      autoPaging: 'text'
+      autoPaging: 'text',
+      html2canvas:{
+        allowTaint:true,
+        letterRendering:true,
+        scale:0.28,
+      }
     });
 
   };
