@@ -270,19 +270,19 @@ export default function ClaimForm({ onEmailSent }) {
   const pdfContent = () => {
     return (
       <>
-        <div className='p-0 w-full text-[10px] text-justify' style="letter-spacing: 0.01px;" id='pdf_to_be'>
+        <div className='p-0 w-full text-[10px] text-justify' style={{letterSpacing: '0.2px'}} id='pdf_to_be'>
           <div className='flex justify-between'>
             <img src="/pdf1.png" className='w-[130px] object-contain' alt="" />
             <img src="/pdf2.png" className='w-[90px] object-contain' alt="" />
           </div>
           <div className='text-center'>Date: {new Date().toLocaleDateString()}</div>
           <div className='mt-1'>
-          <p><span className='font-semibold italic capitalize'>Via Email</span> :  {formData.email}</p>
-            <p><span className='font-semibold'>Name</span> : {formData.firstName} {formData.lastName}</p>
-            <p className=''><span className='font-semibold '>Address</span> : {formData.address}, {formData.city}, {formData.state} {formData.zipcode}</p>
+          <p><span className='font-semibold italic capitalize font-sans tracking-normal'  style={{letterSpacing: '0.2px'}}>Via Email</span> :  {formData.email}</p>
+            <p><span className='font-semibold font-sans tracking-normal'>Name</span> : {formData.firstName} {formData.lastName}</p>
+            <p className=''><span className='font-semibold font-sans tracking-normal '>Address</span> : {formData.address}, {formData.city}, {formData.state} {formData.zipcode}</p>
           </div>
           <div className='mt-2 ml-[40px]'>
-          <span className='font-semibold'>Re:</span>	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
+          <span className='font-semibold font-sans tracking-normal'>Re:</span>	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
           </div>
           <div className='mt-1'>
             <p className=''>Dear <span className='underline'>{formData.firstName}</span>,</p>
@@ -424,7 +424,7 @@ export default function ClaimForm({ onEmailSent }) {
 
     var doc = new jsPDF({
       orientation: 'p',
-      unit: 'px',
+      unit: 'pt',
       format: [520, 700]
     });
 
@@ -527,7 +527,10 @@ export default function ClaimForm({ onEmailSent }) {
       x: 10,
       y: 10,
       margin:[0,0,20,0],
-      autoPaging: 'text'
+      autoPaging: 'text',
+      html2canvas:{
+        letterRendering:true,
+      }
     });
 
   };
