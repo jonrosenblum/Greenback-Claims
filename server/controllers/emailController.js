@@ -29,7 +29,7 @@ const sendEmail = async (req, res) => {
     }</p>
     <p><b>Company Type:</b>&nbsp;&nbsp; ${formData.companyType}</p>
     <p><b>EIN/SSN:</b>&nbsp;&nbsp; ${formData.ein}</p>
-    <p><b>Annual Sales:</b>&nbsp;&nbsp; ${formData.annualSales}</p>
+    <p><b>Annual Visa/Mastercard Sales:</b>&nbsp;&nbsp; ${formData.annualSales}</p>
     <p><b>Franchise Agreement:</b>&nbsp;&nbsp; ${
       formData.franchiseAgreement
     }</p>
