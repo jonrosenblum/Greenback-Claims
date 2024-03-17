@@ -425,21 +425,21 @@ export default function ClaimForm({ onEmailSent }) {
     var doc = new jsPDF({
       orientation: 'p',
       unit: 'px',
-      format: [500, 700]
+      format: [520, 700]
     });
 
-    var pdfjs = document.querySelector('#pdf_to_be');
-    console.log(pdfjs);
-    let pdfjs2 = pdfjs.cloneNode(true)
+    // var doc =  new jsPDF('l', 'mm', [1200, 1210])
 
+    var pdfjs = document.querySelector('#pdf_to_be');
+    let pdfjs2 = pdfjs.cloneNode(true)
     var myDiv = document.createElement("div");
     myDiv.style.width = "500px";
     myDiv.style.padding = "40px"
     myDiv.appendChild(pdfjs2)
-
     doc.html(myDiv, {
       callback: function (doc) {
         let url = doc.output('blob')
+
         if (referralID) {
           formData.referralDetails = referralID;
         } else {
@@ -449,6 +449,7 @@ export default function ClaimForm({ onEmailSent }) {
         formDataToSend.append('pdf', url);
         formDataToSend.append('formData', JSON.stringify(formData));
         const email_api = import.meta.env.VITE_APP_API + 'send-email';
+        
         fetch(email_api, {
           method: 'POST',
           body: formDataToSend,
@@ -523,7 +524,13 @@ export default function ClaimForm({ onEmailSent }) {
           })
       },
       x: 10,
-      y: 10
+      y: 10,
+      margin:[0,0,20,0],
+      autoPaging: 'text',
+      html2canvas: {
+          allowTaint: true,
+          letterRendering: true,
+      }
     });
 
   };
@@ -669,7 +676,7 @@ export default function ClaimForm({ onEmailSent }) {
             </div>
 
             <div className='flex flex-col relative mt-2 w-full sm:w-1/2 m-1'>
-                <p className='m-1'>Estimated annual credit card sales</p>
+                <p className='m-1'>Estimated annual Visa/Mastercard sales</p>
                 <input
                   className='mx-2 p-2 pl-4 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500 '
                   placeholder=''
