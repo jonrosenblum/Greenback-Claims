@@ -424,7 +424,7 @@ export default function ClaimForm({ onEmailSent }) {
 
     var doc = new jsPDF({
       orientation: 'p',
-      unit: 'px',
+      unit: 'pt',
       format: [520, 700]
     });
 
