@@ -277,12 +277,12 @@ export default function ClaimForm({ onEmailSent }) {
           </div>
           <div className='text-center'>Date: {new Date().toLocaleDateString()}</div>
           <div className='mt-1'>
-          <p><span className='font-semibold italic capitalize'>Via Email</span> :  {formData.email}</p>
-            <p><span className='font-semibold'>Name</span> : {formData.firstName} {formData.lastName}</p>
-            <p className=''><span className='font-semibold '>Address</span> : {formData.address}, {formData.city}, {formData.state} {formData.zipcode}</p>
+          <p><span className='font-semibold italic capitalize font-sans tracking-normal'  style={{letterSpacing: '0.2px'}}>Via Email</span> :  {formData.email}</p>
+            <p><span className='font-semibold font-sans tracking-normal'>Name</span> : {formData.firstName} {formData.lastName}</p>
+            <p className=''><span className='font-semibold font-sans tracking-normal '>Address</span> : {formData.address}, {formData.city}, {formData.state} {formData.zipcode}</p>
           </div>
           <div className='mt-2 ml-[40px]'>
-          <span className='font-semibold'>Re:</span>	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
+          <span className='font-semibold font-sans tracking-normal'>Re:</span>	In re Payment Card Interchange Fee and Merchant Discount Antitrust Litigation, MDL 1720
           </div>
           <div className='mt-1'>
             <p className=''>Dear <span className='underline'>{formData.firstName}</span>,</p>
