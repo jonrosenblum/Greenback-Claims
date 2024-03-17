@@ -529,9 +529,7 @@ export default function ClaimForm({ onEmailSent }) {
       margin:[0,0,20,0],
       autoPaging: 'text',
       html2canvas:{
-        allowTaint:true,
         letterRendering:true,
-        scale:0.28,
       }
     });
 
