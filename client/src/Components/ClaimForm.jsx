@@ -676,7 +676,7 @@ export default function ClaimForm({ onEmailSent }) {
             </div>
 
             <div className='flex flex-col relative mt-2 w-full sm:w-1/2 m-1'>
-                <p className='m-1'>Estimated annual credit card sales</p>
+                <p className='m-1'>Estimated annual Visa/Mastercard sales</p>
                 <input
                   className='mx-2 p-2 pl-4 border-2 border-gray-400/80 rounded-md outline-none focus-visible:border-blue-500 '
                   placeholder=''
