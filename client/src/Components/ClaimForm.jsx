@@ -340,7 +340,7 @@ export default function ClaimForm({ onEmailSent }) {
               necessary to prepare and submit Client’s claim, and to provide other services to be rendered
               pursuant to this Agreement as outlined above, will be advanced by the Firms, 100% of
               which will be reimbursed to the Firms solely out of any recovery after application of
-              the thirty-three percent contingency fee. The Firms’ engagement will conclude when the
+              the thirty percent contingency fee. The Firms’ engagement will conclude when the
               Claims Administrator makes payment. The Firms assume no responsibility for any associated
               allocation, distribution, tax or any post-payment issue(s).
             </p>
@@ -961,7 +961,7 @@ export default function ClaimForm({ onEmailSent }) {
                   necessary to prepare and submit Client’s claim, and to provide other services to be rendered
                   pursuant to this Agreement as outlined above, will be advanced by the Firms, 100% of
                   which will be reimbursed to the Firms solely out of any recovery after application of
-                  the thirty-three percent contingency fee. The Firms’ engagement will conclude when the
+                  the thirty percent contingency fee. The Firms’ engagement will conclude when the
                   Claims Administrator makes payment. The Firms assume no responsibility for any associated
                   allocation, distribution, tax or any post-payment issue(s).
                 </p>
