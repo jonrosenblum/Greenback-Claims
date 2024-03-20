@@ -1085,7 +1085,7 @@ export default function ClaimForm({ onEmailSent }) {
   return (
     <>
     {passwordToken && <ResetPassword token={passwordToken} onClose={()=>{setPasswordToken('')}} />}
-    <div className="bg-white text-black pl-3 pr-3 pb-3 h-[700px] overflow-y-auto">
+    <div className="bg-white text-black pl-3 pr-3 pb-3 h-auto md:[700px] overflow-y-auto">
       <Toaster />
       <div className="p-0 xl:p-10">
         <div className='text-sm mt-4'>
