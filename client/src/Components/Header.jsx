@@ -78,7 +78,7 @@ export default function Header() {
                         >
                           Visa & Mastercard Anti-Trust Lawsuit
                         </a>
-                        <a
+                        {/* <a
                           // href="#about"
                           // onClick={setVisaFalse}
                           className={`block px-4 py-2 rounded-bLg text-gray-800 hover:bg-gray-200 ${
@@ -86,7 +86,7 @@ export default function Header() {
                           }`}
                         >
                           <s>Employee Retention Credit (ERC)</s>
-                        </a>
+                        </a> */}
                       </div>
                     </div>
                     {isAuthenticated && user.role=='admin'&&   <RouterLink
@@ -205,7 +205,7 @@ export default function Header() {
                   >
                     Visa & Mastercard Anti-Trust Lawsuit
                   </a>
-                  <a
+                  {/* <a
                     // href="#about"
                     // onClick={setVisaFalse}
                     className={`block text-center px-4 py-2 rounded-bLg text-gray-800 hover:bg-gray-200 ${
@@ -213,7 +213,7 @@ export default function Header() {
                     }`}
                   >
                     <s>Employee Retention Credit (ERC)</s>
-                  </a>
+                  </a> */}
                 </div>
               </div>
               {isAuthenticated ? (
