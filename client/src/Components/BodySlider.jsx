@@ -2,7 +2,7 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import erc from '../../assets/images/erc.png';
+// import erc from '../../assets/images/erc.png';
 export default function BodySlider() {
   const settings = {
     dots: false,
@@ -31,7 +31,7 @@ export default function BodySlider() {
         </div>
       </div>
       
-      <div className="bg-gray-900 text-md h-fit">
+      {/* <div className="bg-gray-900 text-md h-fit">
         <div className="relative py-20 sm:py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center h-[350px] sm:h-[600px]" style={{
           backgroundImage:
             `url(${erc})`,
@@ -43,7 +43,7 @@ export default function BodySlider() {
             <a className="text-white font-medium rounded-lg text-sm md:text-2xl px-6 py-4 text-center">Claim Period Ended</a>
           </div>
         </div>
-      </div>
+      </div> */}
     </Slider>
   );
 }
