@@ -35,6 +35,17 @@ app.get("/", async (req, res) => {
   }
 });
 
+app.get("/initialize-db", async (req, res) => {
+  try {
+    // init DB
+    initializeDatabase();
+    res.send(`Database initialize!!`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 app.use("/api/auth/", authController);
 app.post('/api/saveFormData', saveFormController.saveFormDataController);
