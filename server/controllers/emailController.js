@@ -55,11 +55,12 @@ const sendEmail = async (req, res) => {
 
 
 const sendReferralEmail = async (req, res) => {
+  const formData = JSON.parse(req.body.formData);
   try {
 
     const mailOptions = {
       from: "claims@greenbackclaims.com",
-      to: "claims@greenbackclaims.com",
+      to: formData.referralEmail,
       subject: "NEW VISA & MASTERCARD CLAIM",
       html: `<h3>Referral Email Test</h3>`,
     };
