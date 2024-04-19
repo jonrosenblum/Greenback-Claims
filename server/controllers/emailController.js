@@ -1,4 +1,5 @@
 const emailService = require("../services/emailService");
+const emailTemplates = require('../emails/emailTemplates'); 
 
 const sendEmail = async (req, res) => {
   try {
@@ -62,7 +63,7 @@ const sendReferralEmail = async (req, res) => {
       from: "claims@greenbackclaims.com",
       to: formData.referralEmail,
       subject: "NEW VISA & MASTERCARD CLAIM",
-      html: `<h3>Referral Email Test</h3>`,
+      html: emailTemplates.referralEmailTemplate(formData),
     };
 
 

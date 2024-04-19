@@ -50,7 +50,7 @@ app.get("/initialize-db", async (req, res) => {
 app.use("/api/auth/", authController);
 app.post('/api/saveFormData', saveFormController.saveFormDataController);
 app.post("/send-email", upload.single("pdf"), emailController.sendEmail);
-app.post("/send-email", emailController.sendReferralEmail);
+app.post("/send-referral-email", emailController.sendReferralEmail);
 app.get('/api/submissions/:referralID', countController.getMatchingSubmissionsController);
 app.post('/api/update-referral-frequency/:referralID', countController.updateReferralFrequencyCount);
 app.use("/api/admin/", adminController);
