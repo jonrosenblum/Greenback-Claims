@@ -18,6 +18,7 @@ export default function ClaimForm({ onEmailSent }) {
   const [referalEmail, setReferalEmail] = useState('');
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams);
     // Get the value of the 'ref' parameter
     const refParam = urlParams.get('ref');
     if(refParam) setReferralID(refParam);
