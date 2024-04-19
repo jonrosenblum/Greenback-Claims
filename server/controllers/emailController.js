@@ -59,7 +59,7 @@ const sendReferralEmail = async (req, res) => {
 
     const mailOptions = {
       from: "claims@greenbackclaims.com",
-      to: "claims@greenbackclaims.com", // the referral user whos referral link is being used the email when they signed up
+      to: "claims@greenbackclaims.com",
       subject: "NEW VISA & MASTERCARD CLAIM",
       html: `<h3>Referral Email Test</h3>`,
     };

@@ -15,6 +15,7 @@ ClaimForm.propTypes = {
 export default function ClaimForm({ onEmailSent }) {
   const [referralID, setReferralID] = useState('');
   const [passwordToken, setPasswordToken] = useState('');
+  const [referalEmail, setReferalEmail] = useState('');
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     // Get the value of the 'ref' parameter
