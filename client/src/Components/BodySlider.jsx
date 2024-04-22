@@ -2,8 +2,12 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useState } from 'react';
+import VideoModal from './VideoModal';
 // import erc from '../../assets/images/erc.png';
 export default function BodySlider() {
+  const [showVideoPopup, setShowVideoPopup] = useState(false);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -16,6 +20,7 @@ export default function BodySlider() {
   };
 
   return (
+    <>
     <Slider {...settings}>
       <div className="bg-gray-900 text-md h-fit">
         <div className="relative py-20 sm:py-40 px-4 sm:px-6 lg:px-8 bg-cover bg-center h-[350px] sm:h-[600px]" style={{
@@ -28,7 +33,7 @@ export default function BodySlider() {
             <p className="text-md md:text-lg mb-8 max-w-sm font-medium text-white">You could be eligible to reclaim funds as part of a $5.5 billion dollar settlement.</p>
             <div className='flex flex-row '> 
             <a href="#about" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-2xl px-6 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit Claim</a>
-            <a href="#video" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-2xl px-6 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-5"> Watch Video</a>
+            <a href="javascript:;" onClick={()=>{setShowVideoPopup(true)}} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-2xl px-6 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-5"> Watch Video</a>
             </div>
           </div>
         </div>
@@ -48,5 +53,11 @@ export default function BodySlider() {
         </div>
       </div> */}
     </Slider>
+    {showVideoPopup && (
+      <VideoModal 
+        onClose={() => setShowVideoPopup(false)}
+      />
+    )}
+    </>
   );
 }
