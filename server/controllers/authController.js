@@ -85,6 +85,23 @@ router.get('/user/:userId', async (req, res)=> {
 
 
 //******************************************************************/ 
+// GET USER DETAIL BY ID
+//******************************************************************/ 
+router.get('/refuser/:referralId', async (req, res)=> {
+  try {
+    const { referralId } = req.params;
+    const user = await authService.findUserByReferralID
+    (referralId);
+
+    res.json({ user });
+  } catch (error) {
+    console.error('Error getting user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+
+//******************************************************************/ 
 // FORGOT PASSWORD
 //******************************************************************/ 
 router.post('/forgot-password', async (req, res) => {
