@@ -102,6 +102,21 @@ async function findUserByID(userId) {
   }
 }
 
+//******************************************************************/ 
+// FIND USER BY REFERRAL ID
+//******************************************************************/ 
+async function findUserByReferralID(referralID) {
+  try {
+    const user = await userModel.findUserByReferralID(referralID);
+    if (!user) {
+      throw new Error('Invalid ID.');
+    }
+    return user
+  } catch (error) {
+    throw new Error(error.message || 'User not found.');
+  }
+}
+
 
 // Generate a secure random token
 function generateResetToken() {
@@ -206,5 +221,6 @@ module.exports = {
   findUserByID,
   forgotPassword,
   forgotUsername,
-  resetPassword
+  resetPassword,
+  findUserByReferralID
 };

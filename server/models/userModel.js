@@ -97,6 +97,19 @@ async function findUserByEmail(email) {
   }
 }
 
+//******************************************************************/ 
+// FIND USER BY REFERRAL ID
+//******************************************************************/
+async function findUserByReferralID(referralID) {
+  const client = await db.connect();
+  try {
+    const result = await client.query('SELECT * FROM users WHERE referral_id = $1', [referralID]);
+    return result.rows[0];
+  } finally {
+    client.release();
+  }
+}
+
 
 //******************************************************************/ 
 // SAVE RESET PASSWORD TOKEN
@@ -190,5 +203,6 @@ module.exports = {
   clearResetToken,
   updateFormSubmissionsCount, 
   updateReferralFrequencyCount,
-  saveResetToken
+  saveResetToken,
+  findUserByReferralID
 };

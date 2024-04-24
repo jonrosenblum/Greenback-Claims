@@ -1,3 +1,21 @@
+function referralEmailTemplate() {
+    const htmlString = `
+    <!doctype html>
+    <html lang="en-US">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>Referral Email Template</title>
+        <meta name="description" content="Referral Email Template.">
+    </head>
+    
+    <body>
+        <h1>Hello!</h1>
+    </body>
+    
+    </html>
+    `;
+    return String(htmlString);
+}
 function forgotPasswordEmailTemplate(appUrl,token) {
     const htmlString = `
     <!doctype html>
@@ -163,4 +181,4 @@ function forgotUsernameEmailTemplate(appUrl,username) {
     return String(htmlString);
 }
   
-module.exports = { forgotPasswordEmailTemplate, forgotUsernameEmailTemplate };
+module.exports = { forgotPasswordEmailTemplate, forgotUsernameEmailTemplate, referralEmailTemplate };

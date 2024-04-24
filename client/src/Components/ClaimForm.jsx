@@ -4,7 +4,7 @@ import jsPDF from 'jspdf';
 import Loader from './Loader';
 import toast, { Toaster } from 'react-hot-toast';
 import PropTypes from 'prop-types';
-import { saveFormData } from '../Utils/ApiUtils';
+import { getUserByReferralId, saveFormData, sendEmail, sendReferralEmail } from '../Utils/ApiUtils';
 import ResetPassword from './ResetPassword';
 
 
@@ -15,16 +15,39 @@ ClaimForm.propTypes = {
 export default function ClaimForm({ onEmailSent }) {
   const [referralID, setReferralID] = useState('');
   const [passwordToken, setPasswordToken] = useState('');
+  const [referralEmail, setReferralEmail] = useState('');
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams);
     // Get the value of the 'ref' parameter
     const refParam = urlParams.get('ref');
-    if(refParam) setReferralID(refParam);
+    if(refParam) 
+    {
+      setReferralID(refParam);
+      fetchUserDetailByReferralId(refParam)
+    }
     // Get the value of the 'passwordToken' parameter
     const passwordToken = urlParams.get('passwordToken');
     if(passwordToken) setPasswordToken(passwordToken);
     
   }, []);
+
+  const fetchUserDetailByReferralId = async (referralID) => {
+    try {
+      const userResponse = await fetch(getUserByReferralId + referralID, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const user = await userResponse.json();
+      console.log(user.user.email);
+      setReferralEmail(user.user.email)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 4; 
 
@@ -449,9 +472,7 @@ export default function ClaimForm({ onEmailSent }) {
         const formDataToSend = new FormData();
         formDataToSend.append('pdf', url);
         formDataToSend.append('formData', JSON.stringify(formData));
-        const email_api = import.meta.env.VITE_APP_API + 'send-email';
-        
-        fetch(email_api, {
+        fetch(sendEmail, {
           method: 'POST',
           body: formDataToSend,
         })
@@ -459,6 +480,16 @@ export default function ClaimForm({ onEmailSent }) {
         .then(async (data) => {
             // Handle response
             if(data.status == 200){
+              //send referral email
+                await fetch(sendReferralEmail, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({referralEmail}),
+              });
+
+              //save formData
                 const response = await fetch(saveFormData, {
                     method: 'POST',
                     headers: {
@@ -494,7 +525,7 @@ export default function ClaimForm({ onEmailSent }) {
                         fontWeight: 'bold'
                     },
                 });
-                onEmailSent();
+                onEmailSent();  
             }
             if (data.status == 500){
               toast.error(data.message, {
