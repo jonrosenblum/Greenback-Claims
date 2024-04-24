@@ -61,7 +61,7 @@ const sendReferralEmail = async (req, res) => {
     const mailOptions = {
       from: "claims@greenbackclaims.com",
       to: req.body.referralEmail,
-      subject: "NEW VISA & MASTERCARD CLAIM",
+      subject: "NEW REFERRAL",
       html: emailTemplates.referralEmailTemplate(),
     };
 

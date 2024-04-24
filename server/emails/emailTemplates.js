@@ -9,7 +9,7 @@ function referralEmailTemplate() {
     </head>
     
     <body>
-        <h1>Hello!</h1>
+        <h1>Your referral link was just used to submit a claim. Please check your dashboard for more information.</h1>
     </body>
     
     </html>
